@@ -8,8 +8,12 @@ def index():
     return render_template("index.html")
 
 @app.route('/contact')
-def about():
+def contact():
     return render_template("contact.html")
+
+@app.route('/job')
+def job():
+    return render_template("job.html")
 
 if __name__ ==  "__main__":
     app.run(debug=True)
