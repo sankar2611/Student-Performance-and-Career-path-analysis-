@@ -18,18 +18,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap"
         rel="stylesheet">
 
-    <link href= "{{ url_for('static', filename = 'css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename = 'css/bootstrap.min.css')}}" rel="stylesheet">
 
     <link href="{{ url_for('static', filename = 'css/bootstrap-icons.css')}}" rel="stylesheet">
 
     <link href="{{ url_for('static', filename = 'css/templatemo-topic-listing.css')}}" rel="stylesheet">
-    <!--
-
-TemplateMo 590 topic listing
-
-https://templatemo.com/tm-590-topic-listing
-
--->
 </head>
 
 <body id="top">
@@ -52,7 +45,7 @@ https://templatemo.com/tm-590-topic-listing
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="collapse navbar-collapse" id="navbarNav" style="padding-left: 150px;">
                     <ul class="navbar-nav ms-lg-5 me-lg-auto">
                         <li class="nav-item">
                             <a class="nav-link click-scroll" href="/">Home</a>
@@ -71,19 +64,9 @@ https://templatemo.com/tm-590-topic-listing
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_5">Contact</a>
+                            <a class="nav-link" href="/contact">Contact</a>
                         </li>
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarLightDropdownMenuLink" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
-
-                            <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                                <li><a class="dropdown-item" href="topics-listing.html">Topics Listing</a></li>
-
-                                <li><a class="dropdown-item" href="contact.html">Contact Form</a></li>
-                            </ul>
-                        </li>
                     </ul>
 
                     <div class="d-none d-lg-block">
@@ -137,7 +120,8 @@ https://templatemo.com/tm-590-topic-listing
                                 </div>
                             </div>
 
-                            <img src= "{{ url_for('static', filename = 'images/sapiens.png')}}" class="custom-block-image img-fluid" alt="">
+                            <img src="{{ url_for('static', filename = 'images/sapiens.png')}}"
+                                class="custom-block-image img-fluid" alt="">
                             </a>
                         </div>
                     </div>
@@ -153,7 +137,8 @@ https://templatemo.com/tm-590-topic-listing
                                 </div>
                             </div>
 
-                            <img src= "{{ url_for('static', filename = 'images/person-leading-a-team.png')}}" class="block-image img-fluid" alt="">
+                            <img src="{{ url_for('static', filename = 'images/person-leading-a-team.png')}}"
+                                class="block-image img-fluid" alt="">
                             </a>
                         </div>
                     </div>
@@ -267,7 +252,7 @@ https://templatemo.com/tm-590-topic-listing
                                                     <span class="badge bg-design rounded-pill ms-auto">14</span>
                                                 </div>
 
-                                                <img src=  "{{ url_for('static', filename = 'images/topics/undraw_Remote_design_team_re_urdx.png')}}"
+                                                <img src="{{ url_for('static', filename = 'images/topics/undraw_Remote_design_team_re_urdx.png')}}"
                                                     class="custom-block-image img-fluid" alt="">
                                             </a>
                                         </div>
@@ -286,7 +271,7 @@ https://templatemo.com/tm-590-topic-listing
                                                     <span class="badge bg-design rounded-pill ms-auto">75</span>
                                                 </div>
 
-                                                <img src=  "{{ url_for('static', filename = 'images/topics/undraw_Redesign_feedback_re_jvm0.png')}}"
+                                                <img src="{{ url_for('static', filename = 'images/topics/undraw_Redesign_feedback_re_jvm0.png')}}"
                                                     class="custom-block-image img-fluid" alt="">
                                             </a>
                                         </div>
@@ -305,7 +290,7 @@ https://templatemo.com/tm-590-topic-listing
                                                     <span class="badge bg-design rounded-pill ms-auto">100</span>
                                                 </div>
 
-                                                <img src=  "{{ url_for('static', filename = 'images/topics/colleagues-working-cozy-office-medium-shot.png')}}"
+                                                <img src="{{ url_for('static', filename = 'images/topics/colleagues-working-cozy-office-medium-shot.png')}}"
                                                     class="custom-block-image img-fluid" alt="">
                                             </a>
                                         </div>
@@ -329,7 +314,7 @@ https://templatemo.com/tm-590-topic-listing
                                                     <span class="badge bg-advertising rounded-pill ms-auto">30</span>
                                                 </div>
 
-                                                <img src=  "{{ url_for('static', filename = 'images/topics/undraw_online_ad_re_ol62.png')}}"
+                                                <img src="{{ url_for('static', filename = 'images/topics/undraw_online_ad_re_ol62.png')}}"
                                                     class="custom-block-image img-fluid" alt="">
                                             </a>
                                         </div>
@@ -348,7 +333,7 @@ https://templatemo.com/tm-590-topic-listing
                                                     <span class="badge bg-advertising rounded-pill ms-auto">65</span>
                                                 </div>
 
-                                                <img src=  "{{ url_for('static', filename = 'images/topics/undraw_Group_video_re_btu7.png')}}"
+                                                <img src="{{ url_for('static', filename = 'images/topics/undraw_Group_video_re_btu7.png')}}"
                                                     class="custom-block-image img-fluid" alt="">
                                             </a>
                                         </div>
@@ -367,7 +352,7 @@ https://templatemo.com/tm-590-topic-listing
                                                     <span class="badge bg-advertising rounded-pill ms-auto">50</span>
                                                 </div>
 
-                                                <img src=  "{{ url_for('static', filename = 'images/topics/undraw_viral_tweet_gndb.png')}}"
+                                                <img src="{{ url_for('static', filename = 'images/topics/undraw_viral_tweet_gndb.png')}}"
                                                     class="custom-block-image img-fluid" alt="">
                                             </a>
                                         </div>
@@ -391,7 +376,7 @@ https://templatemo.com/tm-590-topic-listing
                                                     <span class="badge bg-finance rounded-pill ms-auto">30</span>
                                                 </div>
 
-                                                <img src=  "{{ url_for('static', filename = 'images/images/topics/undraw_Finance_re_gnv2.png')}}"
+                                                <img src="{{ url_for('static', filename = 'images/images/topics/undraw_Finance_re_gnv2.png')}}"
                                                     class="custom-block-image img-fluid" alt="">
                                             </a>
                                         </div>
@@ -400,7 +385,7 @@ https://templatemo.com/tm-590-topic-listing
                                     <div class="col-lg-6 col-md-6 col-12">
                                         <div class="custom-block custom-block-overlay">
                                             <div class="d-flex flex-column h-100">
-                                                <img src=  "{{ url_for('static', filename = 'images/businesswoman-using-tablet-analysis-graph-company-finance-strategy-statistics-success-concept-planning-future-office-room.jpg')}}"
+                                                <img src="{{ url_for('static', filename = 'images/businesswoman-using-tablet-analysis-graph-company-finance-strategy-statistics-success-concept-planning-future-office-room.jpg')}}"
                                                     class="custom-block-image img-fluid" alt="">
 
                                                 <div class="custom-block-overlay-text d-flex">
@@ -461,7 +446,7 @@ https://templatemo.com/tm-590-topic-listing
                                                     <span class="badge bg-music rounded-pill ms-auto">45</span>
                                                 </div>
 
-                                                <img src=  "{{ url_for('static', filename = 'images/topics/undraw_Compose_music_re_wpiw.png')}}"
+                                                <img src="{{ url_for('static', filename = 'images/topics/undraw_Compose_music_re_wpiw.png')}}"
                                                     class="custom-block-image img-fluid" alt="">
                                             </a>
                                         </div>
@@ -480,7 +465,7 @@ https://templatemo.com/tm-590-topic-listing
                                                     <span class="badge bg-music rounded-pill ms-auto">45</span>
                                                 </div>
 
-                                                <img src=  "{{ url_for('static', filename = 'images/topics/undraw_happy_music_g6wc.png')}}"
+                                                <img src="{{ url_for('static', filename = 'images/topics/undraw_happy_music_g6wc.png')}}"
                                                     class="custom-block-image img-fluid" alt="">
                                             </a>
                                         </div>
@@ -499,7 +484,7 @@ https://templatemo.com/tm-590-topic-listing
                                                     <span class="badge bg-music rounded-pill ms-auto">20</span>
                                                 </div>
 
-                                                <img src=  "{{ url_for('static', filename = 'images/topics/undraw_Podcast_audience_re_4i5q.png')}}"
+                                                <img src="{{ url_for('static', filename = 'images/topics/undraw_Podcast_audience_re_4i5q.png')}}"
                                                     class="custom-block-image img-fluid" alt="">
                                             </a>
                                         </div>
@@ -523,7 +508,7 @@ https://templatemo.com/tm-590-topic-listing
                                                     <span class="badge bg-education rounded-pill ms-auto">80</span>
                                                 </div>
 
-                                                <img src= "{{ url_for('static', filename = 'images/topics/undraw_Graduation_re_gthn.png')}}"
+                                                <img src="{{ url_for('static', filename = 'images/topics/undraw_Graduation_re_gthn.png')}}"
                                                     class="custom-block-image img-fluid" alt="">
                                             </a>
                                         </div>
@@ -542,7 +527,7 @@ https://templatemo.com/tm-590-topic-listing
                                                     <span class="badge bg-education rounded-pill ms-auto">75</span>
                                                 </div>
 
-                                                <img src=  "{{ url_for('static', filename = 'images/topics/undraw_Educator_re_ju47.png')}}"
+                                                <img src="{{ url_for('static', filename = 'images/topics/undraw_Educator_re_ju47.png')}}"
                                                     class="custom-block-image img-fluid" alt="">
                                             </a>
                                         </div>
@@ -644,7 +629,8 @@ https://templatemo.com/tm-590-topic-listing
                     <div class="clearfix"></div>
 
                     <div class="col-lg-5 col-12">
-                        <img src=  "{{ url_for('static', filename = 'images/faq_graphic.jpg')}}" class="img-fluid" alt="FAQs">
+                        <img src="{{ url_for('static', filename = 'images/faq_graphic.jpg')}}" class="img-fluid"
+                            alt="FAQs">
                     </div>
 
                     <div class="col-lg-6 col-12 m-auto">
@@ -837,11 +823,11 @@ https://templatemo.com/tm-590-topic-listing
 
 
     <!-- JAVASCRIPT FILES -->
-    <script src=  "{{ url_for('static', filename = 'js/jquery.min.js')}}" ></script>
-    <script src= "{{ url_for('static', filename = 'js/bootstrap.bundle.min.js')}}"></script>
-    <script src= "{{ url_for('static', filename = 'js/jquery.sticky.js')}}"></script>
-    <script src= "{{ url_for('static', filename = 'js/click-scroll.js')}}"></script>
-    <script src= "{{ url_for('static', filename = 'js/custom.js')}}"></script>
+    <script src="{{ url_for('static', filename = 'js/jquery.min.js')}}"></script>
+    <script src="{{ url_for('static', filename = 'js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ url_for('static', filename = 'js/jquery.sticky.js')}}"></script>
+    <script src="{{ url_for('static', filename = 'js/click-scroll.js')}}"></script>
+    <script src="{{ url_for('static', filename = 'js/custom.js')}}"></script>
 
 </body>
 
