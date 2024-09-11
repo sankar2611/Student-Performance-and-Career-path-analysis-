@@ -44,5 +44,6 @@ def submit_contact():
     # Redirect or render a success page
     return redirect(url_for('contact'))
 
+
 if __name__ ==  "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")
