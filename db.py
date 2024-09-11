@@ -4,7 +4,7 @@ import pyodbc
 def get_db_connection():
     conn = pyodbc.connect(
         'DRIVER={ODBC Driver 18 for SQL Server};'  # Make sure to have the correct ODBC driver installed
-        'SERVER=MEMRS\SQLEXPRESS;'  # Replace with your server name or IP address
+        'SERVER=MEMRS'  # Replace with your server name or IP address
         'DATABASE=student-career-performance-analysis;'
         'Trusted_Connection=yes;'
         'Encrypt=yes;'  # Optional: Forces encryption (if you need)
