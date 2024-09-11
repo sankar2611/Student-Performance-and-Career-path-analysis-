@@ -36,9 +36,6 @@ def submit_contact():
     # Redirect or render a success page
     return redirect(url_for('contact'))
 
-@app.route('/test', methods=['GET'])
-def test():
-    return 'Test page is working!'
 
 if __name__ ==  "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")
