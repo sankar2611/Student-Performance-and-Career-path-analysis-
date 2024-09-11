@@ -41,7 +41,7 @@
           $(elem).removeClass('active');
         }
         var MainTimelineContainer = $('#vertical-scrollable-timeline')[0];
-        var MainTimelineContainerBottom = MainTimelineContainer.getBoundingClientRect().bottom - $(window).height()*.5;
+        var MainTimelineContainerBottom = MainTimelineContainer.getBoundingClientRect().top - $(window).height()*.5;
         $(MainTimelineContainer).find('.inner').css('height',MainTimelineContainerBottom+'px');
       }
       var timeline = $('#vertical-scrollable-timeline li');

@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Career</title>
+
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap"
+        rel="stylesheet">
+
+    <link href="{{ url_for('static', filename = 'css/bootstrap.min.css')}}" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename = 'css/bootstrap-icons.css')}}" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename = 'css/templatemo-topic-listing.css')}}" rel="stylesheet">
+</head>
+
+<body id="top">
+
+    <main>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <i class="bi-back"></i>
+                    <span>Career</span>
+                </a>
+
+                <div class="d-lg-none ms-auto me-4">
+                    <a href="#top" class="navbar-icon bi-person smoothscroll"></a>
+                </div>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav" style="padding-left: 150px;">
+                    <ul class="navbar-nav ms-lg-5 me-lg-auto">
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="/">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="#section_2">Browse Topics</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="#section_3">How it works</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="#section_4">FAQs</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contact">Contact</a>
+                        </li>
+
+                    </ul>
+
+                    <div class="d-none d-lg-block">
+                        <a href="/login" class="navbar-icon bi-person smoothscroll" style="color: black;"></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </main>
+    <br><br><br><br><br><br>
+    <div class="cont" style="margin-left: 600px;">
+        <div class="heading">Sign Up</div>
+        <form action="" class="form">
+            <input required="" class="input" type="name" name="name" id="name" placeholder="Name">
+            <input required="" class="input" type="contact" name="contact" id="contact" placeholder="Phone Number">
+            <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail">
+            <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
+            <input class="login-button" type="submit" value="Sign Up">
+            <span class="forgot-password">Already have an account ?<br><a href="/login">Log In</a></span>
+            <span class="agreement"><a href="#">Learn user licence agreement</a></span>
+    </div>
+
+    </form>
+    <br>
+    <br><br>
+    <style>
+        .cont {
+            max-width: 350px;
+            background: #F8F9FD;
+            background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(244, 247, 251) 100%);
+            border-radius: 40px;
+            padding: 25px 35px;
+            border: 5px solid rgb(255, 255, 255);
+            box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 30px 30px -20px;
+            margin: 20px;
+        }
+
+        .heading {
+            text-align: center;
+            font-weight: 900;
+            font-size: 30px;
+            color: rgb(16, 137, 211);
+        }
+
+        .form {
+            margin-top: 20px;
+        }
+
+        .form .input {
+            width: 100%;
+            background: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 20px;
+            margin-top: 15px;
+            box-shadow: #cff0ff 0px 10px 10px -5px;
+            border-inline: 2px solid transparent;
+        }
+
+        .form .input::-moz-placeholder {
+            color: rgb(170, 170, 170);
+        }
+
+        .form .input::placeholder {
+            color: rgb(170, 170, 170);
+        }
+
+        .form .input:focus {
+            outline: none;
+            border-inline: 2px solid #12B1D1;
+        }
+
+        .form .forgot-password {
+            display: block;
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+
+        .form .forgot-password {
+            text-align: center;
+        }
+
+        .form .forgot-password a {
+            font-size: 11px;
+            color: #0099ff;
+            text-decoration: none;
+        }
+
+        .form .login-button {
+            display: block;
+            width: 100%;
+            font-weight: bold;
+            background: linear-gradient(45deg, rgb(16, 137, 211) 0%, rgb(18, 177, 209) 100%);
+            color: white;
+            padding-block: 15px;
+            margin: 20px auto;
+            border-radius: 20px;
+            box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 20px 10px -15px;
+            border: none;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .form .login-button:hover {
+            transform: scale(1.03);
+            box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 23px 10px -20px;
+        }
+
+        .form .login-button:active {
+            transform: scale(0.95);
+            box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 15px 10px -10px;
+        }
+
+        .social-account-container {
+            margin-top: 25px;
+        }
+
+        .social-account-container .title {
+            display: block;
+            text-align: center;
+            font-size: 10px;
+            color: rgb(170, 170, 170);
+        }
+
+        .social-account-container .social-accounts {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 5px;
+        }
+
+        .social-account-container .social-accounts .social-button {
+            background: linear-gradient(45deg, rgb(0, 0, 0) 0%, rgb(112, 112, 112) 100%);
+            border: 5px solid white;
+            padding: 5px;
+            border-radius: 50%;
+            width: 40px;
+            aspect-ratio: 1;
+            display: grid;
+            place-content: center;
+            box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 12px 10px -8px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .social-account-container .social-accounts .social-button .svg {
+            fill: white;
+            margin: auto;
+        }
+
+        .social-account-container .social-accounts .social-button:hover {
+            transform: scale(1.2);
+        }
+
+        .social-account-container .social-accounts .social-button:active {
+            transform: scale(0.9);
+        }
+
+        .agreement {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .agreement a {
+            text-decoration: none;
+            color: #0099ff;
+            font-size: 9px;
+        }
+    </style>
+
+    <footer class="site-footer section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-12 mb-4 pb-2">
+                    <a class="navbar-brand mb-2" href="index.html">
+                        <i class="bi-back"></i>
+                        <span>Career</span>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-6">
+                    <h6 class="site-footer-title mb-3">Resources</h6>
+
+                    <ul class="site-footer-links">
+                        <li class="site-footer-link-item">
+                            <a href="#" class="site-footer-link">Home</a>
+                        </li>
+
+                        <li class="site-footer-link-item">
+                            <a href="#" class="site-footer-link">How it works</a>
+                        </li>
+
+                        <li class="site-footer-link-item">
+                            <a href="#" class="site-footer-link">FAQs</a>
+                        </li>
+
+                        <li class="site-footer-link-item">
+                            <a href="#" class="site-footer-link">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-6 mb-4 mb-lg-0">
+                    <h6 class="site-footer-title mb-3">Information</h6>
+
+                    <p class="text-white d-flex mb-1">
+                        <a href="tel: 305-240-9671" class="site-footer-link">
+                            305-240-9671
+                        </a>
+                    </p>
+
+                    <p class="text-white d-flex">
+                        <a href="mailto:info@company.com" class="site-footer-link">
+                            info@company.com
+                        </a>
+                    </p>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-12 mt-4 mt-lg-0 ms-auto">
+
+                    <p class="copyright-text mt-lg-5 mt-4">Copyright © 2048 Career.<br>All rights reserved </p>
+
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- JAVASCRIPT FILES -->
+    <script src="{{ url_for('static', filename = 'js/jquery.min.js')}}"></script>
+    <script src="{{ url_for('static', filename = 'js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ url_for('static', filename = 'js/jquery.sticky.js')}}"></script>
+    <script src="{{ url_for('static', filename = 'js/click-scroll.js')}}"></script>
+    <script src="{{ url_for('static', filename = 'js/custom.js')}}"></script>
+
+</body>
+
+</html>
