@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+from flask import Flask, request, redirect, url_for, render_template
+import db 
 
 app = Flask(__name__)
 
@@ -25,12 +26,7 @@ def signup():
 
 
 
-
-from flask import Flask, request, redirect, url_for, render_template
-import db  # Assuming db.py contains your database functions
-
-
-
+ # Assuming db.py contains your database functions
 @app.route('/submit_contact', methods=['POST'])
 def submit_contact():
     name = request.form['name']
