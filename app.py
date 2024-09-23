@@ -24,6 +24,10 @@ def login():
 def signup():
     return render_template("sign.html")
 
+@app.route('/details')
+def details():
+    return render_template("studentdetails.html")
+
 
 
  # Assuming db.py contains your database functions
