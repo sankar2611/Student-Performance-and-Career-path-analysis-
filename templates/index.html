@@ -26,14 +26,92 @@
 </head>
 
 <body id="top">
+    <style>
+        /* CSS to resize the logo */
+        .logo {
+            height: 60px;
+            /* Adjust this value to shorten the logo */
+            width: auto;
+        }
+
+        /* From Uiverse.io by satyamchaudharydev */
+        .browse-button {
+            padding: 0;
+            margin: 0;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+
+        .browse-button  {
+            --primary-color: #000;
+            --hovered-color: #000;
+            position: relative;
+            display: flex;
+            font-weight: 600;
+            font-size: 20px;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .browse-button p {
+            margin: 0;
+            position: relative;
+            font-size: 20px;
+            color: var(--primary-color);
+        }
+
+        .browse-button::after {
+            position: absolute;
+            content: "";
+            width: 0;
+            left: 0;
+            bottom: -7px;
+            background: var(--hovered-color);
+            height: 2px;
+            transition: 0.3s ease-out;
+        }
+
+        .browse-button p::before {
+            position: absolute;
+            /*   box-sizing: border-box; */
+            content: "Know More";
+            width: 0%;
+            inset: 0;
+            color: var(--hovered-color);
+            overflow: hidden;
+            transition: 0.3s ease-out;
+        }
+
+        .browse-button:hover::after {
+            width: 100%;
+        }
+
+        .browse-button:hover p::before {
+            width: 100%;
+        }
+
+        .browse-button:hover svg {
+            transform: translateX(4px);
+            color: var(--hovered-color);
+        }
+
+        .browse-button svg {
+            color: var(--primary-color);
+            transition: 0.2s;
+            position: relative;
+            width: 15px;
+            transition-delay: 0.2s;
+        }
+    </style>
 
     <main>
 
         <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand" href="/">
-                    <i class="bi-back"></i>
-                    <span>Career</span>
+                    <image src="{{ url_for('static', filename = 'images/image-removebg-preview (2).png')}}" alt="Logo"
+                        class="logo"></image>
                 </a>
 
                 <div class="d-lg-none ms-auto me-4">
@@ -48,11 +126,11 @@
                 <div class="collapse navbar-collapse" id="navbarNav" style="padding-left: 150px;">
                     <ul class="navbar-nav ms-lg-5 me-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="/">Home</a>
+                            <a class="nav-link click-scroll" href="/"><strong>Home</strong></a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_2">Browse Topics</a>
+                            <a class="nav-link click-scroll" href="/job" >Browse Topics</a>
                         </li>
 
                         <li class="nav-item">
@@ -255,10 +333,25 @@
                                                 <img src="{{ url_for('static', filename = 'images/topics/colleagues-working-cozy-office-medium-shot.png')}}"
                                                     class="custom-block-image img-fluid" alt="">
                                             </a>
-                                        </div>
+                                        </div><br>
                                     </div>
                                 </div>
-                            </div>
+                            </div><br>
+                            <button class="browse-button" style="left: 600px;">
+                                <a href="/job">
+                                    <p>Know More</p>
+                                </a>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" stroke-width="4">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3">
+                                    </path>
+                                </svg>
+                            </button>
+
+
+
+
+
 
                             <div class="tab-pane fade" id="marketing-tab-pane" role="tabpanel"
                                 aria-labelledby="marketing-tab" tabindex="0">

@@ -4,38 +4,38 @@
         Your browser does not support the video tag.
     </video>
     <div class="container">
-    <main class="signup-container" style="
+        <main class="signup-container" style="
     padding-left: 950px;
     padding-right: 0px;
 ">
-        <h1 class="heading-primary">Sign Up<span class="span-blue">.</span></h1>
-        <form class="signup-form">
-            <label class="inp">
-                <input type="name" class="input-text" placeholder="&nbsp;">
-                <span class="label">Name</span>
-                <span class="input-icon"><i class="fa-solid fa-envelope"></i></span>
-            </label>
-            <label class="inp">
-                <input type="contact" class="input-text" placeholder="&nbsp;">
-                <span class="label">Contact No</span>
-                <span class="input-icon"><i class="fa-solid fa-envelope"></i></span>
-            </label>
-            <label class="inp">
-                <input type="email" class="input-text" placeholder="&nbsp;">
-                <span class="label">Email</span>
-                <span class="input-icon"><i class="fa-solid fa-envelope"></i></span>
-            </label>
-            <label class="inp">
-                <input type="password" class="input-text" placeholder="&nbsp;" id="password">
-                <span class="label">Password</span>
-                <span class="input-icon input-icon-password" data-password><i class="fa-solid fa-eye"></i></span>
-            </label>
-            
-            <button class="btn btn-login">Sign Up</button>
-        </form>
-        <p class="text-mute">Already a member? <a href="/login">Log In</a></p>
-    </main>
-</div>
+            <h1 class="heading-primary">Sign Up<span class="span-blue">.</span></h1>
+            <form class="signup-form">
+                <label class="inp">
+                    <input type="name" class="input-text" placeholder="&nbsp;">
+                    <span class="label">Name</span>
+                    <span class="input-icon"><i class="fa-solid fa-envelope"></i></span>
+                </label>
+                <label class="inp">
+                    <input type="contact" class="input-text" placeholder="&nbsp;">
+                    <span class="label">Contact No</span>
+                    <span class="input-icon"><i class="fa-solid fa-envelope"></i></span>
+                </label>
+                <label class="inp">
+                    <input type="email" class="input-text" placeholder="&nbsp;">
+                    <span class="label">Email</span>
+                    <span class="input-icon"><i class="fa-solid fa-envelope"></i></span>
+                </label>
+                <label class="inp">
+                    <input type="password" class="input-text" placeholder="&nbsp;" id="password">
+                    <span class="label">Password</span>
+                    <span class="input-icon input-icon-password" data-password><i class="fa-solid fa-eye"></i></span>
+                </label>
+
+                <button class="btn btn-login">Sign Up</button>
+            </form>
+            <p class="text-mute">Already a member? <a href="/login">Log In</a></p>
+        </main>
+    </div>
 </body>
 
 <!-- CSS Styling -->
@@ -318,13 +318,13 @@
     const password_elem = document.getElementById("password");
 
     eyeClick.onclick = () => {
-    const icon = eyeClick.children[0];
-    icon.classList.toggle("fa-eye-slash");
-    if (password_elem.type === "password") {
-    password_elem.type = "text";
-    } else if (password_elem.type === "text") {
-    password_elem.type = "password";
-    }
+        const icon = eyeClick.children[0];
+        icon.classList.toggle("fa-eye-slash");
+        if (password_elem.type === "password") {
+            password_elem.type = "text";
+        } else if (password_elem.type === "text") {
+            password_elem.type = "password";
+        }
     };
 
 </script>
