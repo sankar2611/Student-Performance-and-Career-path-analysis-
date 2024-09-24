@@ -1,13 +1,10 @@
 <body>
     <video autoplay muted loop id="background-video">
-        <source src="{{ url_for('static', filename='videos/background (6).mp4') }}" type="video/mp4">
+        <source src="{{ url_for('static', filename='videos/background (8).mp4') }}" type="video/mp4">
         Your browser does not support the video tag.
     </video>
     <div class="container">
-        <main class="signup-container" style="
-    padding-left: 950px;
-    padding-right: 0px;
-">
+        <main class="signup-container" style="padding-left: 950px; padding-right: 0px; padding-bottom: 0px; padding-top: 60px;">
             <h1 class="heading-primary">Sign Up<span class="span-blue">.</span></h1>
             <form class="signup-form">
                 <label class="inp">
@@ -30,7 +27,15 @@
                     <span class="label">Password</span>
                     <span class="input-icon input-icon-password" data-password><i class="fa-solid fa-eye"></i></span>
                 </label>
-
+                <label class="inp">
+                    <select class="input-text">
+                        <option value="Role" disabled selected></option>
+                        <option value="student">Student</option>
+                        <option value="company">Company</option>
+                    </select>
+                    <span class="label">Select Role</span>
+                    <span class="input-icon input-icon-password" data-password><i class="fa-solid fa-eye"></i></span>
+                </label>
                 <button class="btn btn-login">Sign Up</button>
             </form>
             <p class="text-mute">Already a member? <a href="/login">Log In</a></p>
@@ -312,6 +317,7 @@
             display: none;
         }
     }
+    
 </style>
 <script>
     const eyeClick = document.querySelector("[data-password]");
