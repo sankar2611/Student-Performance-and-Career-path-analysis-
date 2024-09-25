@@ -112,5 +112,9 @@ def submit_contact():
     # Redirect or render a success page
     return redirect(url_for('contact'))
 
+@app.route('/details')
+def student():
+    return render_template("studentdetails.html")
+
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")
