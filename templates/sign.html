@@ -62,15 +62,16 @@
     <div class="container">
         <main class="signup-container" style="padding-left: 950px; padding-right: 0px; padding-bottom: 0px; padding-top: 60px;">
             <h1 class="heading-primary">Sign Up<span class="span-blue">.</span></h1>
-            {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul>
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
+            {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <ul>
+        {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
             <form class="signup-form" method="POST" action="/signup">  <!-- Change action to /signup -->
                 <label class="inp">
                     <input type="text" name="name" class="input-text" placeholder="&nbsp;" required>
@@ -138,7 +139,18 @@
             z-index: -1;
             background-color: black;
         }
-
+        ul {
+            list-style: none;
+        }
+        
+        .success {
+            color: green;
+        }
+        
+        .error {
+            color: red;
+        }
+        
         .container {
             position: relative;
             z-index: 1;

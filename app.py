@@ -15,7 +15,10 @@ def index():
 
 @app.route('/contact')
 def contact():
-    return render_template("contact.html")
+    user_name = session.get('name')  # Assuming you set 'name' in the session during login
+    user_email = session.get('email')  # Email is already in the session
+
+    return render_template("contact.html", name=user_name, email=user_email)
 
 @app.route('/job')
 def job():
@@ -35,6 +38,7 @@ def login():
         if user:
             # Store user details in session
             session['email'] = email
+            session['name'] = user[1]  # Assuming the name is at index 1 in the user tuple
             session['role'] = role.lower()
             print("DEBUG: Session set")  # Debugging session
 
@@ -42,16 +46,18 @@ def login():
 
             # Redirect to respective dashboard
             if role.lower() == 'student':
+                flash('Login successful!', 'success')
                 return redirect(url_for('index'))
             elif role.lower() == 'company':
+                flash('Login successful!', 'success')
                 return redirect(url_for('index'))
         else:
             # Invalid credentials
-            print("DEBUG: Invalid credentials")  # Log invalid login attempts
-            return "Invalid credentials", 401
+            flash('Invalid credentials. Please try again.', 'error')
+            print("DEBUG: Flash message for invalid credentials triggered")  # Log invalid login attempts
+            return redirect(url_for('login'))
 
     return render_template("login.html")
-
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
@@ -91,6 +97,20 @@ def company_dashboard():
         return "Company Dashboard"
     else:
         return redirect(url_for('login'))
+
+@app.route('/submit_contact', methods=['POST'])
+def submit_contact():
+    name = request.form['name']
+    email = request.form['email']
+    subject = request.form['subject']
+    message = request.form['message']
+
+    # Insert into the database using SQL Server
+    db.insert_contact(name, email, subject, message)
+    flash('Your message has been sent successfully!', 'success')
+
+    # Redirect or render a success page
+    return redirect(url_for('contact'))
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")

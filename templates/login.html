@@ -8,8 +8,17 @@
     padding-top: 200px;
     padding-left: 150px;
 ">
-        <h1 class="heading-primary">Log in<span class="span-blue">.</span></h1>
 
+        <h1 class="heading-primary">Log in<span class="span-blue">.</span></h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+    <ul>
+    {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+{% endwith %}
         <form class="signup-form" method="POST" action="/login">  <!-- Add action here -->
     <label class="inp">
         <input type="email" name="email" class="input-text" placeholder="&nbsp;" required>  <!-- Added name attribute -->
@@ -49,7 +58,18 @@
         position: relative;
         z-index: 1;
     }
-
+    ul {
+        list-style: none;
+    }
+    
+    .success {
+        color: green;
+    }
+    
+    .error {
+        color: red;
+    }
+    
     * {
         margin: 0;
         padding: 0;

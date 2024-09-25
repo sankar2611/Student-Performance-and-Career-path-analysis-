@@ -12,7 +12,16 @@ def get_db_connection():
         'TrustServerCertificate=yes;'  # Bypasses the SSL certificate validation
     )
     return conn
-
+def insert_contact(name, email, subject, message):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute('''
+        INSERT INTO Contact (Name, Email, Subject, Message) 
+        VALUES (?, ?, ?, ?)
+    ''', (name, email, subject, message))
+    conn.commit()
+    cursor.close()
+    conn.close()
 def check_user(email, password):
     conn = get_db_connection()
     cursor = conn.cursor()
