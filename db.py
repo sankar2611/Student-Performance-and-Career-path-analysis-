@@ -1,7 +1,7 @@
 import pyodbc
 from werkzeug.security import generate_password_hash,check_password_hash
 
-# Define your connection parameters
+
 def get_db_connection():
     conn = pyodbc.connect(
         'DRIVER={ODBC Driver 18 for SQL Server};'  # Make sure to have the correct ODBC driver installed
@@ -95,11 +95,11 @@ def insert_signup(name, contact, email, password, role):
             ''', (name, contact, email, password))
 
         conn.commit()
-        print("DEBUG: Signup successful")  # Logging success
+        # print("DEBUG: Signup successful")  # Logging success
         return "Signup successful"
 
     except Exception as e:
-        print(f"DEBUG: Error during signup: {e}")  # Log any errors
+        # print(f"DEBUG: Error during signup: {e}")  # Log any errors
         return "Error during signup"
 
     finally:
