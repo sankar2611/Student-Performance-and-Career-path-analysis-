@@ -111,6 +111,8 @@ def submit_contact():
     # Redirect or render a success page
     return redirect(url_for('contact'))
 
+
+
 @app.route('/details', methods=['GET', 'POST'])
 def student_details():
     # Assuming that user_id is stored in the session when the user logs in
@@ -173,6 +175,7 @@ def student_details():
 @app.route('/company')
 def company():
     return render_template("company.html")
+
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")
