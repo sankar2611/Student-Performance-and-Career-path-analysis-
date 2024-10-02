@@ -36,11 +36,10 @@ def login():
         print(f"DEBUG: Role: {role}, User: {user}")  # Add debug information
 
         if user:
-            # Store user details in session
             session['email'] = email
-            session['name'] = user[1]  # Assuming the name is at index 1 in the user tuple
+            session['name'] = user[1]  
             session['role'] = role.lower()
-            print("DEBUG: Session set")  # Debugging session
+            print("DEBUG: Session set")  
 
             db.log_user_login(email, role)
 
@@ -112,9 +111,64 @@ def submit_contact():
     # Redirect or render a success page
     return redirect(url_for('contact'))
 
-@app.route('/details')
-def student():
-    return render_template("studentdetails.html")
+@app.route('/details', methods=['GET', 'POST'])
+def student_details():
+    # Assuming that user_id is stored in the session when the user logs in
+    user_id = session.get('user_id')
+    
+    if not user_id:
+        flash("You need to be logged in to access this page.", "error")
+        return redirect(url_for('login'))
+
+    # Fetch the current user's details from Sign_up table
+    user_details = db.get_user_details(user_id)
+
+    if request.method == 'POST':
+        # Extract form data
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
+        middle_name = request.form.get('middle_name', '')  # Optional field
+        date_of_birth = request.form['date_of_birth']
+        mobile_number = request.form['mobile_number']
+        gender = request.form['gender']
+        area_of_interest = request.form['area_of_interest']
+        location = request.form['location']
+        nationality = request.form['nationality']
+        preferred_location = request.form['preferred_location']
+        job_mode = request.form['job_mode']
+        available_to_join = request.form['available_to_join']
+        skills = request.form['skills']
+        languages = request.form['languages']
+        university = request.form['university']
+        course = request.form['course']
+        specialization = request.form['specialization']
+        course_start = request.form['course_start']
+        course_end = request.form['course_end']
+        github = request.form.get('github', '')  # Optional field
+        linkedin = request.form['linkedin']
+        
+        # Extract subjects and CGPAs
+        subjects = request.form.getlist('subject-name[]')
+        cgpas = request.form.getlist('cgpa[]')
+
+        # Insert data into the database using the student_id from session
+        result = db.insert_student_details(
+            user_id, first_name, last_name, middle_name, date_of_birth, mobile_number, 
+            gender, area_of_interest, location, nationality, preferred_location, 
+            job_mode, available_to_join, skills, languages, university, course, 
+            specialization, course_start, course_end, github, linkedin, 
+            subjects, cgpas
+        )
+
+        if result == "Details submitted successfully":
+            flash("Your details have been submitted successfully!", "success")
+            return redirect(url_for('index'))  # Redirect to home page or dashboard
+        else:
+            flash("Error submitting details. Please try again.", "error")
+
+    # Render the template with user details pre-filled
+    return render_template("studentdetails.html", user=user_details)
+
 
 @app.route('/company')
 def company():

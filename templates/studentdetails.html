@@ -20,6 +20,13 @@
 </head>
 
 <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
     <video autoplay muted loop id="background-video">
         <source src="{{ url_for('static', filename='videos/details.mp4') }}" type="video/mp4">
         Your browser does not support the video tag.
@@ -84,13 +91,13 @@
                 <div class="details personal">
                     <span class="title">Personal Details</span><br>
                     <div class="fields">
-                        <div class="input-field">
-                            <label>First Name</label>
-                            <input type="text" placeholder="First Name" required>
+                        <div class="form-group">
+                            <label for="first_name">First Name:</label>
+                            <input type="text" id="first_name" name="first_name" value="{{ user['name'].split()[0] }}" class="form-control" required>
                         </div>
-                        <div class="input-field">
-                            <label>Last Name</label>
-                            <input type="text" placeholder="Last Name" required>
+                        <div class="form-group">
+                            <label for="last_name">Last Name:</label>
+                            <input type="text" id="last_name" name="last_name" value="{{ user['name'].split()[1] }}" class="form-control" required>
                         </div>
                         <div class="input-field">
                             <label>Middle Name [Optional]</label>
@@ -100,9 +107,9 @@
                             <label>Date of Birth</label>
                             <input type="date" placeholder="Enter birth date" required>
                         </div>
-                        <div class="input-field">
-                            <label>Mobile Number</label>
-                            <input type="tel" placeholder="Enter mobile number" required>
+                        <div class="form-group">
+                            <label for="mobile_number">Mobile Number:</label>
+                            <input type="text" id="mobile_number" name="mobile_number" value="{{ user['contact'] }}" class="form-control" required>
                         </div>
                         <div class="input-field">
                             <label>Gender</label>
@@ -795,6 +802,23 @@
             background-color: #aaa;
             /* Change color on hover */
         }
+       
+            .alert {
+              padding: 15px;
+              margin-bottom: 20px;
+              border: 1px solid transparent;
+              border-radius: 4px;
+            }
+            .alert-success {
+              color: #3c763d;
+              background-color: #dff0d8;
+              border-color: #d6e9c6;
+            }
+            .alert-error {
+              color: #a94442;
+              background-color: #f2dede;
+              border-color: #ebccd1;
+            }
     </style>
     <script>
         

@@ -63,8 +63,6 @@ def log_user_login(email, role):
     conn.commit()
     cursor.close()
     conn.close()
-
-
 def insert_signup(name, contact, email, password, role):
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -105,4 +103,67 @@ def insert_signup(name, contact, email, password, role):
     finally:
         cursor.close()
         conn.close()
+def insert_student_details(student_id, first_name, last_name, middle_name, date_of_birth, mobile_number, 
+                           gender, area_of_interest, location, nationality, preferred_location, 
+                           job_mode, available_to_join, skills, languages, university, course, 
+                           specialization, course_start, course_end, github, linkedin, 
+                           subjects, cgpas):
+    conn = get_db_connection()
+    cursor = conn.cursor()
 
+    try:
+        # Insert into StudentDetails table, link it with the Sign_up ID (student_id)
+        cursor.execute('''
+            INSERT INTO StudentDetails (
+                student_id, first_name, last_name, middle_name, date_of_birth, mobile_number, 
+                gender, area_of_interest, location, nationality, preferred_location, 
+                job_mode, available_to_join, skills, languages, university, course, 
+                specialization, course_start, course_end, github, linkedin
+            ) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (student_id, first_name, last_name, middle_name, date_of_birth, mobile_number, 
+              gender, area_of_interest, location, nationality, preferred_location, 
+              job_mode, available_to_join, skills, languages, university, course, 
+              specialization, course_start, course_end, github, linkedin))
+        
+        # Insert subjects and CGPAs
+        for subject, cgpa in zip(subjects, cgpas):
+            cursor.execute('''
+                INSERT INTO StudentSubjects (student_id, subject_name, cgpa)
+                VALUES (?, ?, ?)
+            ''', (student_id, subject, cgpa))
+
+        conn.commit()
+        return "Details submitted successfully"
+
+    except Exception as e:
+        conn.rollback()
+        print(f"Error inserting student details: {e}")
+        return "Error submitting details"
+
+    finally:
+        cursor.close()
+        conn.close()
+
+def get_user_details(user_id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    try:
+        cursor.execute('''
+            SELECT name, contact FROM Sign_up WHERE id = ?
+        ''', (user_id,))
+        user_details = cursor.fetchone()
+
+        if user_details:
+            return {'name': user_details[0], 'contact': user_details[1]}
+        else:
+            return None
+
+    except Exception as e:
+        print(f"Error fetching user details: {e}")
+        return None
+
+    finally:
+        cursor.close()
+        conn.close()
