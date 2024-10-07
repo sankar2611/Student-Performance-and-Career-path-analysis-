@@ -50,7 +50,7 @@
             <div class="collapse navbar-collapse" id="navbarNav" style="padding-left: 100px;">
                 <ul class="navbar-nav ms-lg-5 me-lg-auto">
                     <li class="nav-item">
-                        <a class="nav-link click-scroll" href="/"><strong>Home</strong></a>
+                        <a class="nav-link click-scroll" href="/index"><strong>Home</strong></a>
                     </li>
 
                     <li class="nav-item">
@@ -97,8 +97,10 @@
                     <div class="fields">
                         <div class="form-group">
                             <label for="first_name">First Name:</label>
-                            <input type="text" id="first_name" name="first_name" value="{{ user['name'].split()[0] }}" class="form-control" required>
-                        </div>
+                            <input type="text" id="first_name" name="first_name" 
+                            value="{{ user['name'].split()[0] if user and user['name'] else '' }}" 
+                            class="form-control" required>
+                                             </div>
                         <div class="form-group">
                             <label for="last_name">Last Name:</label>
                             <input type="text" id="last_name" name="last_name" value="{{ user['name'].split()[1] }}" class="form-control" required>

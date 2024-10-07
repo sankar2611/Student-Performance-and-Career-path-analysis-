@@ -1,12 +1,42 @@
 from flask import Flask, request, redirect, url_for, render_template, session, flash
+from datetime import timedelta
+from functools import wraps
 import db 
 
 app = Flask(__name__)
 app.secret_key = '2144bf28b53d00814d9f82b0ef0e0857'  # Set a secret key for session management
 
 
+app.permanent_session_lifetime = timedelta(minutes=30)
+
+
 @app.route('/')
 def home():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+
+        role, user = db.check_user(email, password)
+        print(f"DEBUG: Role: {role}, User: {user}")  
+
+        if user:
+            session['email'] = email
+            session['name'] = user[1]  
+            session['role'] = role.lower()
+            session['user_id'] = user[0] 
+            print("DEBUG: Session set")  
+
+            db.log_user_login(email, role)
+
+            flash('Login successful!', 'success')            
+            if role.lower() == 'student':
+                return redirect(url_for('index'))
+            elif role.lower() == 'company':
+                return redirect(url_for('index'))
+        else:
+            # Invalid credentials
+            flash('Invalid credentials. Please try again.', 'error')
+            return redirect(url_for('login'))
     return render_template("login.html")
 
 @app.route('/index')
@@ -15,6 +45,9 @@ def index():
 
 @app.route('/contact')
 def contact():
+    if 'email' not in session:
+        flash("You need to be logged in to access this page.", "error")
+        return redirect(url_for('login'))
     user_name = session.get('name')  # Assuming you set 'name' in the session during login
     user_email = session.get('email')  # Email is already in the session
 
@@ -39,24 +72,23 @@ def login():
             session['email'] = email
             session['name'] = user[1]  
             session['role'] = role.lower()
+            session['user_id'] = user[0] 
             print("DEBUG: Session set")  
 
             db.log_user_login(email, role)
 
-            # Redirect to respective dashboard
+            flash('Login successful!', 'success')            
             if role.lower() == 'student':
-                flash('Login successful!', 'success')
                 return redirect(url_for('index'))
             elif role.lower() == 'company':
-                flash('Login successful!', 'success')
                 return redirect(url_for('index'))
         else:
             # Invalid credentials
             flash('Invalid credentials. Please try again.', 'error')
-            print("DEBUG: Flash message for invalid credentials triggered")  # Log invalid login attempts
             return redirect(url_for('login'))
 
     return render_template("login.html")
+
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
@@ -111,20 +143,33 @@ def submit_contact():
     # Redirect or render a success page
     return redirect(url_for('contact'))
 
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'user_id' not in session:
+            flash("You need to be logged in to access this page.", "error")
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return decorated_function
 
 
 @app.route('/details', methods=['GET', 'POST'])
+@login_required
 def student_details():
-    # Assuming that user_id is stored in the session when the user logs in
-    user_id = session.get('user_id')
-    
-    if not user_id:
+    if 'email' not in session:
         flash("You need to be logged in to access this page.", "error")
         return redirect(url_for('login'))
+    
+    user_id = session.get('user_id')
+    
+    # if not user_id:
+    #     flash("You need to be logged in to access this page.", "error")
+    #     return redirect(url_for('login'))
 
-    # Fetch the current user's details from Sign_up table
     user_details = db.get_user_details(user_id)
-
+    if not user_details:
+        flash("User details not found. Please contact support.", "error")
+        return redirect(url_for('index'))
     if request.method == 'POST':
         # Extract form data
         first_name = request.form['first_name']
