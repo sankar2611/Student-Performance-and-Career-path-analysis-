@@ -169,7 +169,7 @@ def student_details():
     user_details = db.get_user_details(user_id)
     if not user_details:
         flash("User details not found. Please contact support.", "error")
-        return redirect(url_for('index'))
+        return redirect(url_for('contact'))
     if request.method == 'POST':
         # Extract form data
         first_name = request.form['first_name']
@@ -191,7 +191,8 @@ def student_details():
         specialization = request.form['specialization']
         course_start = request.form['course_start']
         course_end = request.form['course_end']
-        github = request.form.get('github', '')  # Optional field
+        github = request.form.get('github', '') 
+        print("done") # Optional field
         linkedin = request.form['linkedin']
         
         # Extract subjects and CGPAs
@@ -206,12 +207,23 @@ def student_details():
             specialization, course_start, course_end, github, linkedin, 
             subjects, cgpas
         )
+        import logging
+
+        logging.basicConfig(level=logging.DEBUG)
+
+        # Instead of print(), use:
+        logging.debug(f"Form Data: {first_name}, {last_name}, {middle_name}, {date_of_birth}, {mobile_number}, "
+                    f"{gender}, {area_of_interest}, {location}, {nationality}, {preferred_location}, "
+                    f"{job_mode}, {available_to_join}, {skills}, {languages}, {university}, {course}, "
+                    f"{specialization}, {course_start}, {course_end}, {github}, {linkedin}, {subjects}, {cgpas}")
 
         if result == "Details submitted successfully":
+            print("Successfully")
             flash("Your details have been submitted successfully!", "success")
             return redirect(url_for('index'))  # Redirect to home page or dashboard
         else:
             flash("Error submitting details. Please try again.", "error")
+            return redirect(url_for('index'))
 
     # Render the template with user details pre-filled
     return render_template("studentdetails.html", user=user_details)

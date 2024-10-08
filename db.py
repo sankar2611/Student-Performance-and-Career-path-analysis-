@@ -110,8 +110,9 @@ def insert_student_details(student_id, first_name, last_name, middle_name, date_
                            subjects, cgpas):
     conn = get_db_connection()
     cursor = conn.cursor()
-
+    print("Inserting student details")
     try:
+        print("try coming")
         # Insert into StudentDetails table, link it with the Sign_up ID (student_id)
         cursor.execute('''
             INSERT INTO StudentDetails (
@@ -120,19 +121,21 @@ def insert_student_details(student_id, first_name, last_name, middle_name, date_
                 job_mode, available_to_join, skills, languages, university, course, 
                 specialization, course_start, course_end, github, linkedin
             ) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)
         ''', (student_id, first_name, last_name, middle_name, date_of_birth, mobile_number, 
               gender, area_of_interest, location, nationality, preferred_location, 
               job_mode, available_to_join, skills, languages, university, course, 
               specialization, course_start, course_end, github, linkedin))
-        
-        # Insert subjects and CGPAs
-        for subject, cgpa in zip(subjects, cgpas):
-            cursor.execute('''
-                INSERT INTO StudentSubjects (student_id, subject_name, cgpa)
-                VALUES (?, ?, ?)
-            ''', (student_id, subject, cgpa))
+        print("Data Insertion into StudentDetails successful")
 
+        # Insert subjects and CGPAs
+        if subjects and cgpas:
+            for subject, cgpa in zip(subjects, cgpas):
+                cursor.execute('''
+                    INSERT INTO StudentSubjects (student_id, subject_name, cgpa)
+                    VALUES (?, ?, ?)
+                ''', (student_id, subject, cgpa))
+        print("done")
         conn.commit()
         return "Details submitted successfully"
 
@@ -152,10 +155,11 @@ def get_user_details(user_id):
     try:
         cursor.execute('''
             SELECT name, contact FROM Sign_up WHERE id = ?
-        ''', (user_id,))
+        ''', (user_id))
         user_details = cursor.fetchone()
 
         if user_details:
+            print("found")
             return {'name': user_details[0], 'contact': user_details[1]}
         else:
             return None

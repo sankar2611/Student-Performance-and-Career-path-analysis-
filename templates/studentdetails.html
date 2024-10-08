@@ -89,391 +89,393 @@
     </div>
 
     <div class="container123" style="left: 300px; margin-left: 0px; margin-right: 0px; padding-top: 10px">
-        <form id="registration-form1">
-            <header>Registration</header><br>
-            <div class="form first" id="form-first">
-                <div class="details personal">
-                    <span class="title">Personal Details</span><br>
-                    <div class="fields">
-                        <div class="form-group">
-                            <label for="first_name">First Name:</label>
-                            <input type="text" id="first_name" name="first_name" 
-                            value="{{ user['name'].split()[0] if user and user['name'] else '' }}" 
-                            class="form-control" required>
-                                             </div>
-                        <div class="form-group">
-                            <label for="last_name">Last Name:</label>
-                            <input type="text" id="last_name" name="last_name" value="{{ user['name'].split()[1] }}" class="form-control" required>
-                        </div>
-                        <div class="input-field">
-                            <label>Middle Name [Optional]</label>
-                            <input type="text" placeholder="Middle Name [optional]">
-                        </div>
-                        <div class="input-field">
-                            <label>Date of Birth</label>
-                            <input type="date" placeholder="Enter birth date" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="mobile_number">Mobile Number:</label>
-                            <input type="text" id="mobile_number" name="mobile_number" value="{{ user['contact'] }}" class="form-control" required>
-                        </div>
-                        <div class="input-field">
-                            <label>Gender</label>
-                            <select required>
-                                <option disabled selected>Select gender</option>
-                                <option>Male</option>
-                                <option>Female</option>
-                                <option>Others</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <button type="button" class="nextBtn" id="next1" style="margin-left: 325px">
-                    <span class="btnText">Next</span>
-                    <i class="uil uil-navigator"></i>
-                </button>
-            </div>
-        </form>
-        <form id="registration-form2">
-            <header>Details</header><br>
-            <div class="form sec" id="form-sec">
-                <div class="details address">
-                    <span class="title">Prefference Details</span><br>
-                    <div class="fields">
-                        <div class="input-field">
-                            <label>Area Of Interest</label>
-                            <select required>
-                                <option disabled selected>Select Your Area</option>
-                                <option>Architecture & Engineering</option>
-                                <option>Arts, Culture & Entertainment</option>
-                                <option>Business, Management & Administration</option>
-                                <option>Communications</option>
-                                <option>Community & Social Services</option>
-                                <option>Education</option>
-                                <option>Science & Technology</option>
-                                <option>Installation, Repair & Maintenance</option>
-                                <option>Farming, Fishing & Forestry</option>
-                                <option>Government</option>
-                                <option>Health & Medicine</option>
-                                <option>Law & Public Policy</option>
-                                <option>Sales</option>
-                            </select>
-                        </div>
-                        <div class="input-field">
-                            <label>Location</label>
-                            <input type="text" placeholder="Current Resident" required>
-                        </div>
-                        <div class="input-field">
-                            <label>Nationality</label>
-                            <select required>
-                                <option disabled selected>Nationality</option>
-                                <option value="AF">Afghan</option>
-                                <option value="AL">Albanian</option>
-                                <option value="DZ">Algerian</option>
-                                <option value="AS">American Samoan</option>
-                                <option value="AD">Andorran</option>
-                                <option value="AO">Angolan</option>
-                                <option value="AG">Antiguan or Barbudan</option>
-                                <option value="AR">Argentinian</option>
-                                <option value="AM">Armenian</option>
-                                <option value="AU">Australian</option>
-                                <option value="AT">Austrian</option>
-                                <option value="AZ">Azerbaijani</option>
-                                <option value="BS">Bahamian</option>
-                                <option value="BH">Bahraini</option>
-                                <option value="BD">Bangladeshi</option>
-                                <option value="BB">Barbadian</option>
-                                <option value="BY">Belarusian</option>
-                                <option value="BE">Belgian</option>
-                                <option value="BZ">Belizean</option>
-                                <option value="BJ">Beninese</option>
-                                <option value="BT">Bhutanese</option>
-                                <option value="BO">Bolivian</option>
-                                <option value="BA">Bosnian or Herzegovinian</option>
-                                <option value="BW">Botswanan</option>
-                                <option value="BR">Brazilian</option>
-                                <option value="BN">Bruneian</option>
-                                <option value="BG">Bulgarian</option>
-                                <option value="BF">Burkinabe</option>
-                                <option value="BI">Burundian</option>
-                                <option value="CV">Cabo Verdean</option>
-                                <option value="KH">Cambodian</option>
-                                <option value="CM">Cameroonian</option>
-                                <option value="CA">Canadian</option>
-                                <option value="CF">Central African</option>
-                                <option value="TD">Chadian</option>
-                                <option value="CL">Chilean</option>
-                                <option value="CN">Chinese</option>
-                                <option value="CO">Colombian</option>
-                                <option value="KM">Comoran</option>
-                                <option value="CG">Congolese (Congo-Brazzaville)</option>
-                                <option value="CD">Congolese (Congo-Kinshasa)</option>
-                                <option value="CR">Costa Rican</option>
-                                <option value="HR">Croatian</option>
-                                <option value="CU">Cuban</option>
-                                <option value="CY">Cypriot</option>
-                                <option value="CZ">Czech</option>
-                                <option value="DK">Danish</option>
-                                <option value="DJ">Djiboutian</option>
-                                <option value="DM">Dominican</option>
-                                <option value="DO">Dominican (Republic)</option>
-                                <option value="EC">Ecuadorian</option>
-                                <option value="EG">Egyptian</option>
-                                <option value="SV">Salvadoran</option>
-                                <option value="GQ">Equatorial Guinean</option>
-                                <option value="ER">Eritrean</option>
-                                <option value="EE">Estonian</option>
-                                <option value="ET">Ethiopian</option>
-                                <option value="FJ">Fijian</option>
-                                <option value="FI">Finnish</option>
-                                <option value="FR">French</option>
-                                <option value="GA">Gabonese</option>
-                                <option value="GM">Gambian</option>
-                                <option value="GE">Georgian</option>
-                                <option value="DE">German</option>
-                                <option value="GH">Ghanaian</option>
-                                <option value="GR">Greek</option>
-                                <option value="GD">Grenadian</option>
-                                <option value="GT">Guatemalan</option>
-                                <option value="GN">Guinean</option>
-                                <option value="GW">Guinea-Bissauan</option>
-                                <option value="GY">Guyanese</option>
-                                <option value="HT">Haitian</option>
-                                <option value="HN">Honduran</option>
-                                <option value="HU">Hungarian</option>
-                                <option value="IS">Icelandic</option>
-                                <option value="IN">Indian</option>
-                                <option value="ID">Indonesian</option>
-                                <option value="IR">Iranian</option>
-                                <option value="IQ">Iraqi</option>
-                                <option value="IE">Irish</option>
-                                <option value="IL">Israeli</option>
-                                <option value="IT">Italian</option>
-                                <option value="JM">Jamaican</option>
-                                <option value="JP">Japanese</option>
-                                <option value="JO">Jordanian</option>
-                                <option value="KZ">Kazakhstani</option>
-                                <option value="KE">Kenyan</option>
-                                <option value="KI">I-Kiribati</option>
-                                <option value="KP">Korean (North)</option>
-                                <option value="KR">Korean (South)</option>
-                                <option value="KW">Kuwaiti</option>
-                                <option value="KG">Kyrgyzstani</option>
-                                <option value="LA">Lao</option>
-                                <option value="LV">Latvian</option>
-                                <option value="LB">Lebanese</option>
-                                <option value="LS">Lesothoan</option>
-                                <option value="LR">Liberian</option>
-                                <option value="LY">Libyan</option>
-                                <option value="LI">Liechtenstein</option>
-                                <option value="LT">Lithuanian</option>
-                                <option value="LU">Luxembourgish</option>
-                                <option value="MG">Malagasy</option>
-                                <option value="MW">Malawian</option>
-                                <option value="MY">Malaysian</option>
-                                <option value="MV">Maldivian</option>
-                                <option value="ML">Malian</option>
-                                <option value="MT">Maltese</option>
-                                <option value="MH">Marshallese</option>
-                                <option value="MR">Mauritanian</option>
-                                <option value="MU">Mauritian</option>
-                                <option value="MX">Mexican</option>
-                                <option value="FM">Micronesian</option>
-                                <option value="MD">Moldovan</option>
-                                <option value="MC">Monacan</option>
-                                <option value="MN">Mongolian</option>
-                                <option value="ME">Montenegrin</option>
-                                <option value="MA">Moroccan</option>
-                                <option value="MZ">Mozambican</option>
-                                <option value="MM">Myanmar</option>
-                                <option value="NA">Namibian</option>
-                                <option value="NR">Nauruan</option>
-                                <option value="NP">Nepalese</option>
-                                <option value="NL">Dutch</option>
-                                <option value="NZ">New Zealander</option>
-                                <option value="NI">Nicaraguan</option>
-                                <option value="NE">Nigerien</option>
-                                <option value="NG">Nigerian</option>
-                                <option value="MK">Macedonian</option>
-                                <option value="NO">Norwegian</option>
-                                <option value="OM">Omani</option>
-                                <option value="PK">Pakistani</option>
-                                <option value="PW">Palauan</option>
-                                <option value="PA">Panamanian</option>
-                                <option value="PG">Papua New Guinean</option>
-                                <option value="PY">Paraguayan</option>
-                                <option value="PE">Peruvian</option>
-                                <option value="PH">Filipino</option>
-                                <option value="PL">Polish</option>
-                                <option value="PT">Portuguese</option>
-                                <option value="QA">Qatari</option>
-                                <option value="RO">Romanian</option>
-                                <option value="RU">Russian</option>
-                                <option value="RW">Rwandan</option>
-                                <option value="KN">Saint Kitts and Nevis</option>
-                                <option value="LC">Saint Lucian</option>
-                                <option value="VC">Saint Vincentian</option>
-                                <option value="WS">Samoan</option>
-                                <option value="SM">Sanmarinese</option>
-                                <option value="ST">Sao Tomean</option>
-                                <option value="SA">Saudi Arabian</option>
-                                <option value="SN">Senegalese</option>
-                                <option value="RS">Serbian</option>
-                                <option value="SC">Seychellois</option>
-                                <option value="SL">Sierra Leonean</option>
-                                <option value="SG">Singaporean</option>
-                                <option value="SK">Slovak</option>
-                                <option value="SI">Slovene</option>
-                                <option value="SB">Solomon Islander</option>
-                                <option value="SO">Somali</option>
-                                <option value="ZA">South African</option>
-                                <option value="SS">South Sudanese</option>
-                                <option value="ES">Spanish</option>
-                                <option value="LK">Sri Lankan</option>
-                                <option value="SD">Sudanese</option>
-                                <option value="SR">Surinamese</option>
-                                <option value="SZ">Swazi</option>
-                                <option value="SE">Swedish</option>
-                                <option value="CH">Swiss</option>
-                                <option value="SY">Syrian</option>
-                                <option value="TW">Taiwanese</option>
-                                <option value="TJ">Tajikistani</option>
-                                <option value="TZ">Tanzanian</option>
-                                <option value="TH">Thai</option>
-                                <option value="TL">Timorese</option>
-                                <option value="TG">Togolese</option>
-                                <option value="TO">Tongan</option>
-                                <option value="TT">Trinidadian or Tobagonian</option>
-                                <option value="TN">Tunisian</option>
-                                <option value="TR">Turkish</option>
-                                <option value="TM">Turkmen</option>
-                                <option value="TV">Tuvaluan</option>
-                                <option value="UG">Ugandan</option>
-                                <option value="UA">Ukrainian</option>
-                                <option value="AE">Emirati</option>
-                                <option value="GB">British</option>
-                                <option value="US">American</option>
-                                <option value="UY">Uruguayan</option>
-                                <option value="UZ">Uzbekistani</option>
-                                <option value="VU">Vanuatuan</option>
-                                <option value="VE">Venezuelan</option>
-                                <option value="VN">Vietnamese</option>
-                                <option value="YE">Yemeni</option>
-                                <option value="ZM">Zambian</option>
-                                <option value="ZW">Zimbabwean</option>
-                            </select>
-                        </div>
-                        <div class="input-field">
-                            <label>Preffered Location</label>
-                            <input type="text" id="location" placeholder="Maximum of 3, seperate by comma." required>
-                            <small id="location-error" style="color: red; display: none;">You can enter a maximum of 3
-                                locations.</small>
-                        </div>
-
-                        <div class="input-field">
-                            <label>Mode Of Job</label>
-                            <select required>
-                                <option disabled selected>Prefered Mode</option>
-                                <option>On Site</option>
-                                <option>Remote</option>
-                                <option>Hybrid</option>
-                            </select>
-                        </div>
-                        <div class="input-field">
-                            <label>Available To Join</label>
-                            <select required>
-                                <option disabled selected>Immediate Join</option>
-                                <option>Yes</option>
-                                <option>No</option>
-                            </select>
-                        </div>
-                        <div class="input-field">
-                            <label>Skills</label>
-                            <input type="text" id="locations" placeholder="Maximum of 10, seperate by comma." required>
-                            <small id="location-errors" style="color: red; display: none;">You can enter a maximum of 10
-                                Skills.</small>
-                        </div>
-                        <div class="input-field">
-                            <label>Languages - Read & Write</label>
-                            <input type="text" id="locations" placeholder="Maximum of 10, seperate by comma." required>
-                            <small id="location-errors" style="color: red; display: none;">You can enter a maximum of 10
-                                Languages.</small>
+        <form method="POST"  action="{{ url_for('student_details')}}">
+            <div id="registration-form1">
+                <header>Registration</header><br>
+                <div class="form first" id="form-first">
+                    <div class="details personal">
+                        <span class="title">Personal Details</span><br>
+                        <div class="fields">
+                            <div class="form-group">
+                                <label for="first_name">First Name:</label>
+                                <input type="text" id="first_name" name="first_name" 
+                                value="{{ user['name'].split()[0] if user and user['name'] else '' }}" 
+                                class="form-control" required>
+                                                </div>
+                            <div class="form-group">
+                                <label for="last_name">Last Name:</label>
+                                <input type="text" id="last_name" name="last_name" value="{{ user['name'].split()[1] }}" class="form-control" required>
+                            </div>
+                            <div class="input-field">
+                                <label>Middle Name [Optional]</label>
+                                <input type="text" id="middle_name" name="middle_name" placeholder="Middle Name [optional]">
+                            </div>
+                            <div class="input-field">
+                                <label>Date of Birth</label>
+                                <input type="date" id = "date_of_birth" name="date_of_birth" placeholder="Enter birth date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="mobile_number">Mobile Number:</label>
+                                <input type="text" id="mobile_number" name="mobile_number" value="{{ user['contact'] }}" class="form-control" required>
+                            </div>
+                            <div class="input-field">
+                                <label>Gender</label>
+                                <select  name="gender" required >
+                                    <option disabled selected >Select gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Others">Others</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="buttons">
-                    <div class="backBtn" id="back1" style="margin-left: 200px">
-                        <i class="uil uil-navigator"></i>
-                        <span class="btnText">Back</span>
-                    </div>
-                    <button type="button" class="nextBtn" id="next2">
+                    <button type="button" class="nextBtn" id="next1" style="margin-left: 325px">
                         <span class="btnText">Next</span>
                         <i class="uil uil-navigator"></i>
                     </button>
                 </div>
             </div>
-        </form>
-        <form id="registration-form3">
-            <header>Highest Education</header><br>
-            <div class="form thr" id="form-thr">
-                <div class="details address">
-                    <span class="title">Academic Details</span><br>
-                    <div class="fields">
-                        <div class="input-field">
-                            <label>University / Institution</label>
-                            <input type="text" placeholder="University / Institution" required>
-                        </div>
-                        <div class="input-field">
-                            <label>Course</label>
-                            <input type="text" placeholder="Course" required>
-                        </div>
-                        <div class="input-field">
-                            <label>Specialization</label>
-                            <input type="text" placeholder="Specialization" required>
-                        </div>
-                        <div class="input-field">
-                            <label>Course Start</label>
-                            <input type="date" placeholder="Enter birth date" required>
-                        </div>
-                        <div class="input-field">
-                            <label>Course End</label>
-                            <input type="date" placeholder="Enter birth date" required>
-                        </div>
-                        <div class="input-field">
-                            <label for="git-link">Git Hub</label>
-                            <input type="url" id="git-link" placeholder="Git link here">
-                        </div>
-                        <div class="input-field">
-                            <label for="git-link">LinkedIn</label>
-                            <input type="url" id="git-link" placeholder="LinkedIn link here" required>
-                        </div>
-                        <div class="input-field">
-                        </div>
-                        <div class="input-field">
-                        </div>
-                        <div class="input-field" id="subject-container">
-                            <label>Subjects and CGPA</label>
-                            <div class="subject-row">
-                                <input type="text" name="subject-name[]" placeholder="Subject Name" required>
-                                <input type="number" name="cgpa[]" placeholder="CGPA" step="0.01" min="0" max="10"
-                                    required style="width: 200px;">
-                                <button type="button" class="remove-subject" onclick="removeSubject(this)"
-                                    style="margin-bottom: 0; margin-top: 9px; margin-bottom: 0px; height: 40px; margin-left: 380px;">Remove</button>
+            <div id="registration-form2" >
+                <header>Details</header><br>
+                <div class="form sec" id="form-sec">
+                    <div class="details address">
+                        <span class="title">Prefference Details</span><br>
+                        <div class="fields">
+                            <div class="input-field">
+                                <label>Area Of Interest</label>
+                                <select name ="area_of_interest" required>
+                                    <option disabled selected>Select Your Area</option>
+                                    <option>Architecture & Engineering</option>
+                                    <option>Arts, Culture & Entertainment</option>
+                                    <option>Business, Management & Administration</option>
+                                    <option>Communications</option>
+                                    <option>Community & Social Services</option>
+                                    <option>Education</option>
+                                    <option>Science & Technology</option>
+                                    <option>Installation, Repair & Maintenance</option>
+                                    <option>Farming, Fishing & Forestry</option>
+                                    <option>Government</option>
+                                    <option>Health & Medicine</option>
+                                    <option>Law & Public Policy</option>
+                                    <option>Sales</option>
+                                </select>
+                            </div>
+                            <div class="input-field">
+                                <label>Location</label>
+                                <input type="text" placeholder="Current Resident" name ="location" required>
+                            </div>
+                            <div class="input-field">
+                                <label>Nationality</label>
+                                <select name="nationality" required>
+                                    <option disabled selected>Nationality</option>
+                                    <option value="AF">Afghan</option>
+                                    <option value="AL">Albanian</option>
+                                    <option value="DZ">Algerian</option>
+                                    <option value="AS">American Samoan</option>
+                                    <option value="AD">Andorran</option>
+                                    <option value="AO">Angolan</option>
+                                    <option value="AG">Antiguan or Barbudan</option>
+                                    <option value="AR">Argentinian</option>
+                                    <option value="AM">Armenian</option>
+                                    <option value="AU">Australian</option>
+                                    <option value="AT">Austrian</option>
+                                    <option value="AZ">Azerbaijani</option>
+                                    <option value="BS">Bahamian</option>
+                                    <option value="BH">Bahraini</option>
+                                    <option value="BD">Bangladeshi</option>
+                                    <option value="BB">Barbadian</option>
+                                    <option value="BY">Belarusian</option>
+                                    <option value="BE">Belgian</option>
+                                    <option value="BZ">Belizean</option>
+                                    <option value="BJ">Beninese</option>
+                                    <option value="BT">Bhutanese</option>
+                                    <option value="BO">Bolivian</option>
+                                    <option value="BA">Bosnian or Herzegovinian</option>
+                                    <option value="BW">Botswanan</option>
+                                    <option value="BR">Brazilian</option>
+                                    <option value="BN">Bruneian</option>
+                                    <option value="BG">Bulgarian</option>
+                                    <option value="BF">Burkinabe</option>
+                                    <option value="BI">Burundian</option>
+                                    <option value="CV">Cabo Verdean</option>
+                                    <option value="KH">Cambodian</option>
+                                    <option value="CM">Cameroonian</option>
+                                    <option value="CA">Canadian</option>
+                                    <option value="CF">Central African</option>
+                                    <option value="TD">Chadian</option>
+                                    <option value="CL">Chilean</option>
+                                    <option value="CN">Chinese</option>
+                                    <option value="CO">Colombian</option>
+                                    <option value="KM">Comoran</option>
+                                    <option value="CG">Congolese (Congo-Brazzaville)</option>
+                                    <option value="CD">Congolese (Congo-Kinshasa)</option>
+                                    <option value="CR">Costa Rican</option>
+                                    <option value="HR">Croatian</option>
+                                    <option value="CU">Cuban</option>
+                                    <option value="CY">Cypriot</option>
+                                    <option value="CZ">Czech</option>
+                                    <option value="DK">Danish</option>
+                                    <option value="DJ">Djiboutian</option>
+                                    <option value="DM">Dominican</option>
+                                    <option value="DO">Dominican (Republic)</option>
+                                    <option value="EC">Ecuadorian</option>
+                                    <option value="EG">Egyptian</option>
+                                    <option value="SV">Salvadoran</option>
+                                    <option value="GQ">Equatorial Guinean</option>
+                                    <option value="ER">Eritrean</option>
+                                    <option value="EE">Estonian</option>
+                                    <option value="ET">Ethiopian</option>
+                                    <option value="FJ">Fijian</option>
+                                    <option value="FI">Finnish</option>
+                                    <option value="FR">French</option>
+                                    <option value="GA">Gabonese</option>
+                                    <option value="GM">Gambian</option>
+                                    <option value="GE">Georgian</option>
+                                    <option value="DE">German</option>
+                                    <option value="GH">Ghanaian</option>
+                                    <option value="GR">Greek</option>
+                                    <option value="GD">Grenadian</option>
+                                    <option value="GT">Guatemalan</option>
+                                    <option value="GN">Guinean</option>
+                                    <option value="GW">Guinea-Bissauan</option>
+                                    <option value="GY">Guyanese</option>
+                                    <option value="HT">Haitian</option>
+                                    <option value="HN">Honduran</option>
+                                    <option value="HU">Hungarian</option>
+                                    <option value="IS">Icelandic</option>
+                                    <option value="IN">Indian</option>
+                                    <option value="ID">Indonesian</option>
+                                    <option value="IR">Iranian</option>
+                                    <option value="IQ">Iraqi</option>
+                                    <option value="IE">Irish</option>
+                                    <option value="IL">Israeli</option>
+                                    <option value="IT">Italian</option>
+                                    <option value="JM">Jamaican</option>
+                                    <option value="JP">Japanese</option>
+                                    <option value="JO">Jordanian</option>
+                                    <option value="KZ">Kazakhstani</option>
+                                    <option value="KE">Kenyan</option>
+                                    <option value="KI">I-Kiribati</option>
+                                    <option value="KP">Korean (North)</option>
+                                    <option value="KR">Korean (South)</option>
+                                    <option value="KW">Kuwaiti</option>
+                                    <option value="KG">Kyrgyzstani</option>
+                                    <option value="LA">Lao</option>
+                                    <option value="LV">Latvian</option>
+                                    <option value="LB">Lebanese</option>
+                                    <option value="LS">Lesothoan</option>
+                                    <option value="LR">Liberian</option>
+                                    <option value="LY">Libyan</option>
+                                    <option value="LI">Liechtenstein</option>
+                                    <option value="LT">Lithuanian</option>
+                                    <option value="LU">Luxembourgish</option>
+                                    <option value="MG">Malagasy</option>
+                                    <option value="MW">Malawian</option>
+                                    <option value="MY">Malaysian</option>
+                                    <option value="MV">Maldivian</option>
+                                    <option value="ML">Malian</option>
+                                    <option value="MT">Maltese</option>
+                                    <option value="MH">Marshallese</option>
+                                    <option value="MR">Mauritanian</option>
+                                    <option value="MU">Mauritian</option>
+                                    <option value="MX">Mexican</option>
+                                    <option value="FM">Micronesian</option>
+                                    <option value="MD">Moldovan</option>
+                                    <option value="MC">Monacan</option>
+                                    <option value="MN">Mongolian</option>
+                                    <option value="ME">Montenegrin</option>
+                                    <option value="MA">Moroccan</option>
+                                    <option value="MZ">Mozambican</option>
+                                    <option value="MM">Myanmar</option>
+                                    <option value="NA">Namibian</option>
+                                    <option value="NR">Nauruan</option>
+                                    <option value="NP">Nepalese</option>
+                                    <option value="NL">Dutch</option>
+                                    <option value="NZ">New Zealander</option>
+                                    <option value="NI">Nicaraguan</option>
+                                    <option value="NE">Nigerien</option>
+                                    <option value="NG">Nigerian</option>
+                                    <option value="MK">Macedonian</option>
+                                    <option value="NO">Norwegian</option>
+                                    <option value="OM">Omani</option>
+                                    <option value="PK">Pakistani</option>
+                                    <option value="PW">Palauan</option>
+                                    <option value="PA">Panamanian</option>
+                                    <option value="PG">Papua New Guinean</option>
+                                    <option value="PY">Paraguayan</option>
+                                    <option value="PE">Peruvian</option>
+                                    <option value="PH">Filipino</option>
+                                    <option value="PL">Polish</option>
+                                    <option value="PT">Portuguese</option>
+                                    <option value="QA">Qatari</option>
+                                    <option value="RO">Romanian</option>
+                                    <option value="RU">Russian</option>
+                                    <option value="RW">Rwandan</option>
+                                    <option value="KN">Saint Kitts and Nevis</option>
+                                    <option value="LC">Saint Lucian</option>
+                                    <option value="VC">Saint Vincentian</option>
+                                    <option value="WS">Samoan</option>
+                                    <option value="SM">Sanmarinese</option>
+                                    <option value="ST">Sao Tomean</option>
+                                    <option value="SA">Saudi Arabian</option>
+                                    <option value="SN">Senegalese</option>
+                                    <option value="RS">Serbian</option>
+                                    <option value="SC">Seychellois</option>
+                                    <option value="SL">Sierra Leonean</option>
+                                    <option value="SG">Singaporean</option>
+                                    <option value="SK">Slovak</option>
+                                    <option value="SI">Slovene</option>
+                                    <option value="SB">Solomon Islander</option>
+                                    <option value="SO">Somali</option>
+                                    <option value="ZA">South African</option>
+                                    <option value="SS">South Sudanese</option>
+                                    <option value="ES">Spanish</option>
+                                    <option value="LK">Sri Lankan</option>
+                                    <option value="SD">Sudanese</option>
+                                    <option value="SR">Surinamese</option>
+                                    <option value="SZ">Swazi</option>
+                                    <option value="SE">Swedish</option>
+                                    <option value="CH">Swiss</option>
+                                    <option value="SY">Syrian</option>
+                                    <option value="TW">Taiwanese</option>
+                                    <option value="TJ">Tajikistani</option>
+                                    <option value="TZ">Tanzanian</option>
+                                    <option value="TH">Thai</option>
+                                    <option value="TL">Timorese</option>
+                                    <option value="TG">Togolese</option>
+                                    <option value="TO">Tongan</option>
+                                    <option value="TT">Trinidadian or Tobagonian</option>
+                                    <option value="TN">Tunisian</option>
+                                    <option value="TR">Turkish</option>
+                                    <option value="TM">Turkmen</option>
+                                    <option value="TV">Tuvaluan</option>
+                                    <option value="UG">Ugandan</option>
+                                    <option value="UA">Ukrainian</option>
+                                    <option value="AE">Emirati</option>
+                                    <option value="GB">British</option>
+                                    <option value="US">American</option>
+                                    <option value="UY">Uruguayan</option>
+                                    <option value="UZ">Uzbekistani</option>
+                                    <option value="VU">Vanuatuan</option>
+                                    <option value="VE">Venezuelan</option>
+                                    <option value="VN">Vietnamese</option>
+                                    <option value="YE">Yemeni</option>
+                                    <option value="ZM">Zambian</option>
+                                    <option value="ZW">Zimbabwean</option>
+                                </select>
+                            </div>
+                            <div class="input-field">
+                                <label>Preffered Location</label>
+                                <input type="text" id="location" placeholder="Maximum of 3, seperate by comma." name ="preferred_location" required>
+                                <small id="location-error" style="color: red; display: none;">You can enter a maximum of 3
+                                    locations.</small>
+                            </div>
+
+                            <div class="input-field">
+                                <label>Mode Of Job</label>
+                                <select name="job_mode" required>
+                                    <option disabled selected>Prefered Mode</option>
+                                    <option>On Site</option>
+                                    <option>Remote</option>
+                                    <option>Hybrid</option>
+                                </select>
+                            </div>
+                            <div class="input-field">
+                                <label>Available To Join</label>
+                                <select  name="available_to_join" required>
+                                    <option disabled selected>Immediate Join</option>
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                </select>
+                            </div>
+                            <div class="input-field">
+                                <label>Skills</label>
+                                <input type="text" id="locations" placeholder="Maximum of 10, seperate by comma."  name="skills" required>
+                                <small id="location-errors" style="color: red; display: none;">You can enter a maximum of 10
+                                    Skills.</small>
+                            </div>
+                            <div class="input-field">
+                                <label>Languages - Read & Write</label>
+                                <input type="text" id="locations" placeholder="Maximum of 10, seperate by comma." name="languages" required>
+                                <small id="location-errors" style="color: red; display: none;">You can enter a maximum of 10
+                                    Languages.</small>
                             </div>
                         </div>
-                        <button type="button" id="add-subject" class="add-btn"
-                            style="width: 50px; margin-left: 10px; margin-bottom: 0px; margin-top: 5px; height: 40px;">+</button>
+                    </div>
+                    <div class="buttons">
+                        <div class="backBtn" id="back1" style="margin-left: 200px">
+                            <i class="uil uil-navigator"></i>
+                            <span class="btnText">Back</span>
+                        </div>
+                        <button type="button" class="nextBtn" id="next2">
+                            <span class="btnText">Next</span>
+                            <i class="uil uil-navigator"></i>
+                        </button>
                     </div>
                 </div>
-                <div class="buttons">
-                    <div class="backBtn" id="back2" style="margin-left: 200px">
-                        <i class="uil uil-navigator"></i>
-                        <span class="btnText">Back</span>
+            </div>
+            <div id="registration-form3">
+                <header>Highest Education</header><br>
+                <div class="form thr" id="form-thr">
+                    <div class="details address">
+                        <span class="title">Academic Details</span><br>
+                        <div class="fields">
+                            <div class="input-field">
+                                <label>University / Institution</label>
+                                <input type="text" placeholder="University / Institution" name ="university" required>
+                            </div>
+                            <div class="input-field">
+                                <label>Course</label>
+                                <input type="text" placeholder="Course" name="course" required>
+                            </div>
+                            <div class="input-field">
+                                <label>Specialization</label>
+                                <input type="text" placeholder="Specialization" name="specialization" required>
+                            </div>
+                            <div class="input-field">
+                                <label>Course Start</label>
+                                <input type="date" placeholder="Enter birth date" name="course_start"required>
+                            </div>
+                            <div class="input-field">
+                                <label>Course End</label>
+                                <input type="date" placeholder="Enter birth date" name="course_end" required>
+                            </div>
+                            <div class="input-field">
+                                <label for="git-link">Git Hub</label>
+                                <input type="url" id="git-link" placeholder="Git link here" name="github">
+                            </div>
+                            <div class="input-field">
+                                <label for="git-link">LinkedIn</label>
+                                <input type="url" id="git-link" placeholder="LinkedIn link here" name="linkedin" required>
+                            </div>
+                            <div class="input-field">
+                            </div>
+                            <div class="input-field">
+                            </div>
+                            <div class="input-field" id="subject-container">
+                                <label>Subjects and CGPA</label>
+                                <div class="subject-row">
+                                    <input type="text" name="subject-name[]" placeholder="Subject Name" required>
+                                    <input type="number" name="cgpa[]" placeholder="CGPA" step="0.01" min="0" max="10"
+                                        required style="width: 200px;">
+                                    <button type="button" class="remove-subject" onclick="removeSubject(this)"
+                                        style="margin-bottom: 0; margin-top: 9px; margin-bottom: 0px; height: 40px; margin-left: 380px;">Remove</button>
+                                </div>
+                            </div>
+                            <button type="button" id="add-subject" class="add-btn"
+                                style="width: 50px; margin-left: 10px; margin-bottom: 0px; margin-top: 5px; height: 40px;">+</button>
+                        </div>
                     </div>
-                    <button type="submit">
-                        <span class="btnText">Submit</span>
-                        <i class="uil uil-navigator"></i>
-                    </button>
+                    <div class="buttons">
+                        <div class="backBtn" id="back2" style="margin-left: 200px">
+                            <i class="uil uil-navigator"></i>
+                            <span class="btnText">Back</span>
+                        </div>
+                          <button type="submit">
+                            <span class="btnText">Submit</span>
+                            <i class="uil uil-navigator"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </form>
