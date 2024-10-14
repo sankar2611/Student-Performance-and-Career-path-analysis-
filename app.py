@@ -241,6 +241,9 @@ def dash():
 def post():
     return render_template("post.html")
 
+@app.route('/contact2')
+def contact2():
+    return render_template("contact copy.html")
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")
