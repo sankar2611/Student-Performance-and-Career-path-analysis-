@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Career</title>
+
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap"
+        rel="stylesheet">
+
+    <link href="{{ url_for('static', filename = 'css/bootstrap.min.css')}}" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename = 'css/bootstrap-icons.css')}}" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename = 'css/templatemo-topic-listing copy.css')}}" rel="stylesheet">
+</head>
+
+<body id="top">
+    <style>
+        /* CSS to resize the logo */
+        .logo {
+            height: 60px;
+            /* Adjust this value to shorten the logo */
+            width: auto;
+        }
+
+        /* From Uiverse.io by satyamchaudharydev */
+        .browse-button {
+            padding: 0;
+            margin: 0;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+
+        .browse-button {
+            --primary-color: #000;
+            --hovered-color: #000;
+            position: relative;
+            display: flex;
+            font-weight: 600;
+            font-size: 20px;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .browse-button p {
+            margin: 0;
+            position: relative;
+            font-size: 20px;
+            color: var(--primary-color);
+        }
+
+        .browse-button::after {
+            position: absolute;
+            content: "";
+            width: 0;
+            left: 0;
+            bottom: -7px;
+            background: var(--hovered-color);
+            height: 2px;
+            transition: 0.3s ease-out;
+        }
+
+        .browse-button p::before {
+            position: absolute;
+            /*   box-sizing: border-box; */
+            content: "Know More";
+            width: 0%;
+            inset: 0;
+            color: var(--hovered-color);
+            overflow: hidden;
+            transition: 0.3s ease-out;
+        }
+
+        .browse-button:hover::after {
+            width: 100%;
+        }
+
+        .browse-button:hover p::before {
+            width: 100%;
+        }
+
+        .browse-button:hover svg {
+            transform: translateX(4px);
+            color: var(--hovered-color);
+        }
+
+        .browse-button svg {
+            color: var(--primary-color);
+            transition: 0.2s;
+            position: relative;
+            width: 15px;
+            transition-delay: 0.2s;
+        }
+    </style>
+
+    <main>
+
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <image src="{{ url_for('static', filename = 'images/image-removebg-preview (2).png')}}" alt="Logo"
+                        class="logo"></image>
+                </a>
+
+                <div class="d-lg-none ms-auto me-4">
+                    <a href="#top" class="navbar-icon bi-person smoothscroll"></a>
+                </div>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav" style="padding-left: 300px;">
+                    <ul class="navbar-nav ms-lg-5 me-lg-auto">
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="/company">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="/post"><strong>Job Posting</strong></a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contact">Contact</a>
+                        </li>
+
+                    </ul>
+
+                    <div class="d-none d-lg-block">
+                        <a href="/login" class="navbar-icon bi-person smoothscroll" style="color: black;"></a>
+                    </div>
+                </div>
+            </div>
+        </nav><br><br><br><br>
+
+        <div class="job-management-container">
+            <h1 class="job-management-header">Job Posting Management</h1>
+
+            <!-- Add New Job Posting Form -->
+            <form id="job-management-form">
+                <h2 class="job-form-title">Add New Job Posting</h2>
+
+                <label for="job-title" class="job-management-label">Job Title:</label>
+                <input type="text" id="job-title" class="job-management-input" name="job-title" required>
+
+                <label for="job-description" class="job-management-label">Job Description:</label>
+                <textarea id="job-description" class="job-management-textarea" name="job-description" rows="4"
+                    required></textarea>
+
+                <label for="job-requirements" class="job-management-label">Job Requirements:</label>
+                <textarea id="job-requirements" class="job-management-textarea" name="job-requirements" rows="3"
+                    required></textarea>
+
+                <label for="salary-range" class="job-management-label">Salary Range:</label>
+                <div class="salary-range-container">
+                    <input type="number" id="min-salary" class="job-management-input salary-range-input"
+                        name="min-salary" placeholder="Min Salary" required>
+                    <span class="salary-range-separator">to</span>
+                    <input type="number" id="max-salary" class="job-management-input salary-range-input"
+                        name="max-salary" placeholder="Max Salary" required>
+                </div>
+
+                <label for="location" class="job-management-label">Location:</label>
+                <input type="text" id="location" class="job-management-input" name="location" required>
+
+                <label for="job-type" class="job-management-label">Job Type:</label>
+                <select id="job-type" class="job-management-select" name="job-type" required>
+                    <option value="full-time">Full-time</option>
+                    <option value="part-time">Part-time</option>
+                    <option value="contract">Contract</option>
+                </select>
+
+                <label for="application-deadline" class="job-management-label">Application Deadline:</label>
+                <input type="date" id="application-deadline" class="job-management-input" name="application-deadline"
+                    required>
+
+                <label for="contact" class="job-management-label">Contact Email/Phone:</label>
+                <input type="text" id="contact" class="job-management-input" name="contact" required>
+
+                <button type="submit" class="job-management-button">Add Job Posting</button>
+            </form><br><br>
+
+            <!-- Job List Display -->
+            <h2 class="job-list-title">Manage Job Postings</h2>
+            <table id="job-list" class="job-management-table">
+                <thead>
+                    <tr>
+                        <th>Job Title</th>
+                        <th>Description</th>
+                        <th>Salary</th>
+                        <th>Location</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Job postings will be displayed here -->
+                </tbody>
+            </table>
+        </div>
+        <br><br>
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+                font-family: 'Poppins', sans-serif;
+            }
+
+            body {
+                background-color: #f4f4f4;
+                padding: 20px;
+            }
+
+            .job-management-container {
+                max-width: 800px;
+                margin: 0 auto;
+                background-color: #fff;
+                padding: 20px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+            }
+
+            .job-management-header,
+            .job-form-title,
+            .job-list-title {
+                text-align: center;
+                color: #333;
+            }
+
+            #job-management-form {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .job-management-label {
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            .job-management-input,
+            .job-management-textarea,
+            .job-management-select,
+            .job-management-button {
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                font-size: 16px;
+                width: 100%;
+            }
+
+            .job-management-button {
+                background-color: #28a745;
+                color: #fff;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+            .job-management-button:hover {
+                background-color: #218838;
+            }
+
+            .job-management-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+            }
+
+            .job-management-table,
+            th,
+            td {
+                border: 1px solid #ddd;
+            }
+
+            th,
+            td {
+                padding: 12px;
+                text-align: left;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+
+            td {
+                vertical-align: middle;
+            }
+
+            button.job-management-action-btn {
+                padding: 5px 10px;
+                margin: 2px;
+            }
+
+            button.job-management-edit-btn {
+                background-color: #ffc107;
+                color: white;
+            }
+
+            button.job-management-delete-btn {
+                background-color: #dc3545;
+                color: white;
+            }
+
+            button.job-management-edit-btn:hover {
+                background-color: #e0a800;
+            }
+
+            button.job-management-delete-btn:hover {
+                background-color: #c82333;
+            }
+
+            /* From Uiverse.io by shah1345 */
+            .job-edit-btn {
+                display: inline-block;
+                transition: all 0.2s ease-in;
+                position: relative;
+                overflow: hidden;
+                z-index: 1;
+                color: #090909;
+                padding: 0.2em 1.5em;
+                cursor: pointer;
+                font-size: 18px;
+                border-radius: 0.5em;
+                background: #e8e8e8;
+                border: 1px solid #e8e8e8;
+                box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+            }
+
+            .job-edit-btn:active {
+                color: #666;
+                box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
+            }
+
+            .job-edit-btn:before {
+                content: "";
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%) scaleY(1) scaleX(1.25);
+                top: 100%;
+                width: 140%;
+                height: 180%;
+                background-color: rgba(0, 0, 0, 0.05);
+                border-radius: 50%;
+                display: block;
+                transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+                z-index: -1;
+            }
+
+            .job-edit-btn:after {
+                content: "";
+                position: absolute;
+                left: 55%;
+                transform: translateX(-50%) scaleY(1) scaleX(1.45);
+                top: 180%;
+                width: 160%;
+                height: 190%;
+                background-color: #009087;
+                border-radius: 50%;
+                display: block;
+                transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+                z-index: -1;
+            }
+
+            .job-edit-btn:hover {
+                color: #ffffff;
+                border: 1px solid #009087;
+            }
+
+            .job-edit-btn:hover:before {
+                top: -35%;
+                background-color: #009087;
+                transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+            }
+
+            .job-edit-btn:hover:after {
+                top: -45%;
+                background-color: #009087;
+                transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+            }
+
+            .job-delete-btn {
+                display: inline-block;
+                transition: all 0.2s ease-in;
+                position: relative;
+                overflow: hidden;
+                z-index: 1;
+                color: #090909;
+                padding: 0.2em 1.5em;
+                cursor: pointer;
+                font-size: 18px;
+                border-radius: 0.5em;
+                background: #e8e8e8;
+                border: 1px solid #e8e8e8;
+                box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+            }
+
+            .job-delete-btn:active {
+                color: #666;
+                box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
+            }
+
+            .job-delete-btn:before {
+                content: "";
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%) scaleY(1) scaleX(1.25);
+                top: 100%;
+                width: 140%;
+                height: 180%;
+                background-color: rgba(0, 0, 0, 0.05);
+                border-radius: 50%;
+                display: block;
+                transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+                z-index: -1;
+            }
+
+            .job-delete-btn:after {
+                content: "";
+                position: absolute;
+                left: 55%;
+                transform: translateX(-50%) scaleY(1) scaleX(1.45);
+                top: 180%;
+                width: 160%;
+                height: 190%;
+                background-color: lightcoral;
+                border-radius: 50%;
+                display: block;
+                transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+                z-index: -1;
+            }
+
+            .job-delete-btn:hover {
+                color: #ffffff;
+                border: 1px solid lightcoral;
+            }
+
+            .job-delete-btn:hover:before {
+                top: -35%;
+                background-color: red;
+                transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+            }
+
+            .job-delete-btn:hover:after {
+                top: -45%;
+                background-color: lightcoral;
+                transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+            }
+        </style>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const jobForm = document.getElementById("job-management-form");
+                const jobList = document.getElementById("job-list").getElementsByTagName("tbody")[0];
+
+                // Load jobs from localStorage on page load
+                loadJobs();
+
+                let editMode = false; // Track whether we're in edit mode
+                let currentJobIndex = null; // Store the index of the job being edited
+
+                jobForm.addEventListener("submit", function (event) {
+                    event.preventDefault();
+
+                    // Capture form data
+                    const jobTitle = document.getElementById("job-title").value;
+                    const jobDescription = document.getElementById("job-description").value;
+                    const jobRequirements = document.getElementById("job-requirements").value;
+                    const minSalary = parseFloat(document.getElementById("min-salary").value);
+                    const maxSalary = parseFloat(document.getElementById("max-salary").value);
+
+                    // Validate salary input
+                    if (minSalary >= maxSalary) {
+                        alert("Minimum salary must be less than maximum salary.");
+                        return;
+                    }
+
+                    const salaryRange = `${minSalary} - ${maxSalary}`; // Display salary as range
+                    const location = document.getElementById("location").value;
+                    const jobType = document.getElementById("job-type").value;
+                    const applicationDeadline = document.getElementById("application-deadline").value;
+                    const contact = document.getElementById("contact").value;
+
+                    // Create job object
+                    const newJob = {
+                        jobTitle,
+                        jobDescription,
+                        jobRequirements,
+                        salaryRange,
+                        location,
+                        jobType,
+                        applicationDeadline,
+                        contact
+                    };
+
+                    if (editMode) {
+                        // If in edit mode, update existing job
+                        updateJob(currentJobIndex, newJob);
+                    } else {
+                        // Add job to the table
+                        addJobToTable(newJob);
+                        // Save job to localStorage
+                        saveJobToLocalStorage(newJob);
+                    }
+
+                    // Reset the form
+                    jobForm.reset();
+                    editMode = false; // Reset edit mode
+                    currentJobIndex = null; // Clear current job index
+                });
+
+                // Function to add job to the table
+                function addJobToTable(job) {
+                    const newRow = jobList.insertRow();
+                    newRow.innerHTML = `
+                    <td>${job.jobTitle}</td>
+                    <td>${job.jobDescription}</td>
+                    <td>${job.salaryRange}</td>
+                    <td>${job.location}</td>
+                    <td>
+                        <button class="job-edit-btn">Edit</button>
+                        <button class="job-delete-btn">Delete</button>
+                    </td>
+                `;
+
+                    // Handle delete job
+                    newRow.querySelector(".job-delete-btn").addEventListener("click", function () {
+                        newRow.remove();
+                        deleteJobFromLocalStorage(job.jobTitle);
+                    });
+
+                    // Handle edit job
+                    newRow.querySelector(".job-edit-btn").addEventListener("click", function () {
+                        // Populate the form with job details
+                        document.getElementById("job-title").value = job.jobTitle;
+                        document.getElementById("job-description").value = job.jobDescription;
+                        document.getElementById("job-requirements").value = job.jobRequirements;
+                        document.getElementById("min-salary").value = job.salaryRange.split(' - ')[0];
+                        document.getElementById("max-salary").value = job.salaryRange.split(' - ')[1];
+                        document.getElementById("location").value = job.location;
+                        document.getElementById("job-type").value = job.jobType;
+                        document.getElementById("application-deadline").value = job.applicationDeadline;
+                        document.getElementById("contact").value = job.contact;
+
+                        // Set edit mode
+                        editMode = true;
+                        currentJobIndex = Array.from(jobList.rows).indexOf(newRow); // Get the index of the job
+                    });
+                }
+
+                // Update existing job in the table
+                function updateJob(index, updatedJob) {
+                    const rows = jobList.getElementsByTagName("tr");
+                    const row = rows[index];
+
+                    // Update the row in the table
+                    row.cells[0].textContent = updatedJob.jobTitle;
+                    row.cells[1].textContent = updatedJob.jobDescription;
+                    row.cells[2].textContent = updatedJob.salaryRange;
+                    row.cells[3].textContent = updatedJob.location;
+
+                    // Save the updated job to localStorage
+                    const jobs = JSON.parse(localStorage.getItem("jobs")) || [];
+                    jobs[index] = updatedJob; // Update the job at the specific index
+                    localStorage.setItem("jobs", JSON.stringify(jobs));
+                }
+
+                // Save job to localStorage
+                function saveJobToLocalStorage(job) {
+                    let jobs = JSON.parse(localStorage.getItem("jobs")) || [];
+                    jobs.push(job);
+                    localStorage.setItem("jobs", JSON.stringify(jobs));
+                }
+
+                // Delete job from localStorage
+                function deleteJobFromLocalStorage(jobTitle) {
+                    let jobs = JSON.parse(localStorage.getItem("jobs")) || [];
+                    jobs = jobs.filter(job => job.jobTitle !== jobTitle);
+                    localStorage.setItem("jobs", JSON.stringify(jobs));
+                }
+
+                // Load jobs from localStorage
+                function loadJobs() {
+                    let jobs = JSON.parse(localStorage.getItem("jobs")) || [];
+                    jobs.forEach(job => addJobToTable(job));
+                }
+            });
+        </script>
+
+
+    </main>
+
+    <footer class="site-footer section-padding"
+        style="border-bottom-width: 0px; padding-top: 50px; padding-bottom: 50px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-12 mb-4 pb-2">
+                    <a class="navbar-brand" href="/">
+                        <image src="{{ url_for('static', filename = 'images/image-removebg-preview (2).png')}}"
+                            alt="Logo" class="logo"></image>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-6">
+                    <h6 class="site-footer-title mb-3">Resources</h6>
+
+                    <ul class="site-footer-links">
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="/company">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="/post">Job Posting</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contact">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-6 mb-4 mb-lg-0">
+                    <h6 class="site-footer-title mb-3">Information</h6>
+
+                    <p class="text-white d-flex mb-1">
+                        <a href="tel: 305-240-9671" class="site-footer-link">
+                            305-240-9671
+                        </a>
+                    </p>
+
+                    <p class="text-white d-flex">
+                        <a href="mailto:info@company.com" class="site-footer-link">
+                            info@company.com
+                        </a>
+                    </p>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-12 mt-4 mt-lg-0 ms-auto">
+                    <h6 class="site-footer-title mb-3">Copyrights</h6>
+                    <p class="copy">Copyright © 2048 Career.<br>All rights reserved </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- JAVASCRIPT FILES -->
+    <script src="{{ url_for('static', filename = 'js/jquery.min.js')}}"></script>
+    <script src="{{ url_for('static', filename = 'js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ url_for('static', filename = 'js/jquery.sticky.js')}}"></script>
+    <script src="{{ url_for('static', filename = 'js/click-scroll.js')}}"></script>
+    <script src="{{ url_for('static', filename = 'js/custom.js')}}"></script>
+
+</body>
+
+</html>

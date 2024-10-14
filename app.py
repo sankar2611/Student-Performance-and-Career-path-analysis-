@@ -237,6 +237,10 @@ def company():
 def dash():
     return render_template("dash.html")
 
+@app.route('/post')
+def post():
+    return render_template("post.html")
+
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")
