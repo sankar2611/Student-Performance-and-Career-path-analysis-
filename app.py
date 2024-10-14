@@ -233,6 +233,10 @@ def student_details():
 def company():
     return render_template("company.html")
 
+@app.route('/dash')
+def dash():
+    return render_template("dash.html")
+
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")
