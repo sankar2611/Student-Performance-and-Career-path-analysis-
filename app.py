@@ -56,8 +56,6 @@ def contact():
 @app.route('/job')
 def job():
     return render_template("job.html")
-
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -66,14 +64,11 @@ def login():
 
         # Check which table the user exists in
         role, user = db.check_user(email, password)
-        print(f"DEBUG: Role: {role}, User: {user}")  # Add debug information
-
         if user:
             session['email'] = email
-            session['name'] = user[1]  
+            session['name'] = user[1]
             session['role'] = role.lower()
-            session['user_id'] = user[0] 
-            print("DEBUG: Session set")  
+            session['user_id'] = user[0]
 
             db.log_user_login(email, role)
 
@@ -81,12 +76,10 @@ def login():
             if role.lower() == 'student':
                 return redirect(url_for('index'))
             elif role.lower() == 'company':
-                return redirect(url_for('index'))
+                return redirect(url_for('company'))
         else:
-            # Invalid credentials
             flash('Invalid credentials. Please try again.', 'error')
             return redirect(url_for('login'))
-
     return render_template("login.html")
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -136,12 +129,24 @@ def submit_contact():
     subject = request.form['subject']
     message = request.form['message']
 
-    # Insert into the database using SQL Server
-    db.insert_contact(name, email, subject, message)
+    user_role = session.get('role')  # Retrieve the user role from the session
+
+    if user_role == 'student':
+        # Insert into the database using the student contact method
+        db.insert_contact(name, email, subject, message)
+        return redirect(url_for('contact'))
+    elif user_role == 'company':
+        # Insert into the database using the company contact method
+        db.insert_contact_company(name, email, subject, message)
+        return redirect(url_for('contact2'))
+    else:
+        flash('Error: User role not recognized. Please log in again.', 'error')
+        return redirect(url_for('login'))  # Redirect if the role is not recognized
+
     flash('Your message has been sent successfully!', 'success')
 
     # Redirect or render a success page
-    return redirect(url_for('contact'))
+    
 
 def login_required(f):
     @wraps(f)
@@ -241,9 +246,31 @@ def dash():
 def post():
     return render_template("post.html")
 
-@app.route('/contact2', methods=['POST'])
+@app.route('/contact2', methods=['GET', 'POST'])
 def contact2():
-    return render_template("contact copy.html")
+    if 'email' not in session:
+        flash("You need to be logged in to access this page.", "error")
+        return redirect(url_for('login'))
 
+    if request.method == 'GET':
+        # Fetch user details from session for pre-filling
+        user_name = session.get('name')
+        user_email = session.get('email')
+        return render_template("contact copy.html", name=user_name, email=user_email)
+
+    # Handle form submission for contact2 and save to `contact_company` table
+    if request.method == 'POST':
+        subject = request.form['subject']
+        message = request.form['message']
+        name = session.get('name')
+        email = session.get('email')
+
+        # Insert into `contact_company` table in the database
+        db.insert_contact_company(name, email, subject, message)
+        flash('Your message has been sent successfully!', 'success')
+        return redirect(url_for('company'))
+
+
+   
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")

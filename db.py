@@ -171,12 +171,18 @@ def get_user_details(user_id):
         cursor.close()
         conn.close()
 def insert_contact_company(name, email, subject, message):
+    print("Attempting to insert data into contact_company...")  # Debugging message
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute('''
-        INSERT INTO  contact_company (name, email, subject, message) 
-        VALUES (?, ?, ?, ?)
-    ''', (name, email, subject, message))
-    conn.commit()
-    cursor.close()
-    conn.close()
+    try:
+        cursor.execute("""
+            INSERT INTO contact_company (name, email, subject, message, date)
+            VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)
+        """, (name, email, subject, message))
+        conn.commit()  # Commit the transaction
+        print("Data inserted successfully into contact_company table.")
+    except :
+        print("An error occurred while inserting data:")
+    finally:
+        conn.close()
+        print("Database connection closed.")
