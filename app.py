@@ -32,7 +32,7 @@ def home():
             if role.lower() == 'student':
                 return redirect(url_for('index'))
             elif role.lower() == 'company':
-                return redirect(url_for('index'))
+                return redirect(url_for('company'))
         else:
             # Invalid credentials
             flash('Invalid credentials. Please try again.', 'error')
@@ -115,19 +115,19 @@ def signup():
 
     return render_template("sign.html")  # Render the signup page for GET requests
 
-@app.route('/student_dashboard')
-def student_dashboard():
-    if 'email' in session and session['role'] == 'student':
-        return "Student Dashboard"
-    else:
-        return redirect(url_for('login'))
+# @app.route('/student_dashboard')
+# def student_dashboard():
+#     if 'email' in session and session['role'] == 'student':
+#         return "Student Dashboard"
+#     else:
+#         return redirect(url_for('login'))
 
-@app.route('/company_dashboard')
-def company_dashboard():
-    if 'email' in session and session['role'] == 'company':
-        return "Company Dashboard"
-    else:
-        return redirect(url_for('login'))
+# @app.route('/company_dashboard')
+# def company_dashboard():
+#     if 'email' in session and session['role'] == 'company':
+#         return "Company Dashboard"
+#     else:
+#         return redirect(url_for('login'))
 
 @app.route('/submit_contact', methods=['POST'])
 def submit_contact():
@@ -241,7 +241,7 @@ def dash():
 def post():
     return render_template("post.html")
 
-@app.route('/contact2')
+@app.route('/contact2', methods=['POST'])
 def contact2():
     return render_template("contact copy.html")
 

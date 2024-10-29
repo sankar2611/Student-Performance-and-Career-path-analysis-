@@ -147,7 +147,6 @@ def insert_student_details(student_id, first_name, last_name, middle_name, date_
     finally:
         cursor.close()
         conn.close()
-
 def get_user_details(user_id):
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -171,3 +170,13 @@ def get_user_details(user_id):
     finally:
         cursor.close()
         conn.close()
+def insert_contact_company(name, email, subject, message):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute('''
+        INSERT INTO  contact_company (name, email, subject, message) 
+        VALUES (?, ?, ?, ?)
+    ''', (name, email, subject, message))
+    conn.commit()
+    cursor.close()
+    conn.close()
