@@ -28,7 +28,7 @@
 </head>
 
 <body id="top">
-       <div class="navbar1_content">
+    <div class="navbar1_content">
         <i class="bi bi-grid"></i>
         <i class='bx bx-sun' id="darkLight"></i>
         <i class='bx bx-bell'></i>
@@ -69,29 +69,140 @@
                         </a>
                     </li>
             </ul>
-    <!-- JavaScript -->
+            </div>
+            </nav>
+            <!-- JavaScript -->
+            <div class="dashboard">
+                <header>
+                    <h1>Analytics Dashboard</h1>
+                </header>
+                <div class="charts">
+                    <canvas id="barChart"></canvas>
+                    <canvas id="lineChart"></canvas>
+                    <canvas id="pieChart"></canvas>
+                </div>
+                <footer>
+                    <p>&copy; 2024 Your Company</p>
+                </footer>
+            </div>
+            <style>
+                .dashboard {
+                    max-width: 1200px;
+                    margin: 20px auto;
+                    padding: 20px;
+                    background-color: #fff;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                }
+
+                header {
+                    text-align: center;
+                }
+
+                .charts {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+                }
+
+                canvas {
+                    border-radius: 8px;
+                    background-color: #e2e2e2;
+                }
+            </style>
 
 
+            <script>
+                $("#envelope").hover(function () {
+                    $(this).fadeTo(300, 1);
+                }, function () {
+                    $(this).fadeTo(100, 0.3);
+                });
 
-    <script>
-        $("#envelope").hover(function () {
-            $(this).fadeTo(300, 1);
-        }, function () {
-            $(this).fadeTo(100, 0.3);
-        });
+                $()
+                // Bar Chart
+                const ctxBar = document.getElementById('barChart').getContext('2d');
+                const barChart = new Chart(ctxBar, {
+                    type: 'bar',
+                    data: {
+                        labels: ['January', 'February', 'March', 'April', 'May'],
+                        datasets: [{
+                            label: 'Sales',
+                            data: [12, 19, 3, 5, 2],
+                            backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
 
-        $()
+                // Line Chart
+                const ctxLine = document.getElementById('lineChart').getContext('2d');
+                const lineChart = new Chart(ctxLine, {
+                    type: 'line',
+                    data: {
+                        labels: ['January', 'February', 'March', 'April', 'May'],
+                        datasets: [{
+                            label: 'Revenue',
+                            data: [3, 6, 9, 12, 15],
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            fill: false
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
 
-    </script>
+                // Pie Chart
+                const ctxPie = document.getElementById('pieChart').getContext('2d');
+                const pieChart = new Chart(ctxPie, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Red', 'Blue', 'Yellow'],
+                        datasets: [{
+                            label: 'My First Dataset',
+                            data: [300, 50, 100],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true
+                    }
+                });
 
 
-    <!-- JAVASCRIPT FILES -->
-    <script src="{{ url_for('static', filename = 'js/jquery.min.js')}}"></script>
-    <script src="{{ url_for('static', filename = 'js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{ url_for('static', filename = 'js/jquery.sticky.js')}}"></script>
-    <script src="{{ url_for('static', filename = 'js/click-scroll.js')}}"></script>
-    <script src="{{ url_for('static', filename = 'js/custom.js')}}"></script>
-    <script src="{{ url_for('static', filename = 'js/script.js')}}"></script>
+            </script>
+
+
+            <!-- JAVASCRIPT FILES -->
+            <script src="{{ url_for('static', filename = 'js/jquery.min.js')}}"></script>
+            <script src="{{ url_for('static', filename = 'js/bootstrap.bundle.min.js')}}"></script>
+            <script src="{{ url_for('static', filename = 'js/jquery.sticky.js')}}"></script>
+            <script src="{{ url_for('static', filename = 'js/click-scroll.js')}}"></script>
+            <script src="{{ url_for('static', filename = 'js/custom.js')}}"></script>
+            <script src="{{ url_for('static', filename = 'js/script.js')}}"></script>
 
 
 </body>
