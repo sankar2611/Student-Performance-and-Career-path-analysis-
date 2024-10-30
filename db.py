@@ -147,7 +147,6 @@ def insert_student_details(student_id, first_name, last_name, middle_name, date_
     finally:
         cursor.close()
         conn.close()
-
 def get_user_details(user_id):
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -171,3 +170,19 @@ def get_user_details(user_id):
     finally:
         cursor.close()
         conn.close()
+def insert_contact_company(name, email, subject, message):
+    print("Attempting to insert data into contact_company...")  # Debugging message
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    try:
+        cursor.execute("""
+            INSERT INTO contact_company (name, email, subject, message, date)
+            VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)
+        """, (name, email, subject, message))
+        conn.commit()  # Commit the transaction
+        print("Data inserted successfully into contact_company table.")
+    except :
+        print("An error occurred while inserting data:")
+    finally:
+        conn.close()
+        print("Database connection closed.")
