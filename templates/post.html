@@ -150,45 +150,45 @@
             <h1 class="job-management-header">Job Posting</h1>
 
             <!-- Add New Job Posting Form -->
-            <form id="job-management-form">
+            <form id="job-management-form" action="/post" method="POST">
                 <h2 class="job-form-title">Add New Job</h2>
 
                 <label for="job-title" class="job-management-label">Job Title:</label>
-                <input type="text" id="job-title" class="job-management-input" name="job-title" required>
+                <input type="text" id="job-title" class="job-management-input" name="job_title" required>
 
                 <label for="job-description" class="job-management-label">Job Description:</label>
-                <textarea id="job-description" class="job-management-textarea" name="job-description" rows="4"
+                <textarea id="job-description" class="job-management-textarea" name="job_description" rows="4"
                     required></textarea>
 
                 <label for="job-requirements" class="job-management-label">Job Requirements:</label>
-                <textarea id="job-requirements" class="job-management-textarea" name="job-requirements" rows="3"
+                <textarea id="job-requirements" class="job-management-textarea" name="requirements" rows="3"
                     required></textarea>
 
-                <label for="salary-range" class="job-management-label">Salary Range:</label>
+                <label for="salary-range" class="job-management-label" name = "salary_range">Salary Range:</label>
                 <div class="salary-range-container">
                     <input type="number" id="min-salary" class="job-management-input salary-range-input"
-                        name="min-salary" placeholder="Min Salary" required>
+                        name="min_salary" placeholder="Min Salary" required>
                     <span class="salary-range-separator">to</span>
                     <input type="number" id="max-salary" class="job-management-input salary-range-input"
-                        name="max-salary" placeholder="Max Salary" required>
+                        name="max_salary" placeholder="Max Salary" required>
                 </div>
 
                 <label for="location" class="job-management-label">Location:</label>
                 <input type="text" id="location" class="job-management-input" name="location" required>
 
                 <label for="job-type" class="job-management-label">Job Type:</label>
-                <select id="job-type" class="job-management-select" name="job-type" required>
+                <select id="job-type" class="job-management-select" name="job_type" required>
                     <option value="full-time">Full-time</option>
                     <option value="part-time">Part-time</option>
                     <option value="contract">Contract</option>
                 </select>
 
                 <label for="application-deadline" class="job-management-label">Application Deadline:</label>
-                <input type="date" id="application-deadline" class="job-management-input" name="application-deadline"
+                <input type="date" id="application-deadline" class="job-management-input" name="application_deadline"
                     required>
 
                 <label for="contact" class="job-management-label">Contact Email/Phone:</label>
-                <input type="text" id="contact" class="job-management-input" name="contact" required>
+                <input type="text" id="contact" class="job-management-input" name="contact"  value="{{ contact_email }}" required>
 
                 <button type="submit" class="job-management-button">Add Job Posting</button>
             </form><br><br>
@@ -460,40 +460,37 @@
             }
         </style>
         <script>
-            document.addEventListener("DOMContentLoaded", () => {
+                document.addEventListener("DOMContentLoaded", () => {
                 const jobForm = document.getElementById("job-management-form");
                 const jobList = document.getElementById("job-list").getElementsByTagName("tbody")[0];
-
-                // Load jobs from localStorage on page load
+            
                 loadJobs();
-
-                let editMode = false; // Track whether we're in edit mode
-                let currentJobIndex = null; // Store the index of the job being edited
-
+            
+                let editMode = false;
+                let currentJobIndex = null;
+            
                 jobForm.addEventListener("submit", function (event) {
                     event.preventDefault();
-
-                    // Capture form data
+            
                     const jobTitle = document.getElementById("job-title").value;
                     const jobDescription = document.getElementById("job-description").value;
                     const jobRequirements = document.getElementById("job-requirements").value;
                     const minSalary = parseFloat(document.getElementById("min-salary").value);
                     const maxSalary = parseFloat(document.getElementById("max-salary").value);
-
-                    // Validate salary input
+            
                     if (minSalary >= maxSalary) {
                         alert("Minimum salary must be less than maximum salary.");
                         return;
                     }
-
-                    const salaryRange = `${minSalary} - ${maxSalary}`; // Display salary as range
+            
+                    const salaryRange = `${minSalary} - ${maxSalary}`;
                     const location = document.getElementById("location").value;
                     const jobType = document.getElementById("job-type").value;
                     const applicationDeadline = document.getElementById("application-deadline").value;
                     const contact = document.getElementById("contact").value;
-
-                    // Create job object
+            
                     const newJob = {
+                        id: editMode ? currentJobIndex : Date.now().toString(),  // Unique ID
                         jobTitle,
                         jobDescription,
                         jobRequirements,
@@ -503,46 +500,40 @@
                         applicationDeadline,
                         contact
                     };
-
+            
                     if (editMode) {
-                        // If in edit mode, update existing job
                         updateJob(currentJobIndex, newJob);
                     } else {
-                        // Add job to the table
                         addJobToTable(newJob);
-                        // Save job to localStorage
                         saveJobToLocalStorage(newJob);
                     }
-
-                    // Reset the form
+            
                     jobForm.reset();
-                    editMode = false; // Reset edit mode
-                    currentJobIndex = null; // Clear current job index
+                    editMode = false;
+                    currentJobIndex = null;
                 });
-
-                // Function to add job to the table
+            
                 function addJobToTable(job) {
                     const newRow = jobList.insertRow();
+                    newRow.setAttribute("data-id", job.id);
+            
                     newRow.innerHTML = `
-                    <td>${job.jobTitle}</td>
-                    <td>${job.jobDescription}</td>
-                    <td>${job.salaryRange}</td>
-                    <td>${job.location}</td>
-                    <td>
-                        <button class="job-edit-btn">Edit</button>
-                        <button class="job-delete-btn">Delete</button>
-                    </td>
-                `;
-
-                    // Handle delete job
+                        <td>${job.jobTitle}</td>
+                        <td>${job.jobDescription}</td>
+                        <td>${job.salaryRange}</td>
+                        <td>${job.location}</td>
+                        <td>
+                            <button class="job-edit-btn" data-id="${job.id}">Edit</button>
+                            <button class="job-delete-btn" data-id="${job.id}">Delete</button>
+                        </td>
+                    `;
+            
                     newRow.querySelector(".job-delete-btn").addEventListener("click", function () {
                         newRow.remove();
-                        deleteJobFromLocalStorage(job.jobTitle);
+                        deleteJobFromLocalStorage(job.id);
                     });
-
-                    // Handle edit job
+            
                     newRow.querySelector(".job-edit-btn").addEventListener("click", function () {
-                        // Populate the form with job details
                         document.getElementById("job-title").value = job.jobTitle;
                         document.getElementById("job-description").value = job.jobDescription;
                         document.getElementById("job-requirements").value = job.jobRequirements;
@@ -552,50 +543,50 @@
                         document.getElementById("job-type").value = job.jobType;
                         document.getElementById("application-deadline").value = job.applicationDeadline;
                         document.getElementById("contact").value = job.contact;
-
-                        // Set edit mode
+            
                         editMode = true;
-                        currentJobIndex = Array.from(jobList.rows).indexOf(newRow); // Get the index of the job
+                        currentJobIndex = job.id;
                     });
                 }
-
-                // Update existing job in the table
-                function updateJob(index, updatedJob) {
+            
+                function updateJob(id, updatedJob) {
                     const rows = jobList.getElementsByTagName("tr");
-                    const row = rows[index];
-
-                    // Update the row in the table
-                    row.cells[0].textContent = updatedJob.jobTitle;
-                    row.cells[1].textContent = updatedJob.jobDescription;
-                    row.cells[2].textContent = updatedJob.salaryRange;
-                    row.cells[3].textContent = updatedJob.location;
-
-                    // Save the updated job to localStorage
+                    Array.from(rows).forEach((row, index) => {
+                        if (row.getAttribute("data-id") === id) {
+                            row.cells[0].textContent = updatedJob.jobTitle;
+                            row.cells[1].textContent = updatedJob.jobDescription;
+                            row.cells[2].textContent = updatedJob.salaryRange;
+                            row.cells[3].textContent = updatedJob.location;
+                        }
+                    });
+            
                     const jobs = JSON.parse(localStorage.getItem("jobs")) || [];
-                    jobs[index] = updatedJob; // Update the job at the specific index
-                    localStorage.setItem("jobs", JSON.stringify(jobs));
+                    const jobIndex = jobs.findIndex(job => job.id === id);
+                    if (jobIndex > -1) {
+                        jobs[jobIndex] = updatedJob;
+                        localStorage.setItem("jobs", JSON.stringify(jobs));
+                    }
                 }
-
-                // Save job to localStorage
+            
                 function saveJobToLocalStorage(job) {
                     let jobs = JSON.parse(localStorage.getItem("jobs")) || [];
                     jobs.push(job);
                     localStorage.setItem("jobs", JSON.stringify(jobs));
                 }
-
-                // Delete job from localStorage
-                function deleteJobFromLocalStorage(jobTitle) {
+            
+                function deleteJobFromLocalStorage(id) {
                     let jobs = JSON.parse(localStorage.getItem("jobs")) || [];
-                    jobs = jobs.filter(job => job.jobTitle !== jobTitle);
+                    jobs = jobs.filter(job => job.id !== id);
                     localStorage.setItem("jobs", JSON.stringify(jobs));
                 }
-
-                // Load jobs from localStorage
+            
                 function loadJobs() {
                     let jobs = JSON.parse(localStorage.getItem("jobs")) || [];
                     jobs.forEach(job => addJobToTable(job));
                 }
             });
+            
+            
         </script>
 
 
