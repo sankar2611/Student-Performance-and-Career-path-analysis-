@@ -204,3 +204,51 @@ def add_job_posting(job_title, job_description, requirements, min_salary, max_sa
     finally:
         cursor.close()
         connection.close()
+def update_job_posting(job_id, job_title, job_description, job_requirements, min_salary, max_salary,
+                        location, job_type, application_deadline, contact):
+    connection = get_db_connection()
+    cursor = connection.cursor()
+
+    try:
+        sql = '''
+        UPDATE jobs
+        SET job_title = ?, job_description = ?, requirements = ?, min_salary = ?, max_salary = ?, location = ?, 
+            job_type = ?, application_deadline = ?, contact = ?
+        WHERE job_id = ?
+        '''
+        values = (job_title, job_description, job_requirements, min_salary, max_salary, location, job_type, application_deadline, contact, job_id)
+        cursor.execute(sql, values)
+        connection.commit()
+        print("Job posting updated successfully.")  # Debug message
+    except Exception as e:
+        print(f"Error updating job posting: {e}")  # Log any exceptions
+    finally:
+        cursor.close()
+        connection.close()
+
+def delete_job_posting(job_id):
+    connection = get_db_connection()
+    cursor = connection.cursor()
+    
+    try:
+        # Move job to deleted jobs table
+        sql_insert = '''
+        INSERT INTO deleted_jobs (job_id, company_id, job_title, job_description, requirements, min_salary, max_salary, location, job_type, application_deadline, contact)
+        SELECT id, company_id, job_title, job_description, requirements, min_salary, max_salary, location, job_type, application_deadline, contact
+        FROM jobs
+        WHERE job_id = ?
+        '''
+        cursor.execute(sql_insert, (job_id,))
+        
+        # Delete from jobs table
+        sql_delete = '''
+        DELETE FROM jobs WHERE id = ?
+        '''
+        cursor.execute(sql_delete, (job_id,))
+        connection.commit()
+        print("Job posting moved to deleted jobs and deleted successfully.")  # Debug message
+    except Exception as e:
+        print(f"Error deleting job posting: {e}")  # Log any exceptions
+    finally:
+        cursor.close()
+        connection.close()
