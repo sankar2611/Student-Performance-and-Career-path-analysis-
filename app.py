@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, url_for, render_template, session, flash
+from flask import Flask, request, redirect, url_for, render_template, session, flash,jsonify
 from datetime import timedelta
 from functools import wraps
 import db 
@@ -134,16 +134,19 @@ def submit_contact():
     if user_role == 'student':
         # Insert into the database using the student contact method
         db.insert_contact(name, email, subject, message)
+        flash('Your message has been sent successfully!', 'success')
         return redirect(url_for('contact'))
     elif user_role == 'company':
         # Insert into the database using the company contact method
         db.insert_contact_company(name, email, subject, message)
+        flash('Your message has been sent successfully!', 'success')
         return redirect(url_for('contact2'))
+        
     else:
         flash('Error: User role not recognized. Please log in again.', 'error')
         return redirect(url_for('login'))  # Redirect if the role is not recognized
 
-    flash('Your message has been sent successfully!', 'success')
+    
 
     # Redirect or render a success page
     
@@ -242,9 +245,31 @@ def company():
 def dash():
     return render_template("dash.html")
 
-@app.route('/post')
+@app.route('/post', methods=['GET', 'POST'])
+@login_required
 def post():
-    return render_template("post.html")
+    if 'email' not in session:
+        flash("You need to be logged in to access this page.", "error")
+        return redirect(url_for('login'))
+    user_email = session.get('email')  # Email is already in the session
+    if request.method == 'POST':
+        job_title = request.form['job_title']
+        job_description = request.form['job_description']
+        requirements = request.form['requirements']
+        min_salary = request.form['min_salary']
+        max_salary = request.form['max_salary']
+        location = request.form['location']
+        job_type = request.form['job_type']
+        application_deadline = request.form['application_deadline']
+        company_id = session.get('user_id') 
+        contact = request.form['contact'] 
+        # Call the function to add the job posting to the database
+        db.add_job_posting(job_title, job_description, requirements, min_salary, max_salary, location, job_type, application_deadline, contact, company_id)
+
+        return redirect(url_for('company'))
+    return render_template("post.html",contact_email=user_email)
+
+
 
 @app.route('/contact2', methods=['GET', 'POST'])
 def contact2():

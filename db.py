@@ -186,3 +186,21 @@ def insert_contact_company(name, email, subject, message):
     finally:
         conn.close()
         print("Database connection closed.")
+def add_job_posting(job_title, job_description, requirements, min_salary, max_salary, location, job_type, application_deadline, contact, company_id):
+    connection = get_db_connection()
+    cursor = connection.cursor()
+    
+    try:
+        sql = '''
+        INSERT INTO jobs (company_id, job_title, job_description, requirements, min_salary, max_salary, location, job_type, application_deadline, contact)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        '''
+        values = (company_id, job_title, job_description, requirements, min_salary, max_salary, location, job_type, application_deadline, contact)
+        cursor.execute(sql, values)
+        connection.commit()
+        print("Job posting inserted successfully.")  # Debug message
+    except Exception as e:
+        print(f"Error inserting job posting: {e}")  # Log any exceptions
+    finally:
+        cursor.close()
+        connection.close()
