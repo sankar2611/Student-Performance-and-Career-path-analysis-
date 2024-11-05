@@ -1,210 +1,57 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Career</title>
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/style.css')}}" />
-
-    <!-- CSS FILES -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap"
-        rel="stylesheet">
-
-    <link href="{{ url_for('static', filename = 'css/bootstrap.min.css')}}" rel="stylesheet">
-
-    <link href="{{ url_for('static', filename = 'css/bootstrap-icons.css')}}" rel="stylesheet">
-
-    <link href="{{ url_for('static', filename = 'css/templatemo-topic-listing copy.css')}}" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gender Distribution Dashboard</title>
+    <!-- Import Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+<body>
+    <h2>Gender Distribution</h2>
+    <canvas id="genderChart" width="400" height="400"></canvas>
 
-<body id="top">
-    <div class="navbar1_content">
-        <i class="bi bi-grid"></i>
-        <i class='bx bx-sun' id="darkLight"></i>
-        <i class='bx bx-bell'></i>
-        <img src="images/profile.jpg" alt="" class="profile" />
-    </div>
-    </nav>
-    <!-- sidebar -->
-    <nav class="sidebar" style="padding-top: 40px;">
-        <a class="navbar-brand" href="/">
-            <image src="{{ url_for('static', filename = 'images/image-removebg-preview (2).png')}}" alt="Logo"
-                class="logo"></image>
-        </a>
-        <div class="menu_content">
-            <ul class="menu_items">
-                <div class="menu_titler">
-                    <li class="item"><br>
-                        <a href="#" class="nav_link">
-                            <span class="navlink_icon">
-                                <i class="bx bx-filter"></i>
-                            </span>
-                            <span class="navlink">Home</span>
-                        </a>
-                    </li>
-                    <li class="item">
-                        <a href="#" class="nav_link">
-                            <span class="navlink_icon">
-                                <i class="bx bx-cloud-upload"></i>
-                            </span>
-                            <span class="navlink">Analytics</span>
-                        </a>
-                    </li>
-                    <li class="item">
-                        <a href="#" class="nav_link">
-                            <span class="navlink_icon">
-                                <i class="bx bx-cloud-upload"></i>
-                            </span>
-                            <span class="navlink">Logout</span>
-                        </a>
-                    </li>
-            </ul>
-            </div>
-            </nav>
-            <!-- JavaScript -->
-            <div class="dashboard">
-                <header>
-                    <h1>Analytics Dashboard</h1>
-                </header>
-                <div class="charts">
-                    <canvas id="barChart"></canvas>
-                    <canvas id="lineChart"></canvas>
-                    <canvas id="pieChart"></canvas>
-                </div>
-                <footer>
-                    <p>&copy; 2024 Your Company</p>
-                </footer>
-            </div>
-            <style>
-                .dashboard {
-                    max-width: 1200px;
-                    margin: 20px auto;
-                    padding: 20px;
-                    background-color: #fff;
-                    border-radius: 8px;
-                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-                }
+    <script>
+        // Function to fetch and update the gender distribution chart
+        async function updateGenderChart() {
+            try {
+                const response = await fetch('/api/gender_distribution');  // Flask API endpoint
+                const data = await response.json();
 
-                header {
-                    text-align: center;
-                }
+                // Update chart data
+                genderChart.data.labels = data.labels;
+                genderChart.data.datasets[0].data = data.counts;
+                genderChart.update();
+            } catch (error) {
+                console.error('Error fetching gender distribution:', error);
+            }
+        }
 
-                .charts {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 20px;
-                }
-
-                canvas {
-                    border-radius: 8px;
-                    background-color: #e2e2e2;
-                }
-            </style>
-
-
-            <script>
-                $("#envelope").hover(function () {
-                    $(this).fadeTo(300, 1);
-                }, function () {
-                    $(this).fadeTo(100, 0.3);
-                });
-
-                $()
-                // Bar Chart
-                const ctxBar = document.getElementById('barChart').getContext('2d');
-                const barChart = new Chart(ctxBar, {
-                    type: 'bar',
-                    data: {
-                        labels: ['January', 'February', 'March', 'April', 'May'],
-                        datasets: [{
-                            label: 'Sales',
-                            data: [12, 19, 3, 5, 2],
-                            backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
+        // Set up Chart.js chart
+        const ctx = document.getElementById('genderChart').getContext('2d');
+        const genderChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: [],  // Filled by fetched data
+                datasets: [{
+                    label: 'Gender Distribution',
+                    data: [],  // Filled by fetched data
+                    backgroundColor: ['#4f81bd', '#c0504d'],  // Male, Female colors
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
                     }
-                });
+                }
+            }
+        });
 
-                // Line Chart
-                const ctxLine = document.getElementById('lineChart').getContext('2d');
-                const lineChart = new Chart(ctxLine, {
-                    type: 'line',
-                    data: {
-                        labels: ['January', 'February', 'March', 'April', 'May'],
-                        datasets: [{
-                            label: 'Revenue',
-                            data: [3, 6, 9, 12, 15],
-                            borderColor: 'rgba(255, 99, 132, 1)',
-                            fill: false
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                });
-
-                // Pie Chart
-                const ctxPie = document.getElementById('pieChart').getContext('2d');
-                const pieChart = new Chart(ctxPie, {
-                    type: 'pie',
-                    data: {
-                        labels: ['Red', 'Blue', 'Yellow'],
-                        datasets: [{
-                            label: 'My First Dataset',
-                            data: [300, 50, 100],
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true
-                    }
-                });
-
-
-            </script>
-
-
-            <!-- JAVASCRIPT FILES -->
-            <script src="{{ url_for('static', filename = 'js/jquery.min.js')}}"></script>
-            <script src="{{ url_for('static', filename = 'js/bootstrap.bundle.min.js')}}"></script>
-            <script src="{{ url_for('static', filename = 'js/jquery.sticky.js')}}"></script>
-            <script src="{{ url_for('static', filename = 'js/click-scroll.js')}}"></script>
-            <script src="{{ url_for('static', filename = 'js/custom.js')}}"></script>
-            <script src="{{ url_for('static', filename = 'js/script.js')}}"></script>
-
-
+        // Update chart every 30 seconds
+        setInterval(updateGenderChart, 30000);
+        updateGenderChart();  // Initial load
+    </script>
 </body>
-
 </html>
