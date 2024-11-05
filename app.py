@@ -53,9 +53,11 @@ def contact():
 
     return render_template("contact.html", name=user_name, email=user_email)
 
-@app.route('/job')
+@app.route('/course')
 def job():
-    return render_template("job.html")
+    return render_template("course.html")
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -294,8 +296,44 @@ def contact2():
         db.insert_contact_company(name, email, subject, message)
         flash('Your message has been sent successfully!', 'success')
         return redirect(url_for('company'))
+    
+
+# app.py
+from flask import Flask, jsonify
+import pyodbc
+import pandas as pd
 
 
-   
+# Database connection details (without username and password)
+server = 'MEMRS'
+database = 'student-career-performance-analysis'
+
+# Connect to SQL Server
+def get_database_connection():
+    conn = pyodbc.connect(
+        f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server};DATABASE={database};Trusted_Connection=yes;'
+    )
+    return conn
+
+@app.route('/api/gender_distribution', methods=['GET'])
+def gender_distribution():
+    # Fetch data from SQL Server
+    conn = get_database_connection()
+    query = "SELECT gender FROM StudentDetails"  # Modify with your table name and relevant columns
+    data = pd.read_sql(query, conn)
+    conn.close()
+    
+    # Calculate gender distribution
+    gender_counts = data['gender'].value_counts()
+    
+    # Prepare data for JSON response
+    gender_data = {
+        "labels": gender_counts.index.tolist(),
+        "counts": gender_counts.values.tolist()
+    }
+    
+    return jsonify(gender_data)
+
+ 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")

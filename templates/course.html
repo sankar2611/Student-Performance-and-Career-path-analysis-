@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Job Listing</title>
+
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap"
+        rel="stylesheet">
+
+    <link href="{{ url_for('static', filename = 'css/bootstrap.min.css')}}" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename = 'css/bootstrap-icons.css')}}" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename = 'css/templatemo-topic-listing.css')}}" rel="stylesheet">
+
+</head>
+
+<body id="top">
+    <style>
+        /* CSS to resize the logo */
+        .logo {
+            height: 60px;
+            /* Adjust this value to shorten the logo */
+            width: auto;
+        }
+    </style>
+
+    <main>
+
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <image src="{{ url_for('static', filename = 'images/image-removebg-preview (2).png')}}" alt="Logo"
+                        class="logo"></image>
+                </a>
+
+
+                <div class="d-lg-none ms-auto me-4">
+                    <a href="#top" class="navbar-icon bi-person smoothscroll"></a>
+                </div>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav" style="padding-left: 100px;">
+                    <ul class="navbar-nav ms-lg-5 me-lg-auto">
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="/">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="/course"><strong>Courses</strong></a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="#section_3">How it works</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="#section_4">FAQs</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contact">Contact</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/details">Register</a>
+                        </li>
+
+                    </ul>
+
+                    <div class="d-none d-lg-block">
+                        <a href="/login" class="navbar-icon bi-person smoothscroll" style="color: black;"></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <section class="explore-section section-padding" id="section_2">
+            <div class="container">
+
+                <div class="col-12 text-center">
+                    <h2 class="mb-4">Courses To Enhance</h1>
+                </div>
+
+            </div>
+            </div>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="design-tab" data-bs-toggle="tab"
+                                data-bs-target="#design-tab-pane" type="button" role="tab"
+                                aria-controls="design-tab-pane" aria-selected="true">Data Science</button>
+                        </li>
+
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="marketing-tab" data-bs-toggle="tab"
+                                data-bs-target="#marketing-tab-pane" type="button" role="tab"
+                                aria-controls="marketing-tab-pane" aria-selected="false">Computer Science</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="business-tab" data-bs-toggle="tab"
+                                data-bs-target="#business-tab-pane" type="button" role="tab"
+                                aria-controls="business-tab-pane" aria-selected="false">Business</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="arts-tab" data-bs-toggle="tab" data-bs-target="#arts-tab-pane"
+                                type="button" role="tab" aria-controls="arts-tab-pane" aria-selected="false">Arts and
+                                Humanities</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-12">
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="design-tab-pane" role="tabpanel"
+                                aria-labelledby="design-tab" tabindex="0">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+                                        <div class="custom-block bg-white shadow-lg">
+                                            <a href=https://www.coursera.org/browse/data-science/probability-and-statistics
+                                                target="_blank">
+                                                <div class="d-flex">
+                                                    <div>
+                                                        <h5 class="mb-2">Probability And Statistics</h5><br>
+
+                                                        <p class="mb-0">
+                                                        <ul>
+                                                            <li>Probability and statistics courses teach skills in
+                                                                understanding whether data is meaningful, including
+                                                                optimization, inference, testing, and other methods
+                                                                for analyzing patterns in data and using them to
+                                                                predict, understand, and improve results.</li>
+                                                        </ul>
+
+                                                        </p>
+                                                    </div>
+                                                    <style>
+                                                        ul {
+                                                            list-style-type: disc;
+                                                            /* Default bullet style */
+                                                            padding-left: 20px;
+                                                            /* Indentation for the list */
+                                                        }
+
+                                                        li {
+                                                            margin: 5px 0;
+                                                            /* Spacing between items */
+                                                            font-family: 'Poppins', sans-serif;
+                                                            /* Example font, change as needed */
+                                                        }
+                                                    </style>
+
+                                                    </style>
+
+                                                    <span class="badge bg-design rounded-pill ms-auto">1</span>
+                                                </div>
+
+                                                <img src="{{ url_for('static', filename = 'images/topics/undraw_Remote_design_team_re_urdx.png')}}"
+                                                    class="custom-block-image img-fluid" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+                                        <div class="custom-block bg-white shadow-lg">
+                                            <a href=https://www.coursera.org/browse/data-science/machine-learning
+                                                target="_blank">
+                                                <div class="d-flex">
+                                                    <div>
+                                                        <h5 class="mb-2">Machine Learning</h5><br>
+
+                                                        <p class="mb-0" style="text-align: justify;">
+                                                        <ul>
+                                                            <li>Machine learning courses focus on creating systems to
+                                                                utilize and learn from large sets of data.</li>
+                                                            <li> Topics of study include predictive algorithms, natural
+                                                                language processing, and statistical pattern
+                                                                recognition.</li>
+                                                        </ul>
+
+
+                                                        </p>
+                                                    </div>
+
+                                                    <span class="badge bg-design rounded-pill ms-auto">2</span>
+                                                </div>
+
+                                                <img src="{{ url_for('static', filename = 'images/topics/undraw_Redesign_feedback_re_jvm0.png')}}"
+                                                    class="custom-block-image img-fluid" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-6 col-12">
+                                        <div class="custom-block bg-white shadow-lg">
+                                            <a href=https://www.coursera.org/browse/data-science/data-analysis
+                                                target="_blank">
+                                                <div class="d-flex">
+                                                    <div>
+                                                        <h5 class="mb-2">Data Analysis</h5><br>
+
+                                                        <p class="mb-0" style="text-align: justify;">
+                                                        <ul>
+                                                            <li>Data analysis courses address methods for managing and
+                                                                analyzing large datasets.</li>
+                                                            <li> Start your career as a data scientist by studying data
+                                                                mining, big data
+                                                                applications, and data product development.</li>
+                                                        </ul>
+                                                    </div>
+
+                                                    <span class="badge bg-design rounded-pill ms-auto">3</span>
+                                                </div>
+
+                                                <img src="{{ url_for('static', filename = 'images/topics/colleagues-working-cozy-office-medium-shot.png')}}"
+                                                    class="custom-block-image img-fluid" alt="">
+                                            </a>
+                                        </div><br>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="marketing-tab-pane" role="tabpanel"
+                                aria-labelledby="marketing-tab" tabindex="0">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-3">
+                                        <div class="custom-block bg-white shadow-lg">
+                                            <a href=https://www.coursera.org/browse/computer-science/software-development
+                                                target="_blank">
+                                                <div class="d-flex">
+                                                    <div>
+                                                        <h5 class="mb-2">Software Development</h5><br>
+
+                                                        <p class="mb-0" style="text-align: justify;">
+                                                        <ul>
+                                                            <li>Specializations and courses in software development
+                                                                address the process of creating software, including
+                                                                development tools and methodologies (such as
+                                                                Agile development), programming languages (including
+                                                                Python, C, Java, and Scala), and software architecture
+                                                                and testing.</li>
+
+                                                        </ul>
+                                                        </p>
+                                                    </div>
+
+                                                    <span class="badge bg-advertising rounded-pill ms-auto">1</span>
+                                                </div>
+
+                                                <img src="{{ url_for('static', filename = 'images/topics/undraw_online_ad_re_ol62.png')}}"
+                                                    class="custom-block-image img-fluid" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-lg-4 col-md-6 col-12">
+                                        <div class="custom-block bg-white shadow-lg">
+                                            <a href=https://www.coursera.org/browse/computer-science/computer-security-and-networks
+                                                target="_blank">
+                                                <div class="d-flex">
+                                                    <div>
+                                                        <h5 class="mb-2">Computer Security And Networks</h5><br>
+
+                                                        <p class="mb-0" style="text-align: justify;">
+                                                        <ul>
+                                                            <li>Computer security and networks courses address the
+                                                                foundations of creating modern, secure software and
+                                                                hardware. </li>
+                                                            <li>Subtopics include network
+                                                                security, cybersecurity, risk management, and
+                                                                cryptography.</li>
+                                                        </ul>
+                                                        </p>
+                                                    </div>
+
+                                                    <span class="badge bg-advertising rounded-pill ms-auto">2</span>
+                                                </div>
+
+                                                <img src="{{ url_for('static', filename = 'images/topics/undraw_viral_tweet_gndb.png')}}"
+                                                    class="custom-block-image img-fluid" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-lg-4 col-md-6 col-12">
+                                        <div class="custom-block bg-white shadow-lg">
+                                            <a href=https://www.coursera.org/browse/computer-science/design-and-product
+                                                target="_blank">
+                                                <div class="d-flex">
+                                                    <div>
+                                                        <h5 class="mb-2">Design and Product</h5><br>
+
+                                                        <p class="mb-0" style="text-align: justify;">
+                                                        <ul>
+                                                            <li>Design and product courses teach you to bring a software
+                                                                product to life.</li>
+                                                            <li>Major areas of study include product definition and
+                                                                design, subtopics include UX design, web design,
+                                                                human-computer interaction, and design thinking.</li>
+                                                        </ul>
+                                                        </p>
+                                                    </div>
+
+                                                    <span class="badge bg-advertising rounded-pill ms-auto">3</span>
+                                                </div>
+
+                                                <img src="{{ url_for('static', filename = 'images/topics/undraw_viral_tweet_gndb.png')}}"
+                                                    class="custom-block-image img-fluid" alt="">
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="business-tab-pane" role="tabpanel"
+                                aria-labelledby="business-tab" tabindex="0">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-3">
+                                        <div class="custom-block bg-white shadow-lg">
+                                            <a href=https://www.coursera.org/browse/business/leadership-and-management
+                                                target="_blank">
+                                                <div class="d-flex">
+                                                    <div>
+                                                        <h5 class="mb-2">Leadership And Management</h5><br>
+
+                                                        <p class="mb-0" style="text-align: justify;">
+                                                        <ul>
+                                                            <li>Leadership and management courses offer resources for
+                                                                both new and seasoned leaders to become more adept at
+                                                                developing employees, inspiring and
+                                                                guiding teams, managing change, and effectively
+                                                                influencing stakeholders across an organization.</li>
+
+                                                        </ul>
+                                                        </p>
+                                                    </div>
+
+                                                    <span class="badge bg-advertising rounded-pill ms-auto">1</span>
+                                                </div>
+
+                                                <img src="{{ url_for('static', filename = 'images/topics/undraw_online_ad_re_ol62.png')}}"
+                                                    class="custom-block-image img-fluid" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-3">
+                                        <div class="custom-block bg-white shadow-lg">
+                                            <a href=https://www.coursera.org/browse/business/entrepreneurship
+                                                target="_blank">
+                                                <div class="d-flex">
+                                                    <div>
+                                                        <h5 class="mb-2">Entrepreneurship</h5><br>
+
+                                                        <p class="mb-0" style="text-align: justify;">
+                                                        <ul>
+                                                            <li>Entrepreneurship courses are appropriate for anyone
+                                                                interested in starting and growing a successful
+                                                                business.</li>
+                                                            <li> Learn the theory and practice of
+                                                                entrepreneurship, frameworks for social
+                                                                entrepreneurship, and how to foster a culture of
+                                                                innovation to help your business stay ahead.</li>
+
+                                                        </ul>
+                                                        </p>
+                                                    </div>
+
+                                                    <span class="badge bg-advertising rounded-pill ms-auto">2</span>
+                                                </div>
+
+                                                <img src="{{ url_for('static', filename = 'images/topics/undraw_online_ad_re_ol62.png')}}"
+                                                    class="custom-block-image img-fluid" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-3">
+                                        <div class="custom-block bg-white shadow-lg">
+                                            <a href=https://www.coursera.org/browse/business/marketing target="_blank">
+                                                <div class="d-flex">
+                                                    <div>
+                                                        <h5 class="mb-2">Marketing</h5><br>
+
+                                                        <p class="mb-0" style="text-align: justify;">
+                                                        <ul>
+                                                            <li>Marketing courses teach strategies for influencing
+                                                                customer behavior.
+                                                            </li>
+                                                            <li>Learn fundamentals like creating a marketing
+                                                                strategy, brand building, advertising and budget
+                                                                allocation, and leveraging digital and social media
+                                                                channels to reach your business goals.</li>
+
+                                                        </ul>
+                                                        </p>
+                                                    </div>
+
+                                                    <span class="badge bg-advertising rounded-pill ms-auto">3</span>
+                                                </div>
+
+                                                <img src="{{ url_for('static', filename = 'images/topics/undraw_online_ad_re_ol62.png')}}"
+                                                    class="custom-block-image img-fluid" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-lg-4 col-md-6 col-12">
+                                        <div class="custom-block bg-white shadow-lg">
+                                            <a href=https://www.coursera.org/browse/business/business-strategy
+                                                target="_blank">
+                                                <div class="d-flex">
+                                                    <div>
+                                                        <h5 class="mb-2">Business Strategy</h5><br>
+
+                                                        <p class="mb-0" style="text-align: justify;">
+                                                        <ul>
+                                                            <li>Business strategy courses teach you how to model growth
+                                                                and make smart business decisions to achieve long-term
+                                                                business objectives.</li>
+                                                            <li>Business analysts, business development professionals,
+                                                                or anyone interested in business innovation will find
+                                                                these courses relevant.</li>
+                                                        </ul>
+                                                        </p>
+                                                    </div>
+
+                                                    <span class="badge bg-advertising rounded-pill ms-auto">4</span>
+                                                </div>
+
+                                                <img src="{{ url_for('static', filename = 'images/topics/undraw_viral_tweet_gndb.png')}}"
+                                                    class="custom-block-image img-fluid" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-6 col-12">
+                                        <div class="custom-block bg-white shadow-lg">
+                                            <a href=https://www.coursera.org/browse/business/entrepreneurship
+                                                target="_blank">
+                                                <div class="d-flex">
+                                                    <div>
+                                                        <h5 class="mb-2">Finance</h5><br>
+
+                                                        <p class="mb-0" style="text-align: justify;">
+                                                        <ul>
+                                                            <li>Finance courses cover the fundamentals of banking,
+                                                                accounting, finance management, bookkeeping, corporate
+                                                                finance, and financial analysis. </li>
+                                                            <li>Advanced
+                                                                topics include financial engineering, forensic
+                                                                accounting, and asset pricing.</li>
+                                                        </ul>
+                                                        </p>
+                                                    </div>
+
+                                                    <span class="badge bg-advertising rounded-pill ms-auto">5</span>
+                                                </div>
+
+                                                <img src="{{ url_for('static', filename = 'images/topics/undraw_viral_tweet_gndb.png')}}"
+                                                    class="custom-block-image img-fluid" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-6 col-12">
+                                        <div class="custom-block bg-white shadow-lg">
+                                            <a href=https://www.coursera.org/browse/business/business-essentials
+                                                target="_blank">
+                                                <div class="d-flex">
+                                                    <div>
+                                                        <h5 class="mb-2">Business Essential</h5><br>
+
+                                                        <p class="mb-0" style="text-align: justify;">
+                                                        <ul>
+                                                            <li>Business essentials courses address the foundations of
+                                                                day-to-day business work. From business writing and
+                                                                presentation skills to networking, practicing
+                                                                appropriate business etiquette, and communicating
+                                                                effectively, you'll prepare to start your career or take
+                                                                it to the next level.</li>
+                                                        </ul>
+                                                        </p>
+                                                    </div>
+
+                                                    <span class="badge bg-advertising rounded-pill ms-auto">6</span>
+                                                </div>
+
+                                                <img src="{{ url_for('static', filename = 'images/topics/undraw_viral_tweet_gndb.png')}}"
+                                                    class="custom-block-image img-fluid" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="arts-tab-pane" role="tabpanel" aria-labelledby="arts-tab"
+                                tabindex="0">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-3">
+                                        <div class="custom-block bg-white shadow-lg">
+                                            <a href=https://www.coursera.org/browse/arts-and-humanities/history
+                                                target="_blank">
+                                                <div class="d-flex">
+                                                    <div>
+                                                        <h5 class="mb-2">History</h5><br>
+
+                                                        <p class="mb-0" style="text-align: justify;">
+                                                        <ul>
+                                                            <li>History courses investigate ancient and modern events
+                                                                and social trends. Explore themes such as war,
+                                                                imperialism, and globalization, and study the
+                                                                history of specific groups or time periods through
+                                                                courses on black history, women's history, and more.
+                                                            </li>
+
+                                                        </ul>
+                                                        </p>
+                                                    </div>
+
+                                                    <span class="badge bg-advertising rounded-pill ms-auto">1</span>
+                                                </div>
+
+                                                <img src="{{ url_for('static', filename = 'images/topics/undraw_online_ad_re_ol62.png')}}"
+                                                    class="custom-block-image img-fluid" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-3">
+                                        <div class="custom-block bg-white shadow-lg">
+                                            <a href=https://www.coursera.org/browse/arts-and-humanities/music-and-art
+                                                target="_blank">
+                                                <div class="d-flex">
+                                                    <div>
+                                                        <h5 class="mb-2">Music and Art</h5><br>
+
+                                                        <p class="mb-0" style="text-align: justify;">
+                                                        <ul>
+                                                            <li>Music and arts courses develop skills in the practice
+                                                                and critique of visual art, music, and creative writing.
+                                                            </li>
+                                                            <li>Learn to play the guitar, debate the merits of
+                                                                contemporary graphic novels, or explore the history of
+                                                                human creativity.</li>
+
+                                                        </ul>
+                                                        </p>
+                                                    </div>
+
+                                                    <span class="badge bg-advertising rounded-pill ms-auto">2</span>
+                                                </div>
+
+                                                <img src="{{ url_for('static', filename = 'images/topics/undraw_online_ad_re_ol62.png')}}"
+                                                    class="custom-block-image img-fluid" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-3">
+                                        <div class="custom-block bg-white shadow-lg">
+                                            <a href=https://www.coursera.org/browse/arts-and-humanities/philosophy
+                                                target="_blank">
+                                                <div class="d-flex">
+                                                    <div>
+                                                        <h5 class="mb-2">Philosophy</h5><br>
+
+                                                        <p class="mb-0" style="text-align: justify;">
+                                                        <ul>
+                                                            <li>Philosophy courses address the big questions that make
+                                                                us human-morality, ethics, purpose, and rationality-in
+                                                                the modern and historical context.</li>
+                                                            <li>Explore the field's eastern and western traditions,
+                                                                including specific schools of philosophy such as
+                                                                existentialism and humanism.</li>
+
+                                                        </ul>
+                                                        </p>
+                                                    </div>
+
+                                                    <span class="badge bg-advertising rounded-pill ms-auto">3</span>
+                                                </div>
+
+                                                <img src="{{ url_for('static', filename = 'images/topics/undraw_online_ad_re_ol62.png')}}"
+                                                    class="custom-block-image img-fluid" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer section-padding"
+        style="border-bottom-width: 0px; padding-top: 50px; padding-bottom: 50px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-12 mb-4 pb-2">
+                    <a class="navbar-brand" href="/">
+                        <image src="{{ url_for('static', filename = 'images/image-removebg-preview (2).png')}}"
+                            alt="Logo" class="logo"></image>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-6">
+                    <h6 class="site-footer-title mb-3">Resources</h6>
+
+                    <ul class="site-footer-links">
+                        <li class="site-footer-link-item">
+                            <a href='index' class="site-footer-link">Home</a>
+                        </li>
+
+                        <li class="site-footer-link-item">
+                            <a href="#" class="site-footer-link">How it works</a>
+                        </li>
+
+                        <li class="site-footer-link-item">
+                            <a href="#" class="site-footer-link">FAQs</a>
+                        </li>
+
+                        <li class="site-footer-link-item">
+                            <a href="#" class="site-footer-link">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-6 mb-4 mb-lg-0">
+                    <h6 class="site-footer-title mb-3">Information</h6>
+
+                    <p class="text-white d-flex mb-1">
+                        <a href="tel: 305-240-9671" class="site-footer-link">
+                            305-240-9671
+                        </a>
+                    </p>
+
+                    <p class="text-white d-flex">
+                        <a href="mailto:info@company.com" class="site-footer-link">
+                            info@company.com
+                        </a>
+                    </p>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-12 mt-4 mt-lg-0 ms-auto">
+                    <h6 class="site-footer-title mb-3">Copyrights</h6>
+                    <p class="copy">Copyright © 2048 Career.<br>All rights reserved </p>
+
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- JAVASCRIPT FILES -->
+    <script src="{{ url_for('static', filename = 'js/jquery.min.js')}}"></script>
+    <script src="{{ url_for('static', filename = 'js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ url_for('static', filename = 'js/jquery.sticky.js')}}"></script>
+    <script src="{{ url_for('static', filename = 'js/click-scroll.js')}}"></script>
+    <script src="{{ url_for('static', filename = 'js/custom.js')}}"></script>
+
+</body>
+
+</html>
