@@ -30,11 +30,9 @@
         /* CSS to resize the logo */
         .logo {
             height: 60px;
-            /* Adjust this value to shorten the logo */
             width: auto;
         }
 
-        /* From Uiverse.io by satyamchaudharydev */
         .browse-button {
             padding: 0;
             margin: 0;
@@ -61,21 +59,11 @@
             color: var(--primary-color);
         }
 
-        .browse-button::after {
-            position: absolute;
-            content: "";
-            width: 0;
-            left: 0;
-            bottom: -7px;
-            background: var(--hovered-color);
-            height: 2px;
-            transition: 0.3s ease-out;
-        }
+
 
         .browse-button p::before {
             position: absolute;
             /*   box-sizing: border-box; */
-            content: "Know More";
             width: 0%;
             inset: 0;
             color: var(--hovered-color);
@@ -83,18 +71,12 @@
             transition: 0.3s ease-out;
         }
 
-        .browse-button:hover::after {
-            width: 100%;
-        }
 
         .browse-button:hover p::before {
             width: 100%;
         }
 
-        .browse-button:hover svg {
-            transform: translateX(4px);
-            color: var(--hovered-color);
-        }
+       
 
         .browse-button svg {
             color: var(--primary-color);
@@ -233,7 +215,7 @@
             <div class="container">
 
                 <div class="col-12 text-center">
-                    <h2 class="mb-4">Browse Topics</h1>
+                    <h2 class="mb-4">Courses To Enhance</h1>
                 </div>
 
             </div>
@@ -245,13 +227,13 @@
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active" id="design-tab" data-bs-toggle="tab"
                                 data-bs-target="#design-tab-pane" type="button" role="tab"
-                                aria-controls="design-tab-pane" aria-selected="true">Design</button>
+                                aria-controls="design-tab-pane" aria-selected="true">Data Science</button>
                         </li>
 
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="marketing-tab" data-bs-toggle="tab"
                                 data-bs-target="#marketing-tab-pane" type="button" role="tab"
-                                aria-controls="marketing-tab-pane" aria-selected="false">Marketing</button>
+                                aria-controls="marketing-tab-pane" aria-selected="false">Computer Science</button>
                         </li>
                     </ul>
                 </div>
@@ -267,25 +249,16 @@
                                 <div class="row">
                                     <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
                                         <div class="custom-block bg-white shadow-lg">
-                                            <a href="https://www.linkedin.com/jobs/search/?currentJobId=4005034388&geoId=92000000&keywords=Web%20Designer&origin=JOB_SEARCH_PAGE_LOCATION_HISTORY&refresh=true"
+                                            <a href=https://www.coursera.org/browse/data-science/probability-and-statistics
                                                 target="_blank">
                                                 <div class="d-flex">
                                                     <div>
-                                                        <h5 class="mb-2">Web Design</h5><br>
+                                                        <h5 class="mb-2">Probability And Statistics</h5><br>
 
                                                         <p class="mb-0">
                                                         <ul>
-                                                            <li>Design Software Proficiency</li>
-                                                            <li>HTML/CSS Knowledge</li>
-                                                            <li>Responsive Design</li>
-                                                            <li>User Experience Principles</li>
-                                                            <li>Graphic Design Skills</li>
-                                                            <li>Basic Web Development Understanding </li>
-                                                            <li>SEO Basics</li>
-                                                            <li>Attention to Detail</li>
-                                                            <li>Communication Skills</li>
-                                                            <li>Problem-Solving Skills</li>
-                                                            <li>Time Management</li>
+                                                            <li>Probability and statistics courses teach skills in understanding whether data is meaningful, including optimization, inference, testing, and other methods
+                                                                for analyzing patterns in data and using them to predict, understand, and improve results.</li>
                                                         </ul>
 
                                                         </p>
@@ -308,7 +281,7 @@
 
                                                     </style>
 
-                                                    <span class="badge bg-design rounded-pill ms-auto">14</span>
+                                                    <span class="badge bg-design rounded-pill ms-auto">1</span>
                                                 </div>
 
                                                 <img src="{{ url_for('static', filename = 'images/topics/undraw_Remote_design_team_re_urdx.png')}}"
@@ -319,31 +292,24 @@
 
                                     <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
                                         <div class="custom-block bg-white shadow-lg">
-                                            <a href=https://www.linkedin.com/jobs/search/?currentJobId=3682015985&geoId=92000000&keywords=graphic%20designer&origin=JOB_SEARCH_PAGE_LOCATION_HISTORY&refresh=true
+                                            <a href=https://www.coursera.org/browse/data-science/machine-learning
                                                 target="_blank">
                                                 <div class="d-flex">
                                                     <div>
-                                                        <h5 class="mb-2">Graphic</h5><br>
+                                                        <h5 class="mb-2">Machine Learning</h5><br>
 
                                                         <p class="mb-0" style="text-align: justify;">
                                                         <ul>
-                                                            <li>Proficiency in Adobe applications (InDesign, Illustrator
-                                                                & Photoshop)</li>
-                                                            <li>Proficiency in layout design, typography, image editing,
-                                                                and creativity</li>
-                                                            <li>Proficiency in communication, and comprehension skills
-                                                            </li>
-                                                            <li>User Experience Principles</li>
-                                                            <li>Ability in critical thinking, problem-solving,
-                                                                decision-making, and attention to detail </li>
-
+                                                            <li>Machine learning courses focus on creating systems to utilize and learn from large sets of data.</li>
+                                                            <li> Topics of study include predictive algorithms, natural
+                                                                language processing, and statistical pattern recognition.</li>
                                                         </ul>
 
 
                                                         </p>
                                                     </div>
 
-                                                    <span class="badge bg-design rounded-pill ms-auto">75</span>
+                                                    <span class="badge bg-design rounded-pill ms-auto">2</span>
                                                 </div>
 
                                                 <img src="{{ url_for('static', filename = 'images/topics/undraw_Redesign_feedback_re_jvm0.png')}}"
@@ -354,28 +320,21 @@
 
                                     <div class="col-lg-4 col-md-6 col-12">
                                         <div class="custom-block bg-white shadow-lg">
-                                            <a href=https://www.linkedin.com/jobs/search/?currentJobId=4051505123&geoId=92000000&keywords=ux%20designer&origin=JOB_SEARCH_PAGE_SEARCH_BUTTON&refresh=true
+                                            <a href=https://www.coursera.org/browse/data-science/data-analysis
                                                 target="_blank">
                                                 <div class="d-flex">
                                                     <div>
-                                                        <h5 class="mb-2">UX Design</h5><br>
+                                                        <h5 class="mb-2">Data Analysis</h5><br>
 
                                                         <p class="mb-0" style="text-align: justify;">
                                                         <ul>
-                                                            <li>Wireframing and Prototyping</li>
-                                                            <li>Information Architecture</li>
-                                                            <li>Interaction Design</li>
-                                                            <li>Visual Design Skills</li>
-                                                            <li>Usability Testing</li>
-                                                            <li>Understanding of HTML/CSS</li>
-                                                            <li>Problem-Solving Skills</li>
-                                                            <li>Collaboration and Communication</li>
-                                                            <li>Adaptability and Flexibility</li>
-                                                            <li>Familiarity with Design Systems</li>
+                                                            <li>Data analysis courses address methods for managing and analyzing large datasets.</li>
+                                                            <li> Start your career as a data scientist by studying data mining, big data
+                                                                applications, and data product development.</li>
                                                         </ul>
                                                     </div>
 
-                                                    <span class="badge bg-design rounded-pill ms-auto">100</span>
+                                                    <span class="badge bg-design rounded-pill ms-auto">3</span>
                                                 </div>
 
                                                 <img src="{{ url_for('static', filename = 'images/topics/colleagues-working-cozy-office-medium-shot.png')}}"
@@ -386,7 +345,7 @@
                                 </div><br>
                                 <button class="browse-button" style="left: 600px;">
                                     <a href="/job">
-                                        <p>Know More</p>
+                                        <p>Browse More</p>
                                     </a>
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="4">
@@ -402,27 +361,22 @@
                                 <div class="row">
                                     <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-3">
                                         <div class="custom-block bg-white shadow-lg">
-                                            <a href="https://www.linkedin.com/jobs/search/?currentJobId=4047357474&geoId=92000000&keywords=marketing%20specialist&origin=JOB_SEARCH_PAGE_KEYWORD_AUTOCOMPLETE&refresh=true"
+                                            <a href=https://www.coursera.org/browse/computer-science/software-development
                                                 target="_blank">
                                                 <div class="d-flex">
                                                     <div>
-                                                        <h5 class="mb-2">Advertising</h5><br>
+                                                        <h5 class="mb-2">Software Development</h5><br>
 
                                                         <p class="mb-0" style="text-align: justify;">
                                                         <ul>
-                                                            <li>Marketing and Communication skills</li>
-                                                            <li>Social Media Marketing expertise</li>
-                                                            <li>Web Content Writing proficiency</li>
-                                                            <li>Web Analytics knowledge</li>
-                                                            <li>Experience in creating engaging and shareable content
-                                                            </li>
-                                                            <li>Strong analytical and problem-solving skills</li>
-                                                            <li>Knowledge of SEO best practices</li>
+                                                            <li>Specializations and courses in software development address the process of creating software, including development tools and methodologies (such as
+                                                                Agile development), programming languages (including Python, C, Java, and Scala), and software architecture and testing.</li>
+                                                            
                                                         </ul>
                                                         </p>
                                                     </div>
 
-                                                    <span class="badge bg-advertising rounded-pill ms-auto">30</span>
+                                                    <span class="badge bg-advertising rounded-pill ms-auto">1</span>
                                                 </div>
 
                                                 <img src="{{ url_for('static', filename = 'images/topics/undraw_online_ad_re_ol62.png')}}"
@@ -435,23 +389,22 @@
 
                                     <div class="col-lg-4 col-md-6 col-12">
                                         <div class="custom-block bg-white shadow-lg">
-                                            <a href="https://www.linkedin.com/jobs/search/?currentJobId=4039841387&geoId=92000000&keywords=digital%20marketing&origin=JOB_SEARCH_PAGE_KEYWORD_AUTOCOMPLETE&refresh=true"
+                                            <a href=https://www.coursera.org/browse/computer-science/computer-security-and-networks
                                                 target="_blank">
                                                 <div class="d-flex">
                                                     <div>
-                                                        <h5 class="mb-2">Digital Marketting</h5><br>
+                                                        <h5 class="mb-2">Computer Security And Networks</h5><br>
 
                                                         <p class="mb-0" style="text-align: justify;">
                                                         <ul>
-                                                            <li>Google ads</li>
-                                                            <li> On page and off page SEO</li>
-                                                            <li> Wordpress</li>
-                                                            <li> Email marketing</li>
+                                                            <li>Computer security and networks courses address the foundations of creating modern, secure software and hardware. </li>
+                                                            <li>Subtopics include network
+                                                                security, cybersecurity, risk management, and cryptography.</li>
                                                         </ul>
                                                         </p>
                                                     </div>
 
-                                                    <span class="badge bg-advertising rounded-pill ms-auto">50</span>
+                                                    <span class="badge bg-advertising rounded-pill ms-auto">2</span>
                                                 </div>
 
                                                 <img src="{{ url_for('static', filename = 'images/topics/undraw_viral_tweet_gndb.png')}}"
@@ -459,12 +412,51 @@
                                             </a>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        </section>
+
+                                    <div class="col-lg-4 col-md-6 col-12">
+                                        <div class="custom-block bg-white shadow-lg">
+                                            <a href=https://www.coursera.org/browse/computer-science/design-and-product
+                                                target="_blank">
+                                                <div class="d-flex">
+                                                    <div>
+                                                        <h5 class="mb-2">Design and Product</h5><br>
+
+                                                        <p class="mb-0" style="text-align: justify;">
+                                                        <ul>
+                                                            <li>Design and product courses teach you to bring a software product to life.</li>
+                                                            <li>Major areas of study include product definition and design, subtopics include UX design, web design, human-computer interaction, and design thinking.</li>
+                                                        </ul>
+                                                        </p>
+                                                    </div>
+
+                                                    <span class="badge bg-advertising rounded-pill ms-auto">3</span>
+                                                </div>
+
+                                                <img src="{{ url_for('static', filename = 'images/topics/undraw_viral_tweet_gndb.png')}}"
+                                                    class="custom-block-image img-fluid" alt="">
+                                            </a>
+                                        </div><br>
+                                        <button class="browse-button" style="left: -310px;">
+                                            <a href="/job">
+                                                <p>Browse More</p>
+                                            </a>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" 
+                                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="4">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M14 5l7 7m0 0l-7 7m7-7H3">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        </section>
+                            
+                                        
 
 
         <section class="timeline-section section-padding" id="section_3">

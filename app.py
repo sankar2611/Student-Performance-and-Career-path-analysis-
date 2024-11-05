@@ -53,9 +53,11 @@ def contact():
 
     return render_template("contact.html", name=user_name, email=user_email)
 
-@app.route('/job')
+@app.route('/course')
 def job():
-    return render_template("job.html")
+    return render_template("course.html")
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
