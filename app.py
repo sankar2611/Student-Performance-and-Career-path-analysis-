@@ -2,6 +2,11 @@ from flask import Flask, request, redirect, url_for, render_template, session, f
 from datetime import timedelta
 from functools import wraps
 import db 
+import pyodbc
+import pandas as pd
+from datetime import datetime
+
+
 
 app = Flask(__name__)
 app.secret_key = '2144bf28b53d00814d9f82b0ef0e0857'  # Set a secret key for session management
@@ -331,11 +336,7 @@ def delete_job(job_id):
 
 
 
-# app.py
-from flask import Flask, jsonify
-import pyodbc
-import pandas as pd
-from datetime import datetime
+
 
 
 # Database connection details (without username and password)
@@ -483,12 +484,7 @@ def user_distribution():
     return jsonify(user_data)
 
 
-   
 
-
-# app.py
-from flask import Flask, render_template
-import pandas as pd
 
 def load_data():
     
@@ -549,24 +545,35 @@ def analyze_student(connection, student_id):
             strengths.append(f"{row['subject_name'].title()} (CGPA: {row['cgpa']})")
     
     # Job recommendations based on top subjects
-    if 'computer' in student_data['subject_name'].values and student_data[student_data['subject_name'] == 'computer']['cgpa'].values[0] >= 7.0:
+    if 'computer' in student_data['subject_name'].str.lower().values and student_data[student_data['subject_name'].str.lower() == 'computer']['cgpa'].values[0] >= 5.0:
         recommendations.extend(['Software Developer', 'Data Analyst', 'IT Consultant'])
     
-    if any(subj in student_data['subject_name'].values for subj in ['math', 'maths']) and \
-       student_data[student_data['subject_name'].isin(['math', 'maths'])]['cgpa'].values[0] >= 7.0:
-        recommendations.extend(['Data Scientist', 'Financial Analyst', 'Research Analyst'])
-    
-    if 'science' in student_data['subject_name'].values and student_data[student_data['subject_name'] == 'science']['cgpa'].values[0] >= 7.0:
+    if 'science' in student_data['subject_name'].str.lower().values and student_data[student_data['subject_name'].str.lower() == 'science']['cgpa'].values[0] >= 5.0:
         recommendations.append('Research Scientist')
     
-    if 'biology' in student_data['subject_name'].values and student_data[student_data['subject_name'] == 'biology']['cgpa'].values[0] >= 7.0:
+    if 'biology' in student_data['subject_name'].str.lower().values and student_data[student_data['subject_name'].str.lower() == 'biology']['cgpa'].values[0] >= 5.0:
         recommendations.extend(['Biotechnologist', 'Medical Researcher'])
-        
-    if 'physics' in student_data['subject_name'].values and student_data[student_data['subject_name'] == 'physics']['cgpa'].values[0] >= 7.0:
+    
+    if 'physics' in student_data['subject_name'].str.lower().values and student_data[student_data['subject_name'].str.lower() == 'physics']['cgpa'].values[0] >= 5.0:
         recommendations.extend(['Physics Researcher', 'Engineering Roles'])
         
     if 'maths' in student_data['subject_name'].str.lower().values and student_data[student_data['subject_name'].str.lower() == 'maths']['cgpa'].values[0] >= 5.0:
-        recommendations.extend(['Chemical Engineer', 'Lab Researcher'])
+        recommendations.extend(['Data Scientist', 'Maths Proffesor', 'Banks'])
+
+    if 'accounts' in student_data['subject_name'].str.lower().values and student_data[student_data['subject_name'].str.lower() == 'accounts']['cgpa'].values[0] >= 5.0:
+        recommendations.extend(['Accountant', 'Bank Manager'])
+    
+    if 'time series' in student_data['subject_name'].str.lower().values and student_data[student_data['subject_name'].str.lower() == 'time series']['cgpa'].values[0] >= 5.0:
+        recommendations.extend(['Data Scientist', 'Data Analyst'])
+    
+    if 'statistics' in student_data['subject_name'].str.lower().values and student_data[student_data['subject_name'].str.lower() == 'statistics']['cgpa'].values[0] >= 5.0:
+        recommendations.extend(['Data Scientist', 'Data Analyst'])
+    
+    if 'python' in student_data['subject_name'].str.lower().values and student_data[student_data['subject_name'].str.lower() == 'python']['cgpa'].values[0] >= 5.0:
+        recommendations.extend(['Web Developer', 'IT'])
+
+    if 'django' in student_data['subject_name'].str.lower().values and student_data[student_data['subject_name'].str.lower() == 'python']['cgpa'].values[0] >= 5.0:
+        recommendations.extend(['Web Developer', 'Full-Stack Developer'])
 
 
     
@@ -600,7 +607,6 @@ def student_analysis(student_id):
 
     # Pass the results to the HTML template
     return render_template('trial.html', **result)
-
 
  
 if __name__ == '__main__':

@@ -1,53 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Analysis</title>
+    <link href="{{ url_for('static', filename = 'css/bootstrap.min.css')}}" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename = 'css/bootstrap-icons.css')}}" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename = 'css/templatemo-topic-listing.css')}}" rel="stylesheet">
+</head>
+
+<body id="top">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
+        /* CSS to resize the logo */
+        .logo {
+            height: 60px;
+            width: auto;
+        }
+
+        .browse-button {
             padding: 0;
-        }
-
-        h1 {
-            text-align: center;
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px 0;
             margin: 0;
+            border: none;
+            background: none;
+            cursor: pointer;
         }
 
-        h2, h3 {
-            color: #333;
-            margin-left: 20px;
+        .browse-button {
+            --primary-color: #000;
+            --hovered-color: #000;
+            position: relative;
+            display: flex;
+            font-weight: 600;
+            font-size: 20px;
+            gap: 0.5rem;
+            align-items: center;
         }
 
-        p {
-            font-size: 18px;
-            margin-left: 20px;
-            margin-top: 10px;
+        .browse-button p {
+            margin: 0;
+            position: relative;
+            font-size: 20px;
+            color: var(--primary-color);
         }
 
-        strong {
-            font-weight: bold;
+
+
+        .browse-button p::before {
+            position: absolute;
+            /*   box-sizing: border-box; */
+            width: 0%;
+            inset: 0;
+            color: var(--hovered-color);
+            overflow: hidden;
+            transition: 0.3s ease-out;
         }
 
-        ul {
-            list-style-type: none;
-            padding-left: 20px;
+
+        .browse-button:hover p::before {
+            width: 100%;
         }
 
-        li {
-            font-size: 18px;
-            padding: 5px;
-        }
+       
 
+        .browse-button svg {
+            color: var(--primary-color);
+            transition: 0.2s;
+            position: relative;
+            width: 15px;
+            transition-delay: 0.2s;
+        }
+    </style>
+
+    <main>
+
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <image src="{{ url_for('static', filename = 'images/image-removebg-preview (2).png')}}" alt="Logo"
+                        class="logo"></image>
+                </a>
+
+
+                <div class="d-lg-none ms-auto me-4">
+                    <a href="#top" class="navbar-icon bi-person smoothscroll"></a>
+                </div>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav" style="padding-left: 160px;">
+                    <ul class="navbar-nav ms-lg-5 me-lg-auto">
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="/index">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="/course">Courses</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="/job">Jobs</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/details">Academic Details</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contact">Contact</a>
+                        </li>
+
+                    </ul>
+
+                    <div class="d-none d-lg-block">
+                        <div class="dropdown">
+                            <a href="#" class="navbar-icon bi-person smoothscroll" style="color: black;" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false"></a>
+                            <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                                <li><a class="dropdown-item" href="/profile">My Profile</a></li>
+                                <li><a class="dropdown-item" href="/">Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+  
+    <style>
         table {
-            width: 80%;
-            margin: 20px auto;
+            width: 40%;
+            margin: 10px auto;
             border-collapse: collapse;
             background-color: white;
         }
@@ -73,26 +155,28 @@
     </style>
 </head>
 <body>
-    <h1>Student Analysis</h1>
-    
-    <h2>Student Name: {{ student_name }} (ID: {{ student_id }})</h2>
+    <br><br><br>
+    <h4 style = "margin-left: 550px;"><strong>Student Academic Analysis</strong></h4><br><br>
+    <div style = "margin-left:460px; ">
+    <p><strong>Student Name: </strong> {{ student_name }}</p>
     <p><strong>Average CGPA:</strong> {{ avg_cgpa }}</p>
 
-    <h3>Strengths (Subjects with CGPA >= 7.0):</h3>
+    <p><strong>Strengths (Subjects with CGPA >= 7.0):</strong></p>
     <ul>
         {% for strength in strengths %}
             <li>{{ strength }}</li>
         {% endfor %}
     </ul>
 
-    <h3>Recommended Roles:</h3>
+    <p><strong>Recommended Job Role :</strong></p>
     <ul>
         {% for recommendation in recommendations %}
             <li>{{ recommendation }}</li>
         {% endfor %}
     </ul>
 
-    <h3>All Subjects and CGPA:</h3>
+    <p><strong>Subjects and CGPA</strong></p>
+</div>
     <table>
         <thead>
             <tr>
