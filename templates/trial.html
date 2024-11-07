@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Analysis and Career Recommendations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .student-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .strengths {
+            color: #2c5282;
+        }
+        .recommendations {
+            color: #2b6cb0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f8f9fa;
+        }
+        .header {
+            background-color: #2b6cb0;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .cgpa-highlight {
+            font-weight: bold;
+            color: #2c5282;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Student Analysis and Career Recommendations</h1>
+    </div>
+
+    {% for analysis in analyses %}
+    <div class="student-card">
+        <h2>Student ID: {{ analysis.student_id }}</h2>
+        <p>Average CGPA: <span class="cgpa-highlight">{{ analysis.avg_cgpa }}</span></p>
+        
+        <h3>Academic Strengths:</h3>
+        <ul class="strengths">
+            {% for strength in analysis.strengths %}
+                <li>{{ strength }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3>Recommended Career Paths:</h3>
+        <ul class="recommendations">
+            {% for recommendation in analysis.recommendations %}
+                <li>{{ recommendation }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3>All Subjects Performance:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>CGPA</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for subject in analysis.all_subjects %}
+                <tr>
+                    <td>{{ subject.subject.title() }}</td>
+                    <td>{{ subject.cgpa }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endfor %}
+</body>
+</html>

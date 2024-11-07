@@ -39,6 +39,14 @@ def home():
             return redirect(url_for('login'))
     return render_template("login.html")
 
+@app.route('/job')
+def job():
+    return render_template('jobpage.html')
+
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
+
 @app.route('/index')
 def index():
     return render_template("index.html")
@@ -54,9 +62,8 @@ def contact():
     return render_template("contact.html", name=user_name, email=user_email)
 
 @app.route('/course')
-def job():
+def course():
     return render_template("course.html")
-
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -109,20 +116,6 @@ def signup():
         return redirect('/signup')  # This can stay for errors
 
     return render_template("sign.html")  # Render the signup page for GET requests
-
-# @app.route('/student_dashboard')
-# def student_dashboard():
-#     if 'email' in session and session['role'] == 'student':
-#         return "Student Dashboard"
-#     else:
-#         return redirect(url_for('login'))
-
-# @app.route('/company_dashboard')
-# def company_dashboard():
-#     if 'email' in session and session['role'] == 'company':
-#         return "Company Dashboard"
-#     else:
-#         return redirect(url_for('login'))
 
 @app.route('/submit_contact', methods=['POST'])
 def submit_contact():
@@ -248,12 +241,12 @@ def dash():
     return render_template("dash.html")
 
 @app.route('/post', methods=['GET', 'POST'])
-@login_required
+# @login_required
 def post():
-    if 'email' not in session:
-        flash("You need to be logged in to access this page.", "error")
-        return redirect(url_for('login'))
-    user_email = session.get('email')  # Email is already in the session
+    # if 'email' not in session:
+    #     flash("You need to be logged in to access this page.", "error")
+    #     return redirect(url_for('login'))
+    # user_email = session.get('email')  # Email is already in the session
     if request.method == 'POST':
         job_title = request.form['job_title']
         job_description = request.form['job_description']
@@ -269,7 +262,7 @@ def post():
         db.add_job_posting(job_title, job_description, requirements, min_salary, max_salary, location, job_type, application_deadline, contact, company_id)
 
         return redirect(url_for('company'))
-    return render_template("post.html",contact_email=user_email)
+    return render_template("post.html")
 
 
 
@@ -333,6 +326,84 @@ def gender_distribution():
     }
     
     return jsonify(gender_data)
+
+
+
+# app.py
+from flask import Flask, render_template
+import pandas as pd
+
+def load_data():
+    data = {
+        'id': [6, 7, 8, 9, 10, 11, 12, 13],
+        'student_id': [5, 3, 3, 3, 3, 3, 5, 5],
+        'subject': ['science', 'computer', 'math', 'biology', 'physics', 'chemistry', 'maths', 'computer'],
+        'cgpa': [2.4, 5.0, 6.5, 7.0, 6.5, 7.0, 9.0, 8.5]
+    }
+    return pd.DataFrame(data)
+
+def analyze_student(df, student_id):
+    # Filter data for specific student
+    student_data = df[df['student_id'] == student_id]
+    
+    # Get top subjects based on CGPA
+    top_subjects = student_data.sort_values('cgpa', ascending=False)
+    
+    # Calculate average CGPA
+    avg_cgpa = student_data['cgpa'].mean()
+    
+    # Determine strengths and recommend roles
+    strengths = []
+    recommendations = []
+    
+    for _, row in top_subjects.iterrows():
+        if row['cgpa'] >= 7.0:
+            strengths.append(f"{row['subject'].title()} (CGPA: {row['cgpa']})")
+    
+    # Job recommendations based on top subjects
+    if 'computer' in student_data['subject'].values and student_data[student_data['subject'] == 'computer']['cgpa'].values[0] >= 7.0:
+        recommendations.extend(['Software Developer', 'Data Analyst', 'IT Consultant'])
+    
+    if any(subj in student_data['subject'].values for subj in ['math', 'maths']) and \
+       student_data[student_data['subject'].isin(['math', 'maths'])]['cgpa'].values[0] >= 7.0:
+        recommendations.extend(['Data Scientist', 'Financial Analyst', 'Research Analyst'])
+    
+    if 'science' in student_data['subject'].values and student_data[student_data['subject'] == 'science']['cgpa'].values[0] >= 7.0:
+        recommendations.append('Research Scientist')
+    
+    if 'biology' in student_data['subject'].values and student_data[student_data['subject'] == 'biology']['cgpa'].values[0] >= 7.0:
+        recommendations.extend(['Biotechnologist', 'Medical Researcher'])
+        
+    if 'physics' in student_data['subject'].values and student_data[student_data['subject'] == 'physics']['cgpa'].values[0] >= 7.0:
+        recommendations.extend(['Physics Researcher', 'Engineering Roles'])
+        
+    if 'chemistry' in student_data['subject'].values and student_data[student_data['subject'] == 'chemistry']['cgpa'].values[0] >= 7.0:
+        recommendations.extend(['Chemical Engineer', 'Lab Researcher'])
+    
+    return {
+        'student_id': student_id,
+        'strengths': strengths,
+        'recommendations': list(set(recommendations)),  # Remove duplicates
+        'avg_cgpa': round(avg_cgpa, 2),
+        'all_subjects': top_subjects.to_dict('records')
+    }
+
+@app.route('/trial')
+def trial():
+    df = load_data()
+    student_ids = df['student_id'].unique()
+    all_analyses = []
+    
+    for student_id in student_ids:
+        analysis = analyze_student(df, student_id)
+        all_analyses.append(analysis)
+    
+    return render_template('trial.html', analyses=all_analyses)
+
+
+    
+
+
 
  
 if __name__ == '__main__':

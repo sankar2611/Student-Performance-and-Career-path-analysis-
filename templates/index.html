@@ -96,6 +96,7 @@
                         class="logo"></image>
                 </a>
 
+
                 <div class="d-lg-none ms-auto me-4">
                     <a href="#top" class="navbar-icon bi-person smoothscroll"></a>
                 </div>
@@ -105,37 +106,40 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarNav" style="padding-left: 100px;">
+                <div class="collapse navbar-collapse" id="navbarNav" style="padding-left: 160px;">
                     <ul class="navbar-nav ms-lg-5 me-lg-auto">
                         <li class="nav-item">
                             <a class="nav-link click-scroll" href="/index"><strong>Home</strong></a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="/job">Browse Topics</a>
+                            <a class="nav-link click-scroll" href="/course">Courses</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_3">How it works</a>
+                            <a class="nav-link click-scroll" href="/job">Jobs</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_4">FAQs</a>
+                            <a class="nav-link" href="/details">Academic Details</a>
                         </li>
 
                         <li class="nav-item">
                             <a class="nav-link" href="/contact">Contact</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="/details">Register</a>
-                        </li>
-
                     </ul>
 
                     <div class="d-none d-lg-block">
-                        <a href="/login" class="navbar-icon bi-person smoothscroll" style="color: black;"></a>
+                        <div class="dropdown">
+                            <a href="#" class="navbar-icon bi-person smoothscroll" style="color: black;" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false"></a>
+                            <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                                <li><a class="dropdown-item" href="/profile">My Profile</a></li>
+                                <li><a class="dropdown-item" href="/">Logout</a></li>
+                            </ul>
+                        </div>
                     </div>
+                    
                 </div>
             </div>
         </nav>
@@ -149,19 +153,6 @@
                         <h1 class="text-white text-center">Analyse. Discover. Succeed</h1>
 
                         <h6 class="text-white text-center">platform for job opportunities</h6>
-
-                        <form method="get" class="custom-form mt-4 pt-2 mb-lg-0 mb-5" role="search">
-                            <div class="input-group input-group-lg">
-                                <span class="input-group-text bi-search" id="basic-addon1">
-
-                                </span>
-
-                                <input name="keyword" type="search" class="form-control" id="keyword"
-                                    placeholder="Design, Code, Marketing, Finance ..." aria-label="Search">
-
-                                <button type="submit" class="form-control">Search</button>
-                            </div>
-                        </form>
                     </div>
 
                 </div>
@@ -344,7 +335,7 @@
                                     </div>
                                 </div><br>
                                 <button class="browse-button" style="left: 600px;">
-                                    <a href="/job">
+                                    <a href="/course">
                                         <p>Browse More</p>
                                     </a>
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"

@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>My Profile</title>
+
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap"
+        rel="stylesheet">
+
+    <link href="{{ url_for('static', filename = 'css/bootstrap.min.css')}}" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename = 'css/bootstrap-icons.css')}}" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename = 'css/templatemo-topic-listing.css')}}" rel="stylesheet">
+
+</head>
+
+<body id="top">
+    <main>
+
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <image src="{{ url_for('static', filename = 'images/image-removebg-preview (2).png')}}" alt="Logo"
+                        class="logo"></image>
+                </a>
+
+
+                <div class="d-lg-none ms-auto me-4">
+                    <a href="#top" class="navbar-icon bi-person smoothscroll"></a>
+                </div>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav" style="padding-left: 160px;">
+                    <ul class="navbar-nav ms-lg-5 me-lg-auto">
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="/index">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="/course">Courses</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="/job">Jobs</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/details">Academic Details</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contact">Contact</a>
+                        </li>
+
+                    </ul>
+
+                    <div class="d-none d-lg-block">
+                        <div class="dropdown">
+                            <a href="#" class="navbar-icon bi-person smoothscroll" style="color: black;"
+                                id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false"></a>
+                            <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                                <li><a class="dropdown-item" href="/profile">My Profile</a></li>
+                                <li><a class="dropdown-item" href="/">Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <style>
+            .applied-jobs-section {
+                margin: 20px;
+                padding: 20px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                background-color: #f3f3f3;
+            }
+
+            .applied-jobs-section h3 {
+                margin-top: 0;
+            }
+
+            .job-entry {
+                display: flex;
+                justify-content: space-between;
+                margin: 5px 0;
+                padding: 5px;
+                border-bottom: 1px solid #ddd;
+            }
+        </style>
+
+
+        <body>
+            <br><br><br><br>
+            <div class="applied-jobs-section"><br>
+                <h3>Jobs Applied</h3><br>
+                <div id="applied-jobs-list"></div>
+            </div><br><br><br><br>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                    const appliedJobsList = document.getElementById("applied-jobs-list");
+                    loadAppliedJobs();
+
+                    function loadAppliedJobs() {
+                        const appliedJobs = JSON.parse(localStorage.getItem("appliedJobs")) || [];
+                        if (appliedJobs.length === 0) {
+                            appliedJobsList.innerHTML = "<p>No jobs applied yet.</p>";
+                        } else {
+                            appliedJobs.forEach(job => {
+                                const jobEntry = document.createElement("div");
+                                jobEntry.className = "job-entry";
+                                jobEntry.innerHTML = `
+                            <span>${job.jobTitle}</span>
+                            <span>${job.appliedDate}</span>
+                        `;
+                                appliedJobsList.appendChild(jobEntry);
+                            });
+                        }
+                    }
+                });
+            </script>
+        <br<<br><br><br>
+
+        <footer class="site-footer section-padding"
+                style="border-bottom-width: 0px; padding-top: 50px; padding-bottom: 50px;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-12 mb-4 pb-2">
+                            <a class="navbar-brand" href="/">
+                                <image src="{{ url_for('static', filename = 'images/image-removebg-preview (2).png')}}"
+                                    alt="Logo" class="logo"></image>
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <h6 class="site-footer-title mb-3">Resources</h6>
+
+                            <ul class="site-footer-links">
+                                <li class="site-footer-link-item">
+                                    <a href='index' class="site-footer-link">Home</a>
+                                </li>
+
+                                <li class="site-footer-link-item">
+                                    <a href="#" class="site-footer-link">How it works</a>
+                                </li>
+
+                                <li class="site-footer-link-item">
+                                    <a href="#" class="site-footer-link">FAQs</a>
+                                </li>
+
+                                <li class="site-footer-link-item">
+                                    <a href="#" class="site-footer-link">Contact</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-6 mb-4 mb-lg-0">
+                            <h6 class="site-footer-title mb-3">Information</h6>
+
+                            <p class="text-white d-flex mb-1">
+                                <a href="tel: 305-240-9671" class="site-footer-link">
+                                    305-240-9671
+                                </a>
+                            </p>
+
+                            <p class="text-white d-flex">
+                                <a href="mailto:info@company.com" class="site-footer-link">
+                                    info@company.com
+                                </a>
+                            </p>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-12 mt-4 mt-lg-0 ms-auto">
+                            <h6 class="site-footer-title mb-3">Copyrights</h6>
+                            <p class="copy">Copyright © 2048 Career.<br>All rights reserved </p>
+
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+
+            <!-- JAVASCRIPT FILES -->
+            <script src="{{ url_for('static', filename = 'js/jquery.min.js')}}"></script>
+            <script src="{{ url_for('static', filename = 'js/bootstrap.bundle.min.js')}}"></script>
+            <script src="{{ url_for('static', filename = 'js/jquery.sticky.js')}}"></script>
+            <script src="{{ url_for('static', filename = 'js/click-scroll.js')}}"></script>
+            <script src="{{ url_for('static', filename = 'js/custom.js')}}"></script>
+
+        </body>
+</html>
