@@ -460,14 +460,14 @@
             }
         </style>
         <script>
-                document.addEventListener("DOMContentLoaded", () => {
+            document.addEventListener("DOMContentLoaded", () => {
                 const jobForm = document.getElementById("job-management-form");
                 const jobList = document.getElementById("job-list").getElementsByTagName("tbody")[0];
             
                 loadJobs();
             
                 let editMode = false;
-                let currentJobIndex = null;
+                let currentJobId = null; // To track the job being edited
             
                 jobForm.addEventListener("submit", function (event) {
                     event.preventDefault();
@@ -489,8 +489,7 @@
                     const applicationDeadline = document.getElementById("application-deadline").value;
                     const contact = document.getElementById("contact").value;
             
-                    const newJob = {
-                        id: editMode ? currentJobIndex : Date.now().toString(),  // Unique ID
+                    const jobData = {
                         jobTitle,
                         jobDescription,
                         jobRequirements,
@@ -502,15 +501,18 @@
                     };
             
                     if (editMode) {
-                        updateJob(currentJobIndex, newJob);
+                        // If in edit mode, update the existing job
+                        updateJobInDatabase(currentJobId, jobData);
                     } else {
-                        addJobToTable(newJob);
-                        saveJobToLocalStorage(newJob);
+                        // Otherwise, create a new job
+                        addJobToTable(jobData);
+                        saveJobToLocalStorage(jobData);
                     }
             
+                    // Reset the form
                     jobForm.reset();
                     editMode = false;
-                    currentJobIndex = null;
+                    currentJobId = null;
                 });
             
                 function addJobToTable(job) {
@@ -544,28 +546,37 @@
                         document.getElementById("application-deadline").value = job.applicationDeadline;
                         document.getElementById("contact").value = job.contact;
             
+                        // Set edit mode and the current job ID to identify the job to update
                         editMode = true;
-                        currentJobIndex = job.id;
+                        currentJobId = job.id;
                     });
                 }
             
-                function updateJob(id, updatedJob) {
-                    const rows = jobList.getElementsByTagName("tr");
-                    Array.from(rows).forEach((row, index) => {
-                        if (row.getAttribute("data-id") === id) {
-                            row.cells[0].textContent = updatedJob.jobTitle;
-                            row.cells[1].textContent = updatedJob.jobDescription;
-                            row.cells[2].textContent = updatedJob.salaryRange;
-                            row.cells[3].textContent = updatedJob.location;
+                function updateJobInDatabase(jobId, jobData) {
+                    // Make a PUT request to update the job in the database
+                    fetch(`/update/${jobId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(jobData)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Update job details in the table
+                            const row = document.querySelector(`[data-id="${jobId}"]`);
+                            row.cells[0].textContent = jobData.jobTitle;
+                            row.cells[1].textContent = jobData.jobDescription;
+                            row.cells[2].textContent = jobData.salaryRange;
+                            row.cells[3].textContent = jobData.location;
+                        } else {
+                            alert('Error updating job.');
                         }
+                    })
+                    .catch(error => {
+                        console.error('Error updating job:', error);
                     });
-            
-                    const jobs = JSON.parse(localStorage.getItem("jobs")) || [];
-                    const jobIndex = jobs.findIndex(job => job.id === id);
-                    if (jobIndex > -1) {
-                        jobs[jobIndex] = updatedJob;
-                        localStorage.setItem("jobs", JSON.stringify(jobs));
-                    }
                 }
             
                 function saveJobToLocalStorage(job) {
@@ -585,6 +596,8 @@
                     jobs.forEach(job => addJobToTable(job));
                 }
             });
+            
+            
             
             
         </script>

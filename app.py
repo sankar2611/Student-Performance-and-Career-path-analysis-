@@ -232,6 +232,7 @@ def student_details():
     return render_template("studentdetails.html", user=user_details)
 
 
+
 @app.route('/company')
 def company():
     return render_template("company.html")
@@ -290,6 +291,43 @@ def contact2():
         flash('Your message has been sent successfully!', 'success')
         return redirect(url_for('company'))
     
+@app.route('/update/<job_id>', methods=['PUT'])
+@login_required
+def update_job(job_id):
+    if 'email' not in session:
+        return jsonify({"error": "Unauthorized"}), 401
+
+    data = request.get_json()
+
+    job_title = data['jobTitle']
+    job_description = data['jobDescription']
+    job_requirements = data['jobRequirements']
+    salary_range = data['salaryRange']
+    min_salary, max_salary = salary_range.split(' - ')
+    location = data['location']
+    job_type = data['jobType']
+    application_deadline = data['applicationDeadline']
+    contact = data['contact']
+
+    # Call the function to update the job in the database
+    db.update_job_posting(job_id, job_title, job_description, job_requirements, min_salary, max_salary,
+                          location, job_type, application_deadline, contact)
+
+    return jsonify({"success": True})
+
+@app.route('/delete/<job_id>', methods=['DELETE'])
+@login_required
+def delete_job(job_id):
+    if 'email' not in session:
+        return jsonify({"error": "Unauthorized"}), 401
+
+    # Call the function to move the job posting to the deleted jobs table
+    db.delete_job_posting(job_id)
+
+    return jsonify({"success": "Job deleted successfully."}), 200
+
+
+
 
 # app.py
 from flask import Flask, jsonify
