@@ -26,7 +26,7 @@ def home():
             session['user_id'] = user[0] 
             print("DEBUG: Session set")  
 
-            db.log_user_login(email, role)
+            db.log_user_login(email, role,user[0])
 
             flash('Login successful!', 'success')            
             if role.lower() == 'student':
@@ -45,7 +45,9 @@ def job():
 
 @app.route('/profile')
 def profile():
-    return render_template('profile.html')
+    user = session.get('user_id')  # Email is already in the session
+
+    return render_template('profile.html', user=user)
 
 @app.route('/index')
 def index():
@@ -79,7 +81,7 @@ def login():
             session['role'] = role.lower()
             session['user_id'] = user[0]
 
-            db.log_user_login(email, role)
+            db.log_user_login(email, role,user[0])
 
             flash('Login successful!', 'success')            
             if role.lower() == 'student':
@@ -333,6 +335,7 @@ def delete_job(job_id):
 from flask import Flask, jsonify
 import pyodbc
 import pandas as pd
+from datetime import datetime
 
 
 # Database connection details (without username and password)
@@ -366,23 +369,170 @@ def gender_distribution():
     return jsonify(gender_data)
 
 
+def calculate_age(dob):
+    today = datetime.today()
+    age = today.year - dob.year
+    # Adjust if the current date is before the birthday in the current year
+    if today.month < dob.month or (today.month == dob.month and today.day < dob.day):
+        age -= 1
+    return age
+
+# Categorizing age into ranges
+def categorize_age(age):
+    if age<18:
+        return 'Less than 18'
+    elif 18 <= age <= 20:
+        return '18-20'
+    elif 21 <= age <= 25:
+        return '21-25'
+    elif 26 <= age <= 35:
+        return '26-35'
+    elif 36 <= age <= 45:
+        return '36-45'
+    elif 46 <= age <= 60:
+        return '46-60'
+    elif age > 60:
+        return '60+'
+    return 'Unknown'
+
+@app.route('/api/age_distribution', methods=['GET'])
+def age_distribution():
+    # Fetch data from SQL Server
+    conn = get_database_connection()
+    query = "SELECT date_of_birth FROM StudentDetails"  # Modify with your table name and relevant columns
+    data = pd.read_sql(query, conn)
+    conn.close()
+    
+    # Calculate age distribution
+    data['age'] = data['date_of_birth'].apply(calculate_age)
+    data['age_group'] = data['age'].apply(categorize_age)
+    
+    # Calculate the counts for each age group
+    age_counts = data['age_group'].value_counts()
+    
+    # Prepare data for JSON response
+    age_data = {
+        "labels": age_counts.index.tolist(),
+        "counts": age_counts.values.tolist()
+    }
+    
+    return jsonify(age_data)
+
+@app.route('/api/job_mode_distribution', methods=['GET'])
+def job_mode_distribution():
+    # Fetch data from SQL Server
+    conn = get_database_connection()
+    query = "SELECT job_mode FROM StudentDetails"  # Modify with your table name and relevant columns
+    data = pd.read_sql(query, conn)
+    conn.close()
+    
+    # Calculate job mode distribution (assumes job_mode column exists)
+    job_mode_counts = data['job_mode'].value_counts()
+    
+    # Prepare data for JSON response
+    job_mode_data = {
+        "labels": job_mode_counts.index.tolist(),  # job modes like 'Full-time', 'Part-time'
+        "counts": job_mode_counts.values.tolist()
+    }
+    
+    return jsonify(job_mode_data)
+
+@app.route('/api/available_to_join_distribution', methods=['GET'])
+def available_to_join_distribution():
+    conn = get_database_connection()
+    query = "SELECT available_to_join FROM StudentDetails"  # Modify with your table name and relevant columns
+    data = pd.read_sql(query, conn)
+    conn.close()
+    
+    # Calculate available to join distribution
+    available_to_join_counts = data['available_to_join'].value_counts()
+
+    # Prepare data for JSON response
+    available_to_join_data = {
+        "labels": available_to_join_counts.index.tolist(),
+        "counts": available_to_join_counts.values.tolist()
+    }
+    
+    return jsonify(available_to_join_data)
+
+@app.route('/api/user_distribution', methods=['GET'])
+def user_distribution():
+    # Fetch data from SQL Server for student_users and company_users
+    conn = get_database_connection()
+
+    # Query to get the count of users in student_users and company_users
+    query_student_users = "SELECT COUNT(*) AS student_count FROM Sign_up"
+    query_company_users = "SELECT COUNT(*) AS company_count FROM Sign_up_company"
+
+    # Execute queries and fetch the results
+    student_data = pd.read_sql(query_student_users, conn)
+    company_data = pd.read_sql(query_company_users, conn)
+
+    conn.close()
+
+    # Convert Pandas int64 to Python int
+    student_count = student_data['student_count'][0].item()
+    company_count = company_data['company_count'][0].item()
+
+    # Prepare data for JSON response
+    user_data = {
+        "labels": ["Student Users", "Company Users"],
+        "counts": [student_count, company_count]
+    }
+
+    return jsonify(user_data)
+
+
+   
+
 
 # app.py
 from flask import Flask, render_template
 import pandas as pd
 
 def load_data():
-    data = {
-        'id': [6, 7, 8, 9, 10, 11, 12, 13],
-        'student_id': [5, 3, 3, 3, 3, 3, 5, 5],
-        'subject': ['science', 'computer', 'math', 'biology', 'physics', 'chemistry', 'maths', 'computer'],
-        'cgpa': [2.4, 5.0, 6.5, 7.0, 6.5, 7.0, 9.0, 8.5]
-    }
-    return pd.DataFrame(data)
+    
+    # Establish connection to the database
+    connection = get_database_connection()
+    
+    # SQL query to fetch data (replace with your query)
+    query = 'SELECT * FROM StudentSubjects'
 
-def analyze_student(df, student_id):
-    # Filter data for specific student
-    student_data = df[df['student_id'] == student_id]
+    # Use pandas to load the query result into a DataFrame
+    data = pd.read_sql(query, connection)
+    
+    # Close the connection
+    connection.close()
+
+    return data
+
+# Load the data
+data_from_db = load_data()
+print(data_from_db)
+
+def login_student(connection, student_id):
+    """Authenticate student based on student_id."""
+    # Check if the student exists in the signup table
+    signup_query = f"SELECT * FROM Sign_up WHERE id = {student_id}"
+    student_info = pd.read_sql(signup_query, connection)
+    
+    if student_info.empty:
+        return None  # Student not found
+    return student_info  # Student found, return their details
+
+def analyze_student(connection, student_id):
+    """Analyze student based on their subject data after login."""
+    # Check student login
+    student_info = login_student(connection, student_id)
+    if student_info is None:
+        return {'error': 'Invalid student ID or student not found.'}
+    
+    # Fetch student's subject data from the subjects table
+    subject_query = f"SELECT * FROM StudentSubjects WHERE student_id = {student_id}"
+    student_data = pd.read_sql(subject_query, connection)
+    
+    if student_data.empty:
+        return {'error': 'No subject data found for the student.'}
     
     # Get top subjects based on CGPA
     top_subjects = student_data.sort_values('cgpa', ascending=False)
@@ -396,51 +546,60 @@ def analyze_student(df, student_id):
     
     for _, row in top_subjects.iterrows():
         if row['cgpa'] >= 7.0:
-            strengths.append(f"{row['subject'].title()} (CGPA: {row['cgpa']})")
+            strengths.append(f"{row['subject_name'].title()} (CGPA: {row['cgpa']})")
     
     # Job recommendations based on top subjects
-    if 'computer' in student_data['subject'].values and student_data[student_data['subject'] == 'computer']['cgpa'].values[0] >= 7.0:
+    if 'computer' in student_data['subject_name'].values and student_data[student_data['subject_name'] == 'computer']['cgpa'].values[0] >= 7.0:
         recommendations.extend(['Software Developer', 'Data Analyst', 'IT Consultant'])
     
-    if any(subj in student_data['subject'].values for subj in ['math', 'maths']) and \
-       student_data[student_data['subject'].isin(['math', 'maths'])]['cgpa'].values[0] >= 7.0:
+    if any(subj in student_data['subject_name'].values for subj in ['math', 'maths']) and \
+       student_data[student_data['subject_name'].isin(['math', 'maths'])]['cgpa'].values[0] >= 7.0:
         recommendations.extend(['Data Scientist', 'Financial Analyst', 'Research Analyst'])
     
-    if 'science' in student_data['subject'].values and student_data[student_data['subject'] == 'science']['cgpa'].values[0] >= 7.0:
+    if 'science' in student_data['subject_name'].values and student_data[student_data['subject_name'] == 'science']['cgpa'].values[0] >= 7.0:
         recommendations.append('Research Scientist')
     
-    if 'biology' in student_data['subject'].values and student_data[student_data['subject'] == 'biology']['cgpa'].values[0] >= 7.0:
+    if 'biology' in student_data['subject_name'].values and student_data[student_data['subject_name'] == 'biology']['cgpa'].values[0] >= 7.0:
         recommendations.extend(['Biotechnologist', 'Medical Researcher'])
         
-    if 'physics' in student_data['subject'].values and student_data[student_data['subject'] == 'physics']['cgpa'].values[0] >= 7.0:
+    if 'physics' in student_data['subject_name'].values and student_data[student_data['subject_name'] == 'physics']['cgpa'].values[0] >= 7.0:
         recommendations.extend(['Physics Researcher', 'Engineering Roles'])
         
-    if 'chemistry' in student_data['subject'].values and student_data[student_data['subject'] == 'chemistry']['cgpa'].values[0] >= 7.0:
+    if 'maths' in student_data['subject_name'].str.lower().values and student_data[student_data['subject_name'].str.lower() == 'maths']['cgpa'].values[0] >= 5.0:
         recommendations.extend(['Chemical Engineer', 'Lab Researcher'])
+
+
+    
     
     return {
         'student_id': student_id,
+        'student_name': student_info['name'].values[0],
         'strengths': strengths,
         'recommendations': list(set(recommendations)),  # Remove duplicates
         'avg_cgpa': round(avg_cgpa, 2),
         'all_subjects': top_subjects.to_dict('records')
     }
 
-@app.route('/trial')
-def trial():
-    df = load_data()
-    student_ids = df['student_id'].unique()
-    all_analyses = []
-    
-    for student_id in student_ids:
-        analysis = analyze_student(df, student_id)
-        all_analyses.append(analysis)
-    
-    return render_template('trial.html', analyses=all_analyses)
+@app.route('/trial/<int:student_id>', methods=['GET'])
+def student_analysis(student_id):
+    """Fetch and analyze student data based on student_id from URL path"""
+    # Debugging: Print the student ID to check if it's being passed correctly
+    print(f"Student ID: {student_id}")
 
+    # Proceed with your logic to connect to the database and fetch data
+    db_connection = get_database_connection()
 
+    # Analyze the student's data
+    result = analyze_student(db_connection, student_id)
     
+    # Close the database connection
+    db_connection.close()
 
+    if not result:
+        return render_template('error.html', message="Student not found or no data available")
+
+    # Pass the results to the HTML template
+    return render_template('trial.html', **result)
 
 
  

@@ -52,12 +52,12 @@ def check_user(email, password):
 
     print("No user found")  # Debug log
     return None, None  # No user found
-def log_user_login(email, role):
+def log_user_login(email, role,student_id):
     conn=get_db_connection()
     cursor = conn.cursor()
 
     # Insert the login details into the User_Logins table
-    cursor.execute("INSERT INTO user_logins (email, role) VALUES (?, ?)", (email, role))
+    cursor.execute("INSERT INTO user_logins (email, role,student_id) VALUES (?,?, ?)", (email, role,student_id))
 
     # Commit the transaction
     conn.commit()
@@ -192,10 +192,10 @@ def add_job_posting(job_title, job_description, requirements, min_salary, max_sa
     
     try:
         sql = '''
-        INSERT INTO jobs (company_id, job_title, job_description, requirements, min_salary, max_salary, location, job_type, application_deadline, contact)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO jobs (job_title, job_description, requirements, min_salary, max_salary, location, job_type, application_deadline, contact)
+        VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)
         '''
-        values = (company_id, job_title, job_description, requirements, min_salary, max_salary, location, job_type, application_deadline, contact)
+        values = (job_title, job_description, requirements, min_salary, max_salary, location, job_type, application_deadline, contact)
         cursor.execute(sql, values)
         connection.commit()
         print("Job posting inserted successfully.")  # Debug message
@@ -234,7 +234,7 @@ def delete_job_posting(job_id):
         # Move job to deleted jobs table
         sql_insert = '''
         INSERT INTO deleted_jobs (job_id, company_id, job_title, job_description, requirements, min_salary, max_salary, location, job_type, application_deadline, contact)
-        SELECT id, company_id, job_title, job_description, requirements, min_salary, max_salary, location, job_type, application_deadline, contact
+        SELECT job_id, company_id, job_title, job_description, requirements, min_salary, max_salary, location, job_type, application_deadline, contact
         FROM jobs
         WHERE job_id = ?
         '''

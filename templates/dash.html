@@ -3,13 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gender Distribution Dashboard</title>
-    <!-- Import Chart.js for visualizations -->
+    <title>Admin Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #80d0c7;
+            color: #fff;
+            padding: 15px;
+            border-bottom: 1px solid #444;
+        }
+        .chart-container-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .chart-box {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+            width: 320px;
+        }
+        .chart-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <h2>Gender Distribution</h2>
-    <canvas id="genderChart" width="400" height="400"></canvas>
+    <div class="main-content">
+        <div class="header">
+            <h1 style="color: black;">Admin Dashboard Overview</h1>
+            <h3><a href='/' style="color: black;">Logout</a></h3>
+        </div>
+
+        <div class="chart-container-wrapper">
+            <div class="chart-box">
+                <div class="chart-title">Gender Distribution</div>
+                <div class="chart-container">
+                    <canvas id="genderChart" width="300" height="300"></canvas>
+                </div>
+            </div>
+            <div class="chart-box">
+                <div class="chart-title">Age Distribution</div>
+                <div class="chart-container">
+                    <canvas id="ageChart" width="300" height="300"></canvas>
+                </div>
+            </div>
+            <div class="chart-box">
+                <div class="chart-title">Job Mode Distribution</div>
+                <div class="chart-container">
+                    <canvas id="jobModeChart" width="300" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-container-wrapper">
+            <div class="chart-box">
+                <div class="chart-title">Available to Join Distribution</div>
+                <div class="chart-container">
+                    <canvas id="availableToJoinChart" width="300" height="300"></canvas>
+                </div>
+            </div>
+            <div class="chart-box">
+                <div class="chart-title">User Distribution</div>
+                <div class="chart-container">
+                    <canvas id="userDistributionChart" width="300" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Function to fetch and update the gender distribution chart
@@ -27,9 +104,9 @@
             }
         }
 
-        // Set up Chart.js chart
-        const ctx = document.getElementById('genderChart').getContext('2d');
-        const genderChart = new Chart(ctx, {
+        // Set up gender distribution Chart.js chart
+        const ctxGender = document.getElementById('genderChart').getContext('2d');
+        const genderChart = new Chart(ctxGender, {
             type: 'pie',
             data: {
                 labels: [],  // Filled by fetched data
@@ -49,9 +126,178 @@
             }
         });
 
-        // Update chart every 30 seconds
+        // Function to fetch and update the age distribution chart
+        async function updateAgeChart() {
+            try {
+                const response = await fetch('/api/age_distribution');  // Flask API endpoint
+                const data = await response.json();
+
+                // Update chart data for age distribution
+                ageChart.data.labels = data.labels;
+                ageChart.data.datasets[0].data = data.counts;
+                ageChart.update();
+            } catch (error) {
+                console.error('Error fetching age distribution:', error);
+            }
+        }
+
+        // Set up age distribution Chart.js chart
+        const ctxAge = document.getElementById('ageChart').getContext('2d');
+        const ageChart = new Chart(ctxAge, {
+            type: 'bar',
+            data: {
+                labels: [],  // Filled by fetched data
+                datasets: [{
+                    label: 'Age Distribution',
+                    data: [],  // Filled by fetched data
+                    backgroundColor: '#7b6dff',  // Example color
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                }
+            }
+        });
+
+        // Function to fetch and update the job mode distribution chart (line chart)
+        async function updateJobModeChart() {
+            try {
+                const response = await fetch('/api/job_mode_distribution');  // Flask API endpoint
+                const data = await response.json();
+
+                // Update chart data for job mode distribution
+                jobModeChart.data.labels = data.labels;
+                jobModeChart.data.datasets[0].data = data.counts;
+                jobModeChart.update();
+            } catch (error) {
+                console.error('Error fetching job mode distribution:', error);
+            }
+        }
+
+        // Set up job mode distribution Chart.js chart (line chart)
+        const ctxJobMode = document.getElementById('jobModeChart').getContext('2d');
+        const jobModeChart = new Chart(ctxJobMode, {
+            type: 'line',
+            data: {
+                labels: [],  // Filled by fetched data
+                datasets: [{
+                    label: 'Job Mode Distribution',
+                    data: [],  // Filled by fetched data
+                    borderColor: '#FF5733',  // Example line color
+                    fill: false,  // Do not fill under the line
+                    tension: 0.1  // Slight curve to the line
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                }
+            }
+        });
+
+        // Function to fetch and update the available to join distribution chart (line chart)
+        async function updateAvailableToJoinChart() {
+            try {
+                const response = await fetch('/api/available_to_join_distribution');  // Flask API endpoint
+                const data = await response.json();
+
+                // Update chart data for available to join distribution
+                availableToJoinChart.data.labels = data.labels;
+                availableToJoinChart.data.datasets[0].data = data.counts;
+                availableToJoinChart.update();
+            } catch (error) {
+                console.error('Error fetching available to join distribution:', error);
+            }
+        }
+
+        // Set up available to join distribution Chart.js chart (horizontal bar chart)
+        const ctxAvailableToJoin = document.getElementById('availableToJoinChart').getContext('2d');
+        const availableToJoinChart = new Chart(ctxAvailableToJoin, {
+            type: 'bar',  // Bar chart for horizontal bar
+            data: {
+                labels: [],  // Filled by fetched data
+                datasets: [{
+                    label: 'Available to Join Distribution',
+                    data: [],  // Filled by fetched data
+                    backgroundColor: '#1e90ff',  // Example color
+                }]
+            },
+            options: {
+                responsive: true,
+                indexAxis: 'y',  // This makes the bar chart horizontal
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                }
+            }
+        });
+
+        async function updateUserDistributionChart() {
+            try {
+                const response = await fetch('/api/user_distribution');  // Flask API endpoint
+                const data = await response.json();
+
+                // Update chart data for user distribution
+                userDistributionChart.data.labels = data.labels;
+                userDistributionChart.data.datasets[0].data = data.counts;
+                userDistributionChart.update();
+            } catch (error) {
+                console.error('Error fetching user distribution:', error);
+            }
+        }
+
+        // Set up user distribution Chart.js chart (horizontal bar chart)
+        const ctxUserDistribution = document.getElementById('userDistributionChart').getContext('2d');
+        const userDistributionChart = new Chart(ctxUserDistribution, {
+            type: 'bar',  // Horizontal bar chart
+            data: {
+                labels: [],  // Filled by fetched data
+                datasets: [{
+                    label: 'User Distribution',
+                    data: [],  // Filled by fetched data
+                    backgroundColor: ['#4f81bd', '#c0504d'],  // Student Users, Company Users colors
+                }]
+            },
+            options: {
+                responsive: true,
+                indexAxis: 'y',  // Horizontal bars
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                }
+            }
+        });
+
+        // Update the user distribution chart every 30 seconds
+
+        // Initial load of the user distribution chart
+        
+
+        
+
+        // Update all charts every 30 seconds
         setInterval(updateGenderChart, 30000);
-        updateGenderChart();  // Initial load
+        setInterval(updateAgeChart, 30000);
+        setInterval(updateJobModeChart, 30000);
+        setInterval(updateAvailableToJoinChart, 30000);
+        setInterval(updateUserDistributionChart, 30000);
+
+        
+        // Initial load of all charts
+        updateGenderChart();
+        updateAgeChart();
+        updateJobModeChart();
+        updateAvailableToJoinChart();
+        updateUserDistributionChart();
     </script>
 </body>
 </html>
